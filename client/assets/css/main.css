@@ -1,0 +1,264 @@
+body {
+    background: #f9fbfd;
+}
+
+header {
+    background: #0e7886;
+}
+
+.hidden{
+    display: none;
+}
+
+.logo img {
+    width: 45px;
+    position: relative;
+    top: 7px;
+    margin-right: 15px;
+}
+
+.logo p {
+    color: #fff;
+    font-size: 1.4rem;
+    display: inline-block;
+    position: relative;
+    top: 5px;
+}
+
+a.login {
+    background: #559ea8;
+    padding: 7px 15px;
+    border-radius: 20px;
+    color: #FFF;
+    text-decoration: none!important;
+}
+
+a.login:hover {
+    background: #4c8e97;
+}
+
+
+.dropdown-ellipses.dropdown-toggle::after{
+    content: none;
+}
+
+.fa, .fas{
+    width: 18px;
+}
+
+
+.card {
+    display: block;
+    margin-bottom: 1.5rem;
+    border-color: #edf2f9;
+    box-shadow: 0 0.75rem 1.5rem rgba(18,38,63,.03);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #edf2f9;
+    border-radius: .5rem;
+}
+
+.card-header:first-child {
+    border-radius: calc(.5rem - 1px) calc(.5rem - 1px) 0 0;
+}
+
+.card-header {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    align-items: center;
+    min-height: 3.75rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    padding: 1rem 1.5rem;
+    margin-bottom: 0;
+    background-color: transparent;
+    border-bottom: 1px solid #edf2f9;
+}
+
+.card-body {
+    flex: 1 1 auto;
+    padding: 1.5rem;
+}
+
+.btn {
+    padding: .5rem .75rem;
+    font-size: .9375rem;
+    line-height: 1.5;
+    border-radius: .375rem;
+}
+
+.btn-sm {
+  padding: 0.325rem .5rem;
+  font-size: .8125rem;
+  line-height: 1.75;
+  border-radius: .25rem;
+}
+
+.btn-secondary {
+    color: #fff;
+    background-color: #7e96ab;
+    border-color: #8297a9;
+}
+
+.header {
+    margin-bottom: 2rem;
+}
+
+.header-body {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e3ebf6;
+}
+
+.header-pretitle {
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: #95aac9;
+    font-size: .625rem;
+}
+
+.header-title {
+    margin-bottom: 0;
+    font-weight: 600;
+    line-height: 1.1;
+    font-size: 1.6rem;
+    color: #12263f;
+}
+
+.table td, .table th {
+    padding: .9375rem;
+    vertical-align: top;
+    border-top: 1px solid #edf2f9;
+}
+
+.table-sm, .table thead th {
+    font-size: .8125rem;
+}
+
+
+
+.table-sm thead th {
+    font-size: .625rem;
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #edf2f9;
+    background-color: #f9fbfd;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: .08em;
+    color: #95aac9;
+    border-bottom-width: 1px;
+}
+
+.card-table thead th {
+    border-top-width: 1;
+}
+
+.table-nowrap td, .table-nowrap th {
+    white-space: nowrap;
+}
+
+.usuarioLogado{
+    display: inline-block;
+    margin-right: 15px;
+    position: relative;
+    top: 2px;
+    color: #12263f;
+}
+
+a.avatar.avatar-sm.dropdown-toggle:after{
+    display: none;
+}
+
+.navbar {
+    border-width: 0 0 1px;
+    border-style: solid;
+}
+
+.navbar-light {
+    background-color: #fff;
+    border-color: #e3ebf6;
+    padding: 3px;
+}
+
+.navbar-expand-lg .navbar-collapse {
+    flex-grow: inherit;
+}
+
+.bootstrap-select>.dropdown-toggle{
+  height: 40px;
+}
+
+
+.btn-quantidade {
+  padding: 2px 0px;
+  border-radius: 50%;
+  background: #edf2f9;
+  height: 20px;
+  width: 20px;
+  font-size: 12px;
+  margin-left: 8px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.btn-remover{
+  color: #e74c3c!important;
+  background: #ffecec;
+}
+
+/* TOAST*/
+
+.toasted{
+    z-index: 9999;
+    position: fixed;
+    right: 30px;
+    top: 30px;
+    box-shadow: 1px 1rem 3rem 0px rgba(18, 38, 63, 0.14);
+    background: #e74c3c;
+    color: #FFF;
+    border: none;
+    border-radius: 5px
+}
+
+.alert-danger{
+    background: #e74c3c;
+    color: #FFF;
+    border: none;
+    margin-bottom: 0;
+}
+
+.alert-success{
+    background: #2ecc71;
+    color: #FFF;
+    border: none;
+    margin-bottom: 0;
+}
+
+a.nav-link.active:before {
+  content: '';
+  background: #007cc3;
+  width: 3px;
+  height: 23px;
+  position: absolute;
+  margin-left: -10px;
+  margin-top: 0px;
+}
+
+.mask{
+  position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.95);
+    z-index: 99999;
+}
