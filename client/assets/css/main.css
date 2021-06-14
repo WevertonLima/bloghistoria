@@ -68,11 +68,11 @@ a.login:hover {
 }
 
 .card-header {
-    display: flex;
-    flex-direction: row;
+    /* display: flex; */
+    /* flex-direction: row;
     flex-grow: 1;
     align-items: center;
-    min-height: 3.75rem;
+    min-height: 3.75rem; */
     padding-top: .5rem;
     padding-bottom: .5rem;
     padding: 1rem 1.5rem;
@@ -138,7 +138,7 @@ a.login:hover {
 }
 
 .table-sm, .table thead th {
-    font-size: .8125rem;
+    font-size: 15px;
 }
 
 
@@ -165,6 +165,26 @@ a.login:hover {
 .table-nowrap td, .table-nowrap th {
     white-space: nowrap;
 }
+
+.table .dropdown-ellipses {
+    font-size: 11px!important;
+    padding-top: 2px!important;
+    padding-bottom: 2px!important;
+    font-weight: 600!important;
+}
+
+.dataTables_length {
+    white-space: nowrap;
+    font-size: 13px;
+    color: #12263f;
+    padding: 30px;
+    padding-bottom: 30px;
+    padding-top: 0;
+}
+
+.dataTables_length select {
+    margin-right: 7px;
+ }
 
 .usuarioLogado{
     display: inline-block;

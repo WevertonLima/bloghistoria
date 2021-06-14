@@ -1,5 +1,5 @@
 --#login#
 
-SELECT idusuario, idtipousuario, nome, email, senha, avatar, tokengoogle, confirmouemail FROM usuario WHERE email = @email AND idtipousuario = 2
+SELECT idusuario, nome, email, senha FROM usuario WHERE email = @email
 
 --END#login#

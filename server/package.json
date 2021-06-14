@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "jsonwebtoken": "^8.5.1",
-    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
     "node-schema-object": "^3.3.4",
     "nodemailer": "^6.5.0",
     "recursive-readdir": "^2.2.2",

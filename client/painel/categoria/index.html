@@ -1,0 +1,137 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/css/feathericon.css" />
+    <link rel="stylesheet" href="../../assets/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="../../assets/css/animate.css" />
+    <link rel="stylesheet" href="../css/modal.css" />
+    <link rel="stylesheet" href="../../assets/css/main.css" />
+
+</head>
+
+<body>
+
+    <div id="master"></div>
+
+    <div class="main-content pb-6 hidden">
+        <div class="container-fluid">
+
+            <div class="header mt-md-2">
+                <div class="header-body">
+
+                    <a class="btn btn-primary btn-sm float-right mt-3" href="#" data-toggle="modal"
+                        data-target="#modalForm" onclick="categoria.metodos.abrirModal()">
+                        <i class="fe fe-plus"></i>&nbsp; Adicionar Categoria
+                    </a>
+
+                    <h6 class="header-pretitle">
+                        listagem
+                    </h6>
+                    <h1 class="header-title display-4">
+                        <i class="fe fe-document"></i>&nbsp; Categorias
+                    </h1>
+                </div>
+            </div>
+
+            <div class="card" id="containerTabela">
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal Add/Edit -->
+    <div class="modal fade fixed-right" id="modalForm" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-vertical" role="document">
+            <div class="modal-content">
+    
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h4 class="card-header-title" id="lblTituloModal">
+                                Categoria
+                            </h4>
+                        </div>
+                        <div class="col-auto">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="card-body">
+    
+                    <input type="hidden" id="hdfCategoriaId" />
+    
+                    <div class="form-group">
+                        <label for="txtDescricao">Descrição</label>
+                        <input type="text" class="form-control" name="descricao" id="txtDescricao" maxlength="100" />
+                    </div>
+    
+                </div>
+    
+                <div class="mt-auto"></div>
+    
+                <div class="p-4">
+                    <a id="btnSalvar" href="#" class="btn btn-block btn-primary mb-2">Salvar</a>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Ativar / Desativar -->
+    <div class="modal fade" id="modalAtivar" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-card card mb-0">
+
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h4 class="card-header-title" id="lblTituloModalAtivar">
+                                    Categoria
+                                </h4>
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+
+                        <p class="mb-0" id="lblTextoConfirm">Deseja realmente ativar a categoria?</p>
+         
+                        <div class="float-right mt-5">
+                            <a href="#" id="btnDesativar" class="btn btn-danger" onclick="categoria.metodos.ativar(0)">Desativar</a>
+                            <a href="#" class="btn" data-dismiss="modal">Cancelar</a>
+                            <a href="#" id="btnAtivar" class="btn btn-success" onclick="categoria.metodos.ativar(1)">Ativar</a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../../assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/app.js"></script>
+    <script type="text/javascript" src="./js/index.js"></script>
+
+</body>
+
+</html>

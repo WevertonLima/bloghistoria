@@ -4,7 +4,7 @@ app.eventos = {
 
     init: () => {
 
-        $("#lblUsuarioLogado").text(app.metodos.obterValorSessao('nomeUsuario'));
+        $("#lblUsuarioLogado").text(app.metodos.obterValorSessao('NomeUsuario'));
 
         $('body').append("<div class='mask'></div>")
 
@@ -39,7 +39,7 @@ app.metodos = {
                     error: (xhr, ajaxOptions, error) => {
 
                         // se o retorno for não autorizado, redireciona o usuário para o login
-                        if (xhr.status == 401) app.method.logout();
+                        if (xhr.status == 401) app.metodos.logout();
 
                         callbackError(xhr, ajaxOptions, error)
                     }
@@ -84,13 +84,44 @@ app.metodos = {
 
     },
 
+    // centraliza as chamadas de post
+    put: (url, dados, callbackSuccess, callbackError) => {
+
+        try {
+            if (app.metodos.validaToken()) {
+
+                $.ajax({
+                    url: url,
+                    method: 'PUT',
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: "json",
+                    data: dados,
+                    beforeSend: (request) => { request.setRequestHeader("authorization", app.metodos.obterValorSessao('token')); },
+                    success: (response) => callbackSuccess(response),
+                    error: (xhr, ajaxOptions, error) => {
+
+                        // se o retorno for não autorizado, redireciona o usuário para o login
+                        if (xhr.status == 401) app.metodos.logout();
+
+                        callbackError(xhr, ajaxOptions, error)
+                    }
+                });
+
+            }
+        }
+        catch (ex) {
+            return callbackError(null, null, ex);
+        }
+
+    },
+
     // método para validar se o token existe. É chamado em todas as requisições internas
     validaToken: (login = false) => {
 
         var tokenAtual = app.metodos.obterValorSessao('token');
 
         if ((tokenAtual == undefined || tokenAtual == null || tokenAtual == "" || tokenAtual == 'null') && !login) {
-            window.location.href = '/login.html';
+            window.location.href = '/painel/login.html';
             return false;
         }
 
@@ -114,7 +145,7 @@ app.metodos = {
     logout: () => {
 
         localStorage.clear();
-        window.location.href = '/';        
+        window.location.href = '/painel/login.html';        
 
     },
 

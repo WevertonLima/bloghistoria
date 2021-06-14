@@ -1,0 +1,74 @@
+.main-content {
+    margin-left: 250px;
+}
+
+.name-user{
+    display: inline-block;
+    color: #556080;
+    margin-right: 7px;
+}
+
+.avatar {
+    text-decoration: none!important;
+}
+
+.container-fluid{
+    padding-left: 36px!important;
+    padding-right: 36px!important;
+}
+
+.navbar-expand-md {
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+}
+
+.navbar-vertical.navbar-expand-md {
+    display: block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 250px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    overflow-y: auto;
+}
+
+.navbar[class*=fixed-] {
+    z-index: 1030;
+}
+
+.navbar-vertical.navbar-expand-md .navbar-brand {
+    display: block;
+    text-align: center;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+}
+
+.navbar-vertical.navbar-expand-md>[class*=container] {
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.navbar-vertical.navbar-expand-md .navbar-collapse {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+.navbar-vertical.navbar-expand-md .navbar-nav {
+    flex-direction: column;
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+}
+
+.navbar-brand {
+    margin-right: 0;
+}

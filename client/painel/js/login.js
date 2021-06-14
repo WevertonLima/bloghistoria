@@ -22,12 +22,18 @@ login.metodos = {
     logar: () => {
 
         // valida os campos
-        var usuario = $("#txtUsuario").val().trim();
+        var email = $("#txtEmail").val().trim();
         var senha = $("#txtSenha").val().trim();
 
-        if (usuario == '' || usuario == undefined) {
-            app.metodos.mensagem("Informe o usuário, por favor.")
-            $("#txtUsuario").focus();
+        if (email == '' || email == undefined) {
+            app.metodos.mensagem("Informe o e-mail, por favor.")
+            $("#txtEmail").focus();
+            return;
+        }
+
+        if (!app.metodos.isEmail(email)) {
+            app.metodos.mensagem("Informe um e-mail válido, por favor.")
+            $("#txtEmail").focus();
             return;
         }
 
@@ -38,7 +44,7 @@ login.metodos = {
         }
 
         var dados = {
-            usuario: usuario,
+            email: email,
             senha: senha
         }
 
@@ -55,11 +61,11 @@ login.metodos = {
 
                 if (response.status == "success") {
 
-                    app.method.gravarValorSessao(response.TokenAcesso, "token")
-                    app.method.gravarValorSessao(response.Nome, "NomeUsuario")
-                    app.method.gravarValorSessao(response.Email, "Email")
+                    app.metodos.gravarValorSessao(response.TokenAcesso, "token")
+                    app.metodos.gravarValorSessao(response.Nome, "NomeUsuario")
+                    app.metodos.gravarValorSessao(response.Email, "Email")
 
-                    window.location.href = '/painel/home.html';
+                    window.location.href = '/painel/categoria/index.html';
 
                 }
                 

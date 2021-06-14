@@ -6,7 +6,7 @@ var UsuarioTokenAcesso = new SchemaObject({ tokenAcesso: String },
         methods: {
 
             gerarTokenAcesso(dados) {
-                return jwt.sign({ 'Email': dados.email, 'IdUsuario': dados.idusuario, 'Nome': dados.nome, 'IdTipoUsuario': dados.idtipousuario }, 'Token', { expiresIn: 36000 });
+                return jwt.sign({ 'Email': dados.email, 'IdUsuario': dados.idusuario, 'Nome': dados.nome }, 'Token', { expiresIn: 36000 });
             },
 
             verificaTokenAcesso(req, res, next) {
@@ -34,9 +34,6 @@ var UsuarioTokenAcesso = new SchemaObject({ tokenAcesso: String },
                 }
                 else if (Valor === "IdUsuario") {
                     return decoded.payload.IdUsuario;
-                }
-                else if (Valor === "IdTipoUsuario") {
-                    return decoded.payload.IdTipoUsuario;
                 }
             }
         }

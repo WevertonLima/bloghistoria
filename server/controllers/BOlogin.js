@@ -37,16 +37,16 @@ const controllers = () => {
             // se estiver tudo ok, gera o token e retorna o json
             var tokenAcesso = Acesso.gerarTokenAcesso(usuarioBanco[0]);
 
-            let _confirmou = (usuarioBanco[0].confirmouemail.lastIndexOf(1) !== -1);
+            //let _confirmou = (usuarioBanco[0].confirmouemail.lastIndexOf(1) !== -1);
 
             return {
                 status: 'success',
                 TokenAcesso: tokenAcesso,
                 Nome: usuarioBanco[0].nome,
                 Email: usuarioBanco[0].email,
-                Avatar: usuarioBanco[0].avatar,
-                GTK: undefined, // token do google
-                ConfirmouEmail: _confirmou ? 1 : 0
+                //Avatar: usuarioBanco[0].avatar,
+                //GTK: undefined, // token do google
+                //ConfirmouEmail: _confirmou ? 1 : 0
             };
 
         }
