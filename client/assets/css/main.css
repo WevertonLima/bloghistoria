@@ -37,6 +37,9 @@ a.login:hover {
     background: #4c8e97;
 }
 
+span.badge.badge-light {
+    border: 1px solid;
+}
 
 .dropdown-ellipses.dropdown-toggle::after{
     content: none;

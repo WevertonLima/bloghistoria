@@ -5,8 +5,12 @@ SELECT
     idcategoria
     , descricao
     , ativo
+    , destaque
 FROM 
     categoria
+ORDER BY 
+    destaque DESC
+    , descricao
 
 --END#consultar#
 
@@ -53,3 +57,14 @@ WHERE
     idcategoria = @idcategoria
 
 --END#atualizarStatus#
+
+--#atualizarDestaque#
+
+UPDATE 
+    categoria
+SET 
+    destaque = @destaque
+WHERE
+    idcategoria = @idcategoria
+
+--END#atualizarDestaque#

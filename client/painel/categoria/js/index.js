@@ -72,6 +72,15 @@ categoria.metodos = {
                     }
 
                     elem.Acoes = elem.Acoes.replace('{Opcao}', opcao);
+
+
+                    if (elem.destaque > 0) {
+                        elem.Destaques = `<span class="badge badge-light"><i class="fe fe-star"></i>&nbsp; Destaque</span>`
+                    }
+                    else {
+                        elem.Destaques = `-`
+                    }
+
                 });
 
                 console.log(categorias);
@@ -84,15 +93,16 @@ categoria.metodos = {
                 // cria a tabela
                 $("#tblCategorias").DataTable({
                     destroy: true,
-                    aaSorting: [[0, "asc"]],
+                    aaSorting: [[2]],
                     dom: 'Bfrtipl',
                     lengthMenu: [[10, 25, 50, -1], ['10 linhas', '25 linhas', '50 linhas', 'Todas']],
-                    columnDefs: [{ targets: [3], className: 'text-center' }],
+                    columnDefs: [{ targets: [4], className: 'text-center' }],
                     buttons: ['pageLength'],
                     "data": categorias,
                     "columns": [
                         { data: "idcategoria" },
                         { data: "descricao" },
+                        { data: "Destaques" },
                         { data: "spAtivo" },
                         { data: "Acoes" }
                     ],
@@ -329,6 +339,7 @@ categoria.templates = {
                     <tr>
                         <th class="text-muted">ID</th>
                         <th class="text-muted">Descrição</th>
+                        <th class="text-muted">Destaque Menu</th>
                         <th class="text-muted">Ativa</th>
                         <th colspan="2" class="text-muted text-center">Ações</th>
                     </tr>
