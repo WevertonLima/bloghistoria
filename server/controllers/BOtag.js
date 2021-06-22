@@ -9,7 +9,7 @@ const controllers = () => {
 
     const consultar = async (req) => {
 
-        var ComandoSQL = await readCommandSql.retornaStringSql('consultar', 'BOcategoria');
+        var ComandoSQL = await readCommandSql.retornaStringSql('consultar', 'BOtag');
         var result = await db.Query(ComandoSQL);
 
         return result
@@ -18,7 +18,7 @@ const controllers = () => {
 
     const obterPorId = async (req) => {
 
-        var ComandoSQL = await readCommandSql.retornaStringSql('obterPorId', 'BOcategoria');
+        var ComandoSQL = await readCommandSql.retornaStringSql('obterPorId', 'BOtag');
         var result = await db.Query(ComandoSQL, req.params);
 
         return result
@@ -29,12 +29,12 @@ const controllers = () => {
 
         try {
 
-            var ComandoSQL = await readCommandSql.retornaStringSql('inserir', 'BOcategoria');
+            var ComandoSQL = await readCommandSql.retornaStringSql('inserir', 'BOtag');
             var result = await db.Query(ComandoSQL, req.body);
 
             return {
                 resultado: "sucesso",
-                msg: "Categoria inserida com sucesso!"
+                msg: "Tag inserida com sucesso!"
             }
 
         } catch (error) {
@@ -51,12 +51,12 @@ const controllers = () => {
 
         try {
 
-            var ComandoSQL = await readCommandSql.retornaStringSql('atualizar', 'BOcategoria');
+            var ComandoSQL = await readCommandSql.retornaStringSql('atualizar', 'BOtag');
             var result = await db.Query(ComandoSQL, req.body);
 
             return {
                 resultado: "sucesso",
-                msg: "Categoria atualizada com sucesso!"
+                msg: "Tag atualizada com sucesso!"
             }
 
         } catch (error) {
@@ -73,7 +73,7 @@ const controllers = () => {
 
         try {
 
-            var ComandoSQL = await readCommandSql.retornaStringSql('atualizarStatus', 'BOcategoria');
+            var ComandoSQL = await readCommandSql.retornaStringSql('atualizarStatus', 'BOtag');
             var result = await db.Query(ComandoSQL, req.body);
 
             return {

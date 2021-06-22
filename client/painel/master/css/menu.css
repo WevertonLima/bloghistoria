@@ -72,3 +72,20 @@
 .navbar-brand {
     margin-right: 0;
 }
+
+/* li.nav-item.active:before {
+    content: '';
+    background: #007cc3;
+    width: 3px;
+    height: 40px;
+    position: absolute;
+    margin-top: 0px;
+} */
+
+.navbar-light .navbar-nav .active>.nav-link, 
+.navbar-light .navbar-nav .nav-link.active, 
+.navbar-light .navbar-nav .nav-link.show, 
+.navbar-light .navbar-nav .show>.nav-link {
+    color: #424242;
+    font-weight: bold;
+}

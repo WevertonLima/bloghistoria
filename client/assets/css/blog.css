@@ -118,6 +118,11 @@ a.top-menu-item.link-social:last-child {
     font-weight: normal;
 }
 
+.post-body .post-meta.details {
+    font-size: 14px;
+    font-weight: normal;
+}
+
 .post-meta .date {
     float: left;
     color: #AAA;
@@ -135,6 +140,10 @@ a.top-menu-item.link-social:last-child {
     -webkit-transition: color 0.3s ease;
     -moz-transition: color 0.3s ease;
     transition: color 0.3s ease;
+}
+
+.post-meta .share.details .dropdown {
+    font-size: 18px;
 }
 
 .post-meta .share .dropdown-toggle::after { 
@@ -155,10 +164,32 @@ a.top-menu-item.link-social:last-child {
     color: #6C6C6C;
 }
 
+.post .post-content.details p {
+    line-height: 1.75;
+}
+
 .post .post-footer {
     color: #CCC;
     font-size: 14px;
     margin-top: 30px;
+}
+
+.post .post-footer.details {
+    font-size: 18px;
+}
+
+.post .post-footer.details span.icon-like a {
+    text-decoration: none!important;
+    color: #000;
+}
+
+.post .post-footer.details span.icon-like.liked a i {
+    color: #e74c3c;
+}
+
+.post .post-footer.details span.icon-comment, 
+.post .post-footer.details span.icon-views {
+    color: #000;
 }
 
 .btn-ver-mais {
@@ -377,4 +408,77 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow {
 .slick-disabled {
     cursor: default!important;
     opacity: 0.4!important;
+}
+
+.title-comentarios {
+    border-bottom: 1px solid #4d4d4d;
+    padding-bottom: 20px;
+    margin-top: -15px;
+    margin-bottom: 30px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.card-comentario {
+    margin-bottom: 20px;
+}
+
+.card-comentario .user-image {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto;
+    background: #f3f3f3;
+    border-radius: 50%;
+
+    background-image: url(../img/jp.jpg);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.card-comentario a.btn-remover-comentario {
+    float: right;
+    color: #e74c3c;
+}
+
+.card-comentario .comentario-content {
+    background: #f3f3f3;
+    border-radius: 15px;
+    padding: 10px 20px;
+    display: inline-block;
+}
+
+.card-comentario p.comentario-nome-usuario {
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 7px;
+    font-size: 15px;
+}
+
+.card-comentario p.comentario-texto {
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.card-comentario span.comentario-data-hora {
+    float: right;
+    margin-top: -15px;
+    font-size: 11px;
+    color: #9a9a9a;
+    font-weight: 500;
+}
+
+.new-comentario {
+    border-top: 1px solid #ececec;
+    padding-top: 30px;
+}
+
+.new-comentario .btn-comentar {
+    float: right;
+    margin-top: 15px;
+    background: #86861e;
+    color: #FFF;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 0;
 }

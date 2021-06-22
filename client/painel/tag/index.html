@@ -25,15 +25,15 @@
                 <div class="header-body">
 
                     <a class="btn btn-primary btn-sm float-right mt-3" href="#" data-toggle="modal"
-                        data-target="#modalForm" onclick="categoria.metodos.abrirModal()">
-                        <i class="fe fe-plus"></i>&nbsp; Adicionar Categoria
+                        data-target="#modalForm" onclick="tag.metodos.abrirModal()">
+                        <i class="fe fe-plus"></i>&nbsp; Adicionar Tag
                     </a>
 
                     <h6 class="header-pretitle">
                         listagem
                     </h6>
                     <h1 class="header-title display-4">
-                        <i class="fe fe-document"></i>&nbsp; Categorias
+                        <i class="fe fe-tag"></i>&nbsp; Tags
                     </h1>
                 </div>
             </div>
@@ -45,8 +45,8 @@
         </div>
     </div>
 
-    <!-- Modal Add/Edit -->
-    <div class="modal fade fixed-right" id="modalForm" tabindex="-1" role="dialog" aria-hidden="true">
+     <!-- Modal Add/Edit -->
+     <div class="modal fade fixed-right" id="modalForm" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-vertical" role="document">
             <div class="modal-content">
     
@@ -54,7 +54,7 @@
                     <div class="row align-items-center">
                         <div class="col">
                             <h4 class="card-header-title" id="lblTituloModal">
-                                <i class="fe fe-document"></i>&nbsp; Categoria
+                                <i class="fe fe-tag"></i>&nbsp; Tag
                             </h4>
                         </div>
                         <div class="col-auto">
@@ -67,7 +67,7 @@
     
                 <div class="card-body">
     
-                    <input type="hidden" id="hdfCategoriaId" />
+                    <input type="hidden" id="hdfTagId" />
     
                     <div class="form-group">
                         <label for="txtDescricao">Descrição</label>
@@ -96,7 +96,7 @@
                         <div class="row align-items-center">
                             <div class="col">
                                 <h4 class="card-header-title" id="lblTituloModalAtivar">
-                                    <i class="fe fe-document"></i>&nbsp; Categoria
+                                    <i class="fe fe-tag"></i>&nbsp; Tag
                                 </h4>
                             </div>
                             <div class="col-auto">
@@ -109,12 +109,12 @@
 
                     <div class="card-body">
 
-                        <p class="mb-0" id="lblTextoConfirm">Deseja realmente ativar a categoria?</p>
+                        <p class="mb-0" id="lblTextoConfirm">Deseja realmente ativar a tag?</p>
          
                         <div class="float-right mt-5">
-                            <a href="#" id="btnDesativar" class="btn btn-danger" onclick="categoria.metodos.ativar(0)">Desativar</a>
+                            <a href="#" id="btnDesativar" class="btn btn-danger" onclick="tag.metodos.ativar(0)">Desativar</a>
                             <a href="#" class="btn" data-dismiss="modal">Cancelar</a>
-                            <a href="#" id="btnAtivar" class="btn btn-success" onclick="categoria.metodos.ativar(1)">Ativar</a>
+                            <a href="#" id="btnAtivar" class="btn btn-success" onclick="tag.metodos.ativar(1)">Ativar</a>
                         </div>
 
                     </div>
@@ -133,5 +133,4 @@
     <script type="text/javascript" src="./js/index.js"></script>
 
 </body>
-
 </html>
