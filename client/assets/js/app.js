@@ -14,8 +14,27 @@ app.eventos = {
             $(".mask").remove();
         }, 800);
 
+        // Menu Lateral
+        $("#maskCloseMenuLeft").on('click', () => {
+            $("body").removeClass('slide')
+        })
+        $("#btnCloseMenuLeft").on('click', () => {
+            $("body").removeClass('slide')
+        })
+        $("#btnMenuLeft").on('click', () => {
+            $("body").addClass('slide')
+        })
+
+        // Pesquisa
+        $("#btnPesquisar").on('click', () => {
+            $(".pesquisa").removeClass('hidden')
+        })
+        $("#btnCloseSearch").on('click', () => {
+            $(".pesquisa").addClass('hidden')
+        })
+
         // valida o menu atual
-        app.metodos.validarMenuAtual();
+        // app.metodos.validarMenuAtual();
 
     }
 
@@ -145,7 +164,7 @@ app.metodos = {
     logout: () => {
 
         localStorage.clear();
-        window.location.href = '/painel/login.html';        
+        window.location.href = '/painel/login.html';
 
     },
 

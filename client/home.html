@@ -19,16 +19,54 @@
 
 <body>
 
+    <!-- MENU LATERAL -->
+    <div id="maskCloseMenuLeft" class="mask-left animated fadeIn"></div>
+
+    <div class="menu-left">
+        <a href="#!" id="btnCloseMenuLeft" class="badge close"><i class="fa fa-times"></i></a>
+        <h1 class="title">JP. TONIOSSO</h1>
+        <div class="menu-content">
+            <a href="#!" class="menu-item-left">Início</a>
+            <a href="#!" class="menu-item-left">#HISTÓRIA</a>
+            <a href="#!" class="menu-item-left">#PEDAGOGIA</a>
+            <a href="#!" class="menu-item-left">#ARTIGOS</a>
+            <hr>
+            <a href="#!" class="btn btn-block btn-primary">Login</a>
+            <a href="#!" class="btn btn-block btn-light">Cadastre-se</a>
+           
+        </div>
+    </div>
+
+    <!-- PESQUISA -->
+    <div class="pesquisa animated fadeIn hidden">
+        <div class="pesquisa-close">
+            <a id="btnCloseSearch" href="#!" class="badge close"><i class="fa fa-times"></i></a>
+        </div>
+        <div class="pesquisa-content">
+            <div class="pesquisa-form">
+                <div class="row">
+                    <div class="col-10">
+                        <input type="text" class="form-control form-control-lg" placeholder="Faça a sua busca" />
+                    </div>
+                    <div class="col-2">
+                        <a href="#!" class="btn-search"><i class="fa fa-search"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MENU -->    
     <section class="header">
 
         <div class="top-menus">
             <div class="container">
                 <div class="row">
                     <div class="col-6">
-                        <a href="#!" class="top-menu-item">
+                        <a id="btnMenuLeft" href="#!" class="top-menu-item">
                             <i class="fa fa-bars"></i>
                         </a>
-                        <a href="#!" class="top-menu-item">
+                        <a id="btnPesquisar" href="#!" class="top-menu-item">
                             <i class="fa fa-search"></i>
                         </a>
                     </div>
@@ -65,6 +103,7 @@
         </div>
 
     </section>
+
 
     <section class="container main-content">
         <div class="row">
@@ -480,6 +519,9 @@
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/home.js"></script>
+
 
     <!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
