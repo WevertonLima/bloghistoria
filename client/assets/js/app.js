@@ -43,10 +43,10 @@ app.eventos = {
 app.metodos = {
 
     // centraliza as chamadas de get
-    get: (url, callbackSuccess, callbackError) => {
+    get: (url, callbackSuccess, callbackError, exit = false) => {
 
         try {
-            if (app.metodos.validaToken()) {
+            if (app.metodos.validaToken(exit)) {
 
                 $.ajax({
                     url: url,
