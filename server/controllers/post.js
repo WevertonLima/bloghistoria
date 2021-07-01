@@ -128,6 +128,18 @@ const controllers = () => {
 
     }
 
+    const adicionarComentario = async (req) => {
+
+        let _usuarioId = Acesso.retornaCodigoTokenAcesso('IdUsuario', req.headers['authorization']);
+        req.body.idusuario = _usuarioId;
+
+        var ComandoSQL = await readCommandSql.retornaStringSql('adicionarComentario', 'post');
+        var result = await db.Query(ComandoSQL, req.body);
+
+        return result
+
+    }
+
 
     return Object.create({
         obterposts
@@ -139,6 +151,7 @@ const controllers = () => {
         , curtir
         , acesso
         , removerComentario
+        , adicionarComentario
     })
 
 }

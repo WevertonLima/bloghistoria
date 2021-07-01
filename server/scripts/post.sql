@@ -148,3 +148,12 @@ WHERE
     idcomentario = @idcomentario
 
 --END#removerComentario#
+
+--#adicionarComentario#
+
+INSERT INTO  comentario
+    (idnoticia, idusuario, texto)
+VALUES
+    (@idnoticia, @idusuario, @texto)
+
+--END#adicionarComentario#

@@ -22,6 +22,22 @@ detalhes.eventos = {
         detalhes.metodos.obterCurtidaUsuario();
         detalhes.metodos.obterComentarios();
 
+        $("#btnComentar").on('click', () => {
+            detalhes.metodos.enviarComentario();
+        })
+
+        // insere a foto do usuario no comentario
+        var _avatar = app.metodos.obterValorSessao('avatar')
+
+        if (_avatar != undefined && _avatar != null && _avatar != "") {
+            $("#imgUserComment").css('background-image', `url('${_avatar}')`);
+            $("#imgUserComment").css('background-size', 'cover');
+        }
+        else {
+            $("#imgUserComment").css('background-image', `url('/assets/img/user.png')`);
+            $("#imgUserComment").css('background-size', 'cover');
+        }
+
     }
 
 }
@@ -228,7 +244,7 @@ detalhes.metodos = {
 
             if (_avatar == null) {
                 // define o avatar padrão
-                
+                _avatar = '/assets/img/user.png'
             }
 
             $(".list-comentarios").append(
@@ -278,6 +294,42 @@ detalhes.metodos = {
                 return;
             }
         );
+
+    },
+
+    enviarComentario: () => {
+
+        var texto = $("#txtComentario").val().trim();
+
+        if (texto.length == 0) {
+            alert('Informe o comentário, por favor.')
+            $("#txtComentario").focus();
+            return;
+        }
+
+        var dados = {
+            idnoticia: POST_ID,
+            texto: texto
+        }
+
+        app.metodos.post('/comentario/adicionar', JSON.stringify(dados),
+            (response) => {
+
+                var retorno = response;
+                console.log('retorno', retorno)
+
+                $("#txtComentario").val('')
+                detalhes.metodos.obterComentarios();
+
+            },
+            (xhr, ajaxOptions, error) => {
+                console.log('xhr', xhr);
+                console.log('ajaxOptions', ajaxOptions);
+                console.log('error', error);
+                app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
+                return;
+            }
+        );        
 
     },
 
@@ -345,7 +397,7 @@ detalhes.metodos = {
 
             //curtir
             detalhes.metodos.updatecurtir(1);
-            
+
             USUARIO_CURTIU = true;
             TOTAL_LIKES++;
 
@@ -392,7 +444,7 @@ detalhes.templates = {
         <div class="card-comentario" id="comentario-\${idcomentario}">
             <div class="row">
                 <div class="col-2">
-                    <div class="user-image">\${avatar}</div>
+                    <div class="user-image" style="background-image: url('\${avatar}'); background-size: cover;"></div>
                 </div>
                 <div class="col-10 pl-0">
                     <div class="comentario-content">

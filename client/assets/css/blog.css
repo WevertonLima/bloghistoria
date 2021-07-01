@@ -499,14 +499,11 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow {
 }
 
 .card-comentario .user-image {
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     margin: 0 auto;
     background: #f3f3f3;
     border-radius: 50%;
-
-    background-image: url(../img/jp.jpg);
-    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
 }
@@ -528,11 +525,14 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow {
     margin-top: 5px;
     margin-bottom: 7px;
     font-size: 15px;
+    display: inline;
+    margin-right: 20px;
 }
 
 .card-comentario p.comentario-texto {
     font-size: 14px;
     margin-bottom: 25px;
+    margin-top: 5px;
 }
 
 .card-comentario span.comentario-data-hora {

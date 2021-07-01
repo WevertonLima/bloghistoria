@@ -58,4 +58,10 @@ module.exports = (server) => {
         return next();
     });
 
+    server.post('/comentario/adicionar', async (req, res, next) => {
+        const result = await ctPost.controllers().adicionarComentario(req)
+        res.send(result);
+        return next();
+    });
+
 }
