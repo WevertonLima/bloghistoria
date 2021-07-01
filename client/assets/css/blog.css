@@ -543,6 +543,16 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow {
     font-weight: 500;
 }
 
+.card-comentario-block.mb-0 {
+    text-align: center;
+    padding-top: 15px;
+}
+
+a.link.link-green {
+    color: #86861e!important;
+    font-weight: 600;
+}
+
 .new-comentario {
     border-top: 1px solid #ececec;
     padding-top: 30px;

@@ -193,7 +193,7 @@ app.metodos = {
     logoutBlog: () => {
 
         localStorage.clear();
-        window.location.href = '/';
+        window.location.reload();
 
     },
 

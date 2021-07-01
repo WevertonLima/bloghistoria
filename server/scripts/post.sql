@@ -7,7 +7,7 @@ SELECT
     , n.descricao
     , DATE_FORMAT(n.datapub, "%d/%m/%Y") as datapub
     , n.acessos
-    , (SELECT COUNT(*) FROM comentario WHERE idnoticia = n.idnoticia) as comentarios
+    , (SELECT COUNT(*) FROM comentario WHERE idnoticia = n.idnoticia AND excluido = 0) as comentarios
     , (SELECT COUNT(*) FROM curtida WHERE idnoticia = n.idnoticia) as curtidas
 FROM 
 	noticia as n
@@ -66,6 +66,14 @@ SELECT
     , DATE_FORMAT(c.datacad,'%d/%m/%Y às %H:%i') as datacad
     , u.nome
     , u.avatar
+    , CASE
+		WHEN c.idusuario = @idusuario THEN 1
+        ELSE 0 
+      END AS ad
+    , CASE
+		WHEN @idtipousuario = 1 THEN 1
+        ELSE 0
+	  END as adg
 FROM 
 	comentario c
     JOIN usuario u ON u.idusuario = c.idusuario
@@ -73,7 +81,7 @@ WHERE
     idnoticia = @idnoticia
 	AND excluido = 0
 ORDER BY 
-	datacad DESC
+	c.datacad DESC
 
 --END#obtercomentarios#
 
@@ -129,3 +137,14 @@ WHERE
     idnoticia = @idnoticia
 
 --END#acesso#
+
+--#removerComentario#
+
+UPDATE 
+    comentario
+SET
+    excluido = 1
+WHERE
+    idcomentario = @idcomentario
+
+--END#removerComentario#

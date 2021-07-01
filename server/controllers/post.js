@@ -36,6 +36,24 @@ const controllers = () => {
 
     const obtercomentarios = async (req) => {
 
+        let _usuarioId = 0
+        req.params.idusuario = _usuarioId;
+
+        let _tipoUsuarioId = 0;
+        req.params.idtipousuario = _tipoUsuarioId;
+
+        try {
+            _usuarioId = Acesso.retornaCodigoTokenAcesso('IdUsuario', req.headers['authorization']);
+            req.params.idusuario = _usuarioId;
+
+            _tipoUsuarioId = Acesso.retornaCodigoTokenAcesso('IdTipoUsuario', req.headers['authorization']);
+            req.params.idtipousuario = _tipoUsuarioId;
+
+        }
+        catch {
+
+        }
+
         var ComandoSQL = await readCommandSql.retornaStringSql('obtercomentarios', 'post');
         var result = await db.Query(ComandoSQL, req.params);
 
@@ -101,6 +119,15 @@ const controllers = () => {
 
     }
 
+    const removerComentario = async (req) => {
+
+        var ComandoSQL = await readCommandSql.retornaStringSql('removerComentario', 'post');
+        var result = await db.Query(ComandoSQL, req.body);
+
+        return result
+
+    }
+
 
     return Object.create({
         obterposts
@@ -111,6 +138,7 @@ const controllers = () => {
         , obtertagspost
         , curtir
         , acesso
+        , removerComentario
     })
 
 }

@@ -28,7 +28,7 @@ module.exports = (server) => {
         return next();
     });
 
-    server.get('/obtercurtidausuario/:idnoticia', async (req, res, next) => {
+    server.get('/obtercurtidausuario/:idnoticia', Acesso.verificaTokenAcesso, async (req, res, next) => {
         const result = await ctPost.controllers().obtercurtidausuario(req)
         res.send(result);
         return next();
@@ -40,7 +40,7 @@ module.exports = (server) => {
         return next();
     });
 
-    server.post('/curtir', async (req, res, next) => {
+    server.post('/curtir', Acesso.verificaTokenAcesso, async (req, res, next) => {
         const result = await ctPost.controllers().curtir(req)
         res.send(result);
         return next();
@@ -48,6 +48,12 @@ module.exports = (server) => {
 
     server.post('/acesso', async (req, res, next) => {
         const result = await ctPost.controllers().acesso(req)
+        res.send(result);
+        return next();
+    });
+
+    server.post('/comentario/remover', async (req, res, next) => {
+        const result = await ctPost.controllers().removerComentario(req)
         res.send(result);
         return next();
     });

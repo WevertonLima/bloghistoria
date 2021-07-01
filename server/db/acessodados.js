@@ -21,8 +21,8 @@ module.exports = class AcessoDados {
                         let campo = key;
                         let valor = p[key];
 
-                        console.log('campo', campo)
-                        console.log('valor', valor)
+                        //console.log('campo', campo)
+                        //console.log('valor', valor)
 
                         // valida se é para forçar o tipo para String (str)
                         if (campo.indexOf('str') != 0) {
@@ -52,7 +52,7 @@ module.exports = class AcessoDados {
                 }
             }
 
-            console.log('SqlQueryUp', SqlQueryUp)
+            //console.log('SqlQueryUp', SqlQueryUp)
 
             connection.connect();
 

@@ -176,7 +176,7 @@
                         </div>
 
                         <div class="new-comentario mt-5">
-                            <div class="card-comentario mb-0">
+                            <div class="card-comentario mb-0 hidden">
                                 <div class="row">
                                     <div class="col-2">
                                         <div class="user-image"></div>
@@ -188,6 +188,13 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="card-comentario-block mb-0 hidden">
+                                <p>
+                                    <i class="fa fa-lock"></i>&nbsp; Para comentar é necessário 
+                                    <a href="#!" class="link link-green" data-toggle="modal" data-target="#modalLogin">fazer login</a>
+                                </p>
+                            </div>
+
                         </div>
 
                     </div>
@@ -274,6 +281,43 @@
     </div>
 
     <div id="containerLogin"></div>
+
+    <!-- Modal Remover Comentário -->
+    <div class="modal fade" id="modalRemoverComentario" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-card card mb-0">
+
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h4 class="card-header-title" id="lblTituloModalAtivar">
+                                    Remover comentário
+                                </h4>
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+
+                        <p class="mb-0" id="lblTextoConfirm">Deseja realmente remover este comentário?</p>
+         
+                        <div class="float-right mt-5">
+                            <a href="#!" id="btnRemoverComentario" class="btn btn-danger">Remover</a>
+                            <a href="#!" class="btn" data-dismiss="modal">Cancelar</a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/popper.min.js"></script>

@@ -45,6 +45,19 @@ detalhes.metodos = {
         window.location.href = '/';
     },
 
+    checkUsuarioLogado: () => {
+
+        var _token = app.metodos.obterValorSessao('token')
+
+        if (_token != undefined && _token != null && _token != "") {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    },
+
     obterPostPorId: () => {
 
         app.metodos.get('/obterpostporid/' + POST_ID,
@@ -99,7 +112,7 @@ detalhes.metodos = {
             (response) => {
 
                 var retorno = response;
-                console.log('retorno', retorno)
+                //console.log('retorno', retorno)
 
             },
             (xhr, ajaxOptions, error) => {
@@ -108,17 +121,15 @@ detalhes.metodos = {
                 console.log('error', error);
                 app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
                 return;
-            }
+            },
+            true
         );
 
     },
 
     obterCurtidaUsuario: () => {
 
-        // primeiro valida se o usuário está logado
-        var _token = app.metodos.obterValorSessao('token')
-
-        if (_token != undefined && _token != null && _token != "") {
+        if (detalhes.metodos.checkUsuarioLogado()) {
 
             app.metodos.get('/obtercurtidausuario/' + POST_ID,
                 (response) => {
@@ -163,6 +174,14 @@ detalhes.metodos = {
     obterComentarios: () => {
 
         // primeiro valida se o usuário está logado
+        if (detalhes.metodos.checkUsuarioLogado()) {
+            $(".card-comentario").removeClass('hidden')
+            $(".card-comentario-block").remove();
+        }
+        else {
+            $(".card-comentario").remove()
+            $(".card-comentario-block").removeClass('hidden');
+        }
 
         $(".list-comentarios").html('');
 
@@ -197,9 +216,9 @@ detalhes.metodos = {
 
             let removerComentario = '';
 
-            if (true) {
+            if (e.ad == 1 || e.adg == 1) {
                 removerComentario = `
-                    <a href="#!" class="btn-remover-comentario" onclick="detalhes.metodos.removerComentario('${e.idcomentario}')">
+                    <a href="#!" class="btn-remover-comentario" onclick="detalhes.metodos.openModalExcluirComentario('${e.idcomentario}')">
                         <i class="fa fa-trash"></i>
                     </a>
                 `
@@ -225,9 +244,40 @@ detalhes.metodos = {
 
     },
 
+    openModalExcluirComentario: (id) => {
+
+        $("#btnRemoverComentario").attr('onclick', `detalhes.metodos.removerComentario(${id})`)
+        $("#modalRemoverComentario").modal('show')
+
+    },
+
     removerComentario: (id) => {
 
+        var dados = {
+            idcomentario: id
+        }
 
+        app.metodos.post('/comentario/remover', JSON.stringify(dados),
+            (response) => {
+
+                var retorno = response;
+                console.log('retorno', retorno)
+
+                //alert('Comentário removido com sucesso!')
+                $("#modalRemoverComentario").modal('hide')
+                $("#btnRemoverComentario").attr('onclick', '')
+
+                detalhes.metodos.obterComentarios();
+
+            },
+            (xhr, ajaxOptions, error) => {
+                console.log('xhr', xhr);
+                console.log('ajaxOptions', ajaxOptions);
+                console.log('error', error);
+                app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
+                return;
+            }
+        );
 
     },
 
@@ -320,7 +370,7 @@ detalhes.metodos = {
             (response) => {
 
                 var retorno = response;
-                console.log('retorno', retorno)
+                //console.log('retorno', retorno)
 
             },
             (xhr, ajaxOptions, error) => {
