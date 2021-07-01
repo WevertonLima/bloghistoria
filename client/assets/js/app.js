@@ -4,6 +4,28 @@ app.eventos = {
 
     init: () => {
 
+        var _token = app.metodos.obterValorSessao('token')
+
+        if (_token != undefined && _token != null && _token != "") {
+            $(".containerBtns").addClass('hidden'); 
+            $(".containerUsuario").removeClass('hidden');
+        }
+        else {
+            $(".containerBtns").removeClass('hidden'); 
+            $(".containerUsuario").addClass('hidden');
+        }
+
+        var _avatar = app.metodos.obterValorSessao('avatar')
+
+        if (_avatar != undefined && _avatar != null && _avatar != "") {
+            $("#imgAvatar").css('background-image', `url('${_avatar}')`);
+            $("#imgAvatar").css('background-size', 'cover');
+        }
+        else {
+            $("#imgAvatar").css('background-image', `url('/assets/img/user.png')`);
+            $("#imgAvatar").css('background-size', 'cover');
+        }
+
         $("#lblUsuarioLogado").text(app.metodos.obterValorSessao('NomeUsuario'));
 
         $('body').append("<div class='mask'></div>")
@@ -165,6 +187,13 @@ app.metodos = {
 
         localStorage.clear();
         window.location.href = '/painel/login.html';
+
+    },
+
+    logoutBlog: () => {
+
+        localStorage.clear();
+        window.location.href = '/';
 
     },
 

@@ -15,6 +15,9 @@ common.eventos = {
 
         common.metodos.obterPostsPopulares();
 
+        // adiciona a modal de login e cadastro
+        $('#containerLogin').load('/login.html');
+
     }
 
 }

@@ -14,9 +14,6 @@ home.eventos = {
         app.eventos.init();
         home.metodos.obterPosts();
 
-        // adiciona a modal de login e cadastro
-        $('#containerLogin').load('/login.html');
-
     }
 
 }

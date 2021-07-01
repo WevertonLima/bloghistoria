@@ -10,6 +10,12 @@ module.exports = (server) => {
         return next();
     });
 
+    server.post('/usuario/cadastro', async (req, res, next) => {
+        const result = await ctLogin.controllers().cadastro(req)
+        res.send(result);
+        return next();
+    });
+
     server.get('/check', Acesso.verificaTokenAcesso, async (req, res, next) => {
         res.send(true);
         return next();

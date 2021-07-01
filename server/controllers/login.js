@@ -55,8 +55,59 @@ const controllers = () => {
         }
     };
 
+    const cadastro = async (req) => {
+
+        // valida se o email já está sendo utilizado
+        var resultEmail = await validaEmail(req);
+        console.log('resultEmail', resultEmail)
+
+        req.body.idtipousuario = 2 // Fixo Usuário Normal
+
+        if (resultEmail.length) {
+            return {
+                status: "error",
+                mensagem: "O e-mail informado já está sendo utilizado"
+            };
+        }
+
+        try {
+
+            req.body.senha = crypto.createHmac('sha256', req.body.senha).digest('hex');
+
+            var ComandoSQL = await readCommandSql.retornaStringSql('cadastro', 'login');
+            await db.Query(ComandoSQL, req.body);
+
+            console.log(ComandoSQL)
+
+            return {
+                status: "success",
+                mensagem: "Usuário cadastrado com sucesso!"
+            }
+
+        }
+        catch (ex) {
+            return {
+                status: "error",
+                mensagem: 'Falha ao cadastrar usuário. Tente novamente',
+                ex: ex
+            }
+        }
+
+    }
+
+    const validaEmail = async (req) => {
+
+        var ComandoSQL = await readCommandSql.retornaStringSql('validaEmail', 'login');
+        var result = await db.Query(ComandoSQL, req.body);
+
+        console.log(result);
+        return result
+
+    }
+
     return Object.create({
         login
+        , cadastro
     })
 
 }

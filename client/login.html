@@ -3,26 +3,28 @@
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-body p-5">
+
                 <h5 class="modal-title" id="exampleModalLabel">Fazer login</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    style="position: absolute;right: 20px;top: 20px;">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div>
-            <div class="modal-body">
 
-                <form>
-                    <div class="form-group mb-1">
-                        <label>E-mail:</label>
+                <form class="mt-3">
+                    <div class="form-group mb-3">
+                        <label><b>E-mail:</b></label>
                         <input id="txtEmailLogin" type="email" class="form-control" />
                     </div>
                     <div class="form-group mb-1">
-                        <label>Senha:</label>
+                        <label><b>Senha:</b></label>
                         <a href="#!" class="link-password">Esqueceu a senha?</a>
                         <input id="txtSenhaLogin" type="password" class="form-control" />
                     </div>
 
-                    <a href="#!" id="btnLogin" class="btn btn-big btn-secondary-theme btn-block mt-4">Acessar 
+                    <a href="#!" id="btnLogin"
+                        class="btn btn-big btn-ver-mais btn-block mt-4">Acessar
                         &nbsp;<i class="fe fe-arrow-right"></i></a>
 
                     <!-- <div class="login-google">
@@ -35,5 +37,50 @@
         </div>
     </div>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalCadastro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body p-5">
+
+                <h5 class="modal-title" id="exampleModalLabel">Cadastrar-se</h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    style="position: absolute;right: 20px;top: 20px;">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <form class="mt-3">
+                    <div class="form-group mb-3">
+                        <label><b>Nome:</b></label>
+                        <input id="txtNomeCadastro" type="text" class="form-control" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label><b>E-mail:</b></label>
+                        <input id="txtEmailCadastro" type="email" class="form-control" />
+                    </div>
+                    <div class="form-group mb-1">
+                        <label><b>Senha:</b></label>
+                        <input id="txtSenhaCadastro" type="password" class="form-control" />
+                    </div>
+
+                    <a href="#!" id="btnCadastro"
+                        class="btn btn-big btn-ver-mais btn-block mt-4">Cadastrar-se
+                        &nbsp;<i class="fe fe-arrow-right"></i></a>
+
+                    <!-- <div class="login-google">
+                        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                    </div> -->
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script src="assets/js/login.js"></script>

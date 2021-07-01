@@ -686,3 +686,39 @@ a.btn-search {
     color: #545454;
 }
 
+
+a.link-password {
+    float: right;
+    color: #86861e;
+    font-weight: 500;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+a.btn.btn-block.btn-light {
+    padding: 10px 30px;
+    font-weight: 500;
+    border-radius: 0;
+}
+
+.containerUsuario #lblUsuarioLogado {
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+.containerUsuario .btn-sair {
+    background: white;
+    display: block;
+    color: red;
+    font-weight: 600;
+}
+
+.containerUsuario .avatar-img.rounded-circle {
+    height: 40px;
+    width: 40px;
+    background-color: #3a3a3a;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
