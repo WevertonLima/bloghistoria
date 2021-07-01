@@ -45,7 +45,10 @@ const controllers = () => {
 
     const obtercurtidausuario = async (req) => {
 
-        req.params.idusuario = 1; // TODO: Remover fixo
+        let _usuarioId = Acesso.retornaCodigoTokenAcesso('IdUsuario', req.headers['authorization']);
+        req.params.idusuario = _usuarioId;
+
+        console.log('_usuarioId', _usuarioId)
 
         var ComandoSQL = await readCommandSql.retornaStringSql('obtercurtidausuario', 'post');
         var result = await db.Query(ComandoSQL, req.params);
@@ -63,6 +66,32 @@ const controllers = () => {
 
     }
 
+    const curtir = async (req) => {
+
+        var result;
+
+        let _usuarioId = Acesso.retornaCodigoTokenAcesso('IdUsuario', req.headers['authorization']);
+        req.body.idusuario = _usuarioId;
+
+        if (req.body.curtir == 1) {
+
+            // curtir
+            var ComandoSQL = await readCommandSql.retornaStringSql('curtir', 'post');
+            result = await db.Query(ComandoSQL, req.body);
+
+        }
+        else if (req.body.curtir == 0) {
+
+            // descurtir
+            var ComandoSQL = await readCommandSql.retornaStringSql('descurtir', 'post');
+            result = await db.Query(ComandoSQL, req.body);
+
+        }
+        
+        return result
+
+    }
+
 
     return Object.create({
         obterposts
@@ -71,6 +100,7 @@ const controllers = () => {
         , obtercomentarios
         , obtercurtidausuario
         , obtertagspost
+        , curtir
     })
 
 }

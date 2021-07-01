@@ -89,6 +89,47 @@ detalhes.metodos = {
     obterCurtidaUsuario: () => {
 
         // primeiro valida se o usuário está logado
+        var _token = app.metodos.obterValorSessao('token')
+
+        if (_token != undefined && _token != null && _token != "") {
+
+            app.metodos.get('/obtercurtidausuario/' + POST_ID,
+                (response) => {
+
+                    var curtiu = response;
+                    console.log('curtiu', curtiu)
+
+                    if (curtiu.length > 0) {
+
+                        USUARIO_CURTIU = true;
+
+                        $(".icon-like").addClass('liked');
+                        $("#iconLike").addClass('fa-heart');
+                        $("#iconLike").removeClass('fa-heart-o');
+
+                    }
+
+                },
+                (xhr, ajaxOptions, error) => {
+                    console.log('xhr', xhr);
+                    console.log('ajaxOptions', ajaxOptions);
+                    console.log('error', error);
+                    app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
+                    return;
+                }
+            );
+
+        }
+        else {
+
+            // bloaqueia o botão curtir
+            $("#btnLike").addClass('disabled');
+            $("#btnLike").attr('onclick', '');
+
+            detalhes.metodos.curtir = null;
+            detalhes.metodos.updatecurtir = null;
+
+        }
 
     },
 
@@ -141,7 +182,7 @@ detalhes.metodos = {
 
             if (_avatar == null) {
                 // define o avatar padrão
-
+                
             }
 
             $(".list-comentarios").append(
@@ -211,6 +252,8 @@ detalhes.metodos = {
         if (USUARIO_CURTIU) {
 
             // descurtir
+            detalhes.metodos.updatecurtir(0);
+
             USUARIO_CURTIU = false;
             TOTAL_LIKES--;
 
@@ -224,6 +267,8 @@ detalhes.metodos = {
         else {
 
             //curtir
+            detalhes.metodos.updatecurtir(1);
+            
             USUARIO_CURTIU = true;
             TOTAL_LIKES++;
 
@@ -236,6 +281,31 @@ detalhes.metodos = {
         }
 
     },
+
+    updatecurtir: (curtir) => {
+
+        var dados = {
+            idnoticia: POST_ID,
+            curtir: curtir
+        }
+
+        app.metodos.post('/curtir', JSON.stringify(dados),
+            (response) => {
+
+                var retorno = response;
+                console.log('retorno', retorno)
+
+            },
+            (xhr, ajaxOptions, error) => {
+                console.log('xhr', xhr);
+                console.log('ajaxOptions', ajaxOptions);
+                console.log('error', error);
+                app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
+                return;
+            }
+        );
+
+    }
 
 }
 

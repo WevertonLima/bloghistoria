@@ -29,8 +29,25 @@
         <div class="menu-content mb-5" id="menuDestaquesLeft">
 
         </div>
-        <a href="#!" class="btn btn-block btn-ver-mais" data-toggle="modal" data-target="#modalLogin">Login</a>
-        <a href="#!" class="btn btn-block btn-light" data-toggle="modal" data-target="#modalCadastro">Cadastre-se</a>
+        <div class="containerBtns hidden">
+            <a href="#!" class="btn btn-block btn-ver-mais" data-toggle="modal" data-target="#modalLogin">Login</a>
+            <a href="#!" class="btn btn-block btn-light" data-toggle="modal"
+                data-target="#modalCadastro">Cadastre-se</a>
+        </div>
+        <div class="containerUsuario hidden">
+            <div class="row">
+                <div class="col-3">
+                    <div id="imgAvatar" class="avatar-img rounded-circle"></div>
+                </div>
+                <div class="col-8 pl-0">
+                    <p id="lblUsuarioLogado"></p>
+                </div>
+            </div>
+            <a href="#!" onclick="app.metodos.logoutBlog()" class="btn btn-sair mt-3">
+                Sair
+            </a>
+        </div>
+
     </div>
 
    <!-- PESQUISA -->
@@ -142,7 +159,7 @@
 
                         <div class="post-footer details text-right mt-5">
                             <span class="icon-like">
-                                <a href="#!" onclick="detalhes.metodos.curtir()"><i id="iconLike" class="fa fa-heart-o"></i> <span id="lblTotalLikes">0</span></a>
+                                <a href="#!" id="btnLike" onclick="detalhes.metodos.curtir()"><i id="iconLike" class="fa fa-heart-o"></i> <span id="lblTotalLikes">0</span></a>
                             </span>
                         </div>
                     </div>
@@ -256,6 +273,7 @@
         &copy; Todos os direitos reservados - JPToniosso - 2021 - desenvolvido por <a href="#!">GUIdesign</a>
     </div>
 
+    <div id="containerLogin"></div>
 
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/popper.min.js"></script>

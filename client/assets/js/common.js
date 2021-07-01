@@ -53,6 +53,8 @@ common.metodos = {
 
     carregarCategoriasDestaques: (list) => {
 
+        $("#menuDestaques").append('<a href="/" class="menu-item">Início</a>');
+
         $.each(list, (i, e) => {
 
             var temp = common.templates.itemMenuDestaque;

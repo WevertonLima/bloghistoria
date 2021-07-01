@@ -40,4 +40,10 @@ module.exports = (server) => {
         return next();
     });
 
+    server.post('/curtir', async (req, res, next) => {
+        const result = await ctPost.controllers().curtir(req)
+        res.send(result);
+        return next();
+    });
+
 }

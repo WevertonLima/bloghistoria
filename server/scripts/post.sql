@@ -103,3 +103,18 @@ ORDER BY
 	t.descricao
 
 --END#obtertagspost#
+
+--#curtir#
+
+INSERT INTO curtida
+    (idnoticia, idusuario)
+VALUES
+    (@idnoticia, @idusuario)
+
+--END#curtir#
+
+--#descurtir#
+
+DELETE FROM curtida WHERE idnoticia = @idnoticia AND idusuario = @idusuario
+
+--END#descurtir#

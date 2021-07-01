@@ -194,6 +194,10 @@ a.top-menu-item.link-social:last-child {
     color: #000;
 }
 
+.post .post-footer.details span.icon-like a.disabled {
+    cursor: default!important;
+}
+
 .post .post-footer.details span.icon-like.liked a i {
     color: #e74c3c;
 }
