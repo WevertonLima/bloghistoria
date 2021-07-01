@@ -118,3 +118,14 @@ VALUES
 DELETE FROM curtida WHERE idnoticia = @idnoticia AND idusuario = @idusuario
 
 --END#descurtir#
+
+--#acesso#
+
+UPDATE 
+    noticia
+SET
+    acessos = @acessos
+WHERE
+    idnoticia = @idnoticia
+
+--END#acesso#

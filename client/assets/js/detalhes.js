@@ -71,6 +71,8 @@ detalhes.metodos = {
                         $("#containerCapa").html(`<img class="capa" src="${post[0].capa}" />`)
                     }
 
+                    detalhes.metodos.adicionarAcesso(post[0].acessos)
+
                 }
 
             },
@@ -82,6 +84,31 @@ detalhes.metodos = {
                 return;
             },
             true
+        );
+
+    },
+
+    adicionarAcesso: (acessos) => {
+
+        var dados = {
+            acessos: acessos + 1,
+            idnoticia: POST_ID
+        }
+
+        app.metodos.post('/acesso', JSON.stringify(dados),
+            (response) => {
+
+                var retorno = response;
+                console.log('retorno', retorno)
+
+            },
+            (xhr, ajaxOptions, error) => {
+                console.log('xhr', xhr);
+                console.log('ajaxOptions', ajaxOptions);
+                console.log('error', error);
+                app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
+                return;
+            }
         );
 
     },

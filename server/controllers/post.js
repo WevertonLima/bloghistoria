@@ -92,6 +92,15 @@ const controllers = () => {
 
     }
 
+    const acesso = async (req) => {
+
+        var ComandoSQL = await readCommandSql.retornaStringSql('acesso', 'post');
+        var result = await db.Query(ComandoSQL, req.body);
+
+        return result
+
+    }
+
 
     return Object.create({
         obterposts
@@ -101,6 +110,7 @@ const controllers = () => {
         , obtercurtidausuario
         , obtertagspost
         , curtir
+        , acesso
     })
 
 }

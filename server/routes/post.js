@@ -46,4 +46,10 @@ module.exports = (server) => {
         return next();
     });
 
+    server.post('/acesso', async (req, res, next) => {
+        const result = await ctPost.controllers().acesso(req)
+        res.send(result);
+        return next();
+    });
+
 }
