@@ -16,4 +16,28 @@ module.exports = (server) => {
         return next();
     });
 
+    server.get('/obterpostporid/:idnoticia', async (req, res, next) => {
+        const result = await ctPost.controllers().obterpostporid(req)
+        res.send(result);
+        return next();
+    });
+
+    server.get('/obtercomentarios/:idnoticia', async (req, res, next) => {
+        const result = await ctPost.controllers().obtercomentarios(req)
+        res.send(result);
+        return next();
+    });
+
+    server.get('/obtercurtidausuario/:idnoticia', async (req, res, next) => {
+        const result = await ctPost.controllers().obtercurtidausuario(req)
+        res.send(result);
+        return next();
+    });
+
+    server.get('/obtertagspost/:idnoticia', async (req, res, next) => {
+        const result = await ctPost.controllers().obtertagspost(req)
+        res.send(result);
+        return next();
+    });
+
 }

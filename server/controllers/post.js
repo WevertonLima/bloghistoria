@@ -25,10 +25,52 @@ const controllers = () => {
 
     }
 
+    const obterpostporid = async (req) => {
+
+        var ComandoSQL = await readCommandSql.retornaStringSql('obterpostporid', 'post');
+        var result = await db.Query(ComandoSQL, req.params);
+
+        return result
+
+    }
+
+    const obtercomentarios = async (req) => {
+
+        var ComandoSQL = await readCommandSql.retornaStringSql('obtercomentarios', 'post');
+        var result = await db.Query(ComandoSQL, req.params);
+
+        return result
+
+    }
+
+    const obtercurtidausuario = async (req) => {
+
+        req.params.idusuario = 1; // TODO: Remover fixo
+
+        var ComandoSQL = await readCommandSql.retornaStringSql('obtercurtidausuario', 'post');
+        var result = await db.Query(ComandoSQL, req.params);
+
+        return result
+
+    }
+
+    const obtertagspost = async (req) => {
+
+        var ComandoSQL = await readCommandSql.retornaStringSql('obtertagspost', 'post');
+        var result = await db.Query(ComandoSQL, req.params);
+
+        return result
+
+    }
+
 
     return Object.create({
         obterposts
         , obterpostspopulares
+        , obterpostporid
+        , obtercomentarios
+        , obtercurtidausuario
+        , obtertagspost
     })
 
 }

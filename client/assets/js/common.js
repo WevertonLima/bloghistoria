@@ -187,8 +187,9 @@ common.metodos = {
 
     },
 
-
     obterPostsPopulares: () => {
+
+        $("#listPostsPopular").html('')
 
         app.metodos.get('/obterpostspopulares',
             (response) => {
@@ -212,7 +213,74 @@ common.metodos = {
     },
 
     carregarPostsPopulares: (list) => {
-        
+
+        $.each(list, (i, e) => {
+
+            var temp = common.templates.postPopular;
+
+            $("#listPostsPopular").append(
+                temp.replace(/\${idnoticia}/g, e.idnoticia)
+                    .replace(/\${capa}/g, e.capa)
+                    .replace(/\${titulo}/g, e.titulo)
+                    .replace(/\${descricao}/g, e.descricao)
+                    .replace(/\${data}/g, e.datapub)
+            );
+
+            // ultimo item, carrega o slider
+            if ((i + 1) == list.length) {
+
+                $('.slider').slick({
+                    dots: false,
+                    infinite: false,
+                    speed: 300,
+                    slidesToShow: 3,
+                    centerMode: false,
+                    variableWidth: true
+                });
+
+            }
+
+        })
+
+    },
+
+    enviarEmail: () => {
+
+        // valida os dados
+
+        var email = $("#txtEmailNovidades").val().trim();
+
+        if (email == "" || email == null || !app.metodos.isEmail(email)) {
+            alert('Informe um e-mail válido, por favor')
+            $("#txtEmailNovidades").focus()
+            return;
+        }
+
+        var dados = {
+            emailusuario: email
+        }
+
+        app.metodos.post('/email/adicionar', JSON.stringify(dados),
+            (response) => {
+
+                var retorno = response;
+                console.log('retorno', retorno)
+
+                alert(retorno.mensagem)
+
+                $("#txtEmailNovidades").val('')
+
+            },
+            (xhr, ajaxOptions, error) => {
+                console.log('xhr', xhr);
+                console.log('ajaxOptions', ajaxOptions);
+                console.log('error', error);
+                app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
+                return;
+            },
+            true
+        );
+
     }
 
 
@@ -238,6 +306,19 @@ common.templates = {
 
     itemMenuDestaqueLeft: `
         <a href="/pesquisa?t=2&d=\${descricao}" class="menu-item-left">\${descricao}</a>
+    `,
+
+    postPopular: `
+        <div class="card card-popular">
+            <a href="/detalhes.html?n=\${idnoticia}" class="link-card-popular">
+                <div class="img-card-popupar" style="background-image: url('\${capa}'); background-size: cover;"></div>
+                <div class="card-popular-body">
+                    <h2>\${titulo}</h2>
+                    <p>\${descricao}</p>
+                    <label>$\{data}</label>
+                </div>
+            </a>
+        </div>    
     `
 
 }
