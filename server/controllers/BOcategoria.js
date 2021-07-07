@@ -91,12 +91,35 @@ const controllers = () => {
 
     }
 
+     const atualizarDestaque = async (req) => {
+
+        try {
+
+            var ComandoSQL = await readCommandSql.retornaStringSql('atualizarDestaque', 'BOcategoria');
+            var result = await db.Query(ComandoSQL, req.body);
+
+            return {
+                resultado: "sucesso",
+                msg: "Alterado destaque com sucesso!"
+            }
+
+        } catch (error) {
+            return {
+                resultado: "erro",
+                msg: "Falha ao realizar operação. Tente novamente.",
+                ex: error
+            }
+        }
+
+    }
+
     return Object.create({
         consultar
         , obterPorId
         , inserir
         , atualizar
         , atualizarStatus
+        , atualizarDestaque
     })
 
 }

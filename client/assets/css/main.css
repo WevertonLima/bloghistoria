@@ -285,3 +285,10 @@ a.nav-link.active:before {
     background: rgba(255, 255, 255, 0.95);
     z-index: 99999;
 }
+
+.dropdown-menu .separate {
+    border-bottom: 1px solid #e2e2e2;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

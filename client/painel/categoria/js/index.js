@@ -53,6 +53,8 @@ categoria.metodos = {
                                             <i class="fe fe-edit"></i>&nbsp; Editar
                                         </a>
                                         {Opcao}
+                                        <p class="separate"></p>
+                                        {OpcaoDestaque}
                                     </div>
                                 </div>`;
 
@@ -76,12 +78,24 @@ categoria.metodos = {
                     elem.Acoes = elem.Acoes.replace('{Opcao}', opcao);
 
 
+                    let opcaoDestaque = '';
+
                     if (elem.destaque > 0) {
-                        elem.Destaques = `<span class="badge badge-light"><i class="fe fe-star"></i>&nbsp; Principal</span>`
+                        opcaoDestaque = `<a href="#!" class="dropdown-item" onclick="categoria.metodos.abrirModalDestacar(` + elem.idcategoria + `, 0)">
+                                            <i class="fe fe-star-o"></i>&nbsp; Remover Destaque
+                                        </a>`;
+
+                        elem.spDestaque = `<span class="badge badge-light"><i class="fe fe-star"></i>&nbsp; Principal</span>`;
                     }
                     else {
-                        elem.Destaques = `-`
+                        opcaoDestaque = `<a href="#!" class="dropdown-item" onclick="categoria.metodos.abrirModalDestacar(` + elem.idcategoria + `, 1)">
+                                            <i class="fe fe-star"></i>&nbsp; Destacar
+                                        </a>`;
+
+                        elem.spDestaque = '-'
                     }
+
+                    elem.Acoes = elem.Acoes.replace('{OpcaoDestaque}', opcaoDestaque);
 
                 });
 
@@ -104,7 +118,7 @@ categoria.metodos = {
                     "columns": [
                         { data: "idcategoria" },
                         { data: "descricao" },
-                        { data: "Destaques" },
+                        { data: "spDestaque" },
                         { data: "spAtivo" },
                         { data: "Acoes" }
                     ],
@@ -327,6 +341,71 @@ categoria.metodos = {
 
     },
 
+    abrirModalDestacar: (id, destacar) => {
+
+        $("#hdfCategoriaId").val(id);
+
+        if (destacar == 1) {
+            $("#lblTituloModalDestacar").text('Destacar Categoria');
+            $("#lblTextoConfirm").text('Deseja realmente destacar a categoria como principal?');
+
+            $("#btnDestacar").removeClass('hidden');
+            $("#btnRemoverDestaque").addClass('hidden');
+        }
+        else {
+            $("#lblTituloModalDestacar").text('Remover Destaque Categoria');
+            $("#lblTextoConfirm").text('Deseja realmente remover o destaque da categoria?');
+
+            $("#btnDestacar").addClass('hidden');
+            $("#btnRemoverDestaque").removeClass('hidden');
+        }
+
+        $("#modalDestacar").modal('toggle');
+
+    },
+
+    destacar: (destacar) => {
+
+        var idcategoria = $("#hdfCategoriaId").val();
+
+        if (idcategoria != undefined && idcategoria != '') {
+
+            var dados = {
+                idcategoria: idcategoria,
+                destaque: destacar
+            }
+
+            // chama o método de destacar / remover destaque
+            app.metodos.post('/categoria/destacar', JSON.stringify(dados),
+                (response) => {
+
+                    if (response.resultado == "erro") {
+                        app.metodos.mensagem(response.msg);
+                        console.log("Erro interno: ", response.ex);
+                        return;
+                    }
+
+                    if (response.resultado == "sucesso") {
+                        app.metodos.mensagem(response.msg, 'green');
+                        $("#modalDestacar").modal('toggle');
+
+                        // recarrega a tabela
+                        categoria.metodos.carregarCategorias();
+                    }
+                },
+                (xhr, ajaxOptions, error) => {
+                    console.log('xhr', xhr);
+                    console.log('ajaxOptions', ajaxOptions);
+                    console.log('error', error);
+                    app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
+                    return;
+                }
+            );
+
+        }
+
+    },
+    
     limparCampos: () => {
         $("#txtDescricao").val('');
         $("#hdfCategoriaId").val('');

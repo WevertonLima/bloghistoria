@@ -34,4 +34,10 @@ module.exports = (server) => {
         return next();
     });
 
+    server.post('/categoria/destacar', Acesso.verificaTokenAcesso, async (req, res, next) => {
+        const result = await ctCategoria.controllers().atualizarDestaque(req)
+        res.send(result);
+        return next();
+    });
+    
 }

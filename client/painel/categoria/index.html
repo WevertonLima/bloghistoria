@@ -124,6 +124,44 @@
         </div>
     </div>
 
+    <!-- Modal de Destacar / Remover Destaque -->
+    <div class="modal fade" id="modalDestacar" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-card card mb-0">
+
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h4 class="card-header-title" id="lblTituloModalDestacar">
+                                    <i class="fe fe-document"></i>&nbsp; Categoria
+                                </h4>
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+
+                        <p class="mb-0" id="lblTextoConfirm">Deseja realmente destacar a categoria como principal?</p>
+         
+                        <div class="float-right mt-5">
+                            <a href="#" id="btnRemoverDestaque" class="btn btn-danger" onclick="categoria.metodos.destacar(0)">Remover Destaque</a>
+                            <a href="#" class="btn" data-dismiss="modal">Cancelar</a>
+                            <a href="#" id="btnDestacar" class="btn btn-success" onclick="categoria.metodos.destacar(1)">Destacar</a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript" src="../../assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="../../assets/js/popper.min.js"></script>
     <script type="text/javascript" src="../../assets/js/bootstrap.min.js"></script>

@@ -54,6 +54,9 @@ const controllers = () => {
 
         }
 
+        console.log('_usuarioId', _usuarioId);
+        console.log('_tipoUsuarioId', _tipoUsuarioId);
+
         var ComandoSQL = await readCommandSql.retornaStringSql('obtercomentarios', 'post');
         var result = await db.Query(ComandoSQL, req.params);
 
