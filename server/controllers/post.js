@@ -50,7 +50,7 @@ const controllers = () => {
             req.params.idtipousuario = _tipoUsuarioId;
 
         }
-        catch {
+        catch (ex) {
 
         }
 
