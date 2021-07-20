@@ -56,6 +56,6 @@ exports.get = function get(env) {
         return config.dev;
 
     if(env.toLowerCase() == "prod")
-        return config.dev;
+        return config.prod;
         
 }
