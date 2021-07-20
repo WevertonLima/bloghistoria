@@ -37,7 +37,7 @@ email.metodos = {
 
                 var emails = response;
 
-                console.log('emails', emails)
+                console.log('emails', emails) 
 
                 // adciona a coluna de ação nos registros
 
