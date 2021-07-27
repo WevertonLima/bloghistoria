@@ -59,6 +59,7 @@ email.metodos = {
                     "data": emails,
                     "columns": [
                         { data: "idemail" },
+                        { data: "nome" },
                         { data: "emailusuario" }
                     ],
                     "language": {
@@ -98,6 +99,7 @@ email.templates = {
                 <thead>
                     <tr>
                         <th class="text-muted">ID</th>
+                        <th class="text-muted">Nome</th>
                         <th class="text-muted">E-mail</th>
                     </tr>
                 </thead>

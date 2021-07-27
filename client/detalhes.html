@@ -268,9 +268,15 @@
                 </div>
                 <div class="col-4">
                     <h1 class="title-footer">RECEBA AS NOVIDADES</h1>
-                    <p class="text-footer">Informe seu e-mail e receba novas notícias:</p>
-                    <input type="email" placeholder="E-mail" class="form-control form-footer" id="txtEmailNovidades" />
-                    <a class="btn btn-footer" href="#!" onclick="common.metodos.enviarEmail()"><i class="fa fa-send"></i></a>
+                    <p class="text-footer">Informe seu nome e seu e-mail para receber novidades:</p>
+                    <div class="form-group">
+                        <input type="text" placeholder="Nome Completo" class="form-control form-footer mb-2"
+                            id="txtNomeNovidades" />
+                        <input type="email" placeholder="E-mail" class="form-control form-footer"
+                            id="txtEmailNovidades" />
+                        <a class="btn btn-footer" href="#!" onclick="common.metodos.enviarEmail()"><i
+                                class="fa fa-send"></i></a>
+                    </div>
                 </div>
             </div>
         </div>

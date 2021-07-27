@@ -2,6 +2,7 @@
 
 SELECT                  
     idemail
+    , nome
     , emailusuario
 FROM 
     email
@@ -13,8 +14,8 @@ WHERE
 --#adicionar#
 
 INSERT INTO email
-    (emailusuario)
+    (nome, emailusuario)
 VALUES 
-    (@emailusuario)
+    (@nome, @emailusuario)
 
 --END#adicionar#

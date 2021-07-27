@@ -253,7 +253,14 @@ common.metodos = {
 
         // valida os dados
 
+        var nome = $("#txtNomeNovidades").val().trim();
         var email = $("#txtEmailNovidades").val().trim();
+
+        if (nome == "" || nome == null) {
+            alert('Informe seu nome, por favor')
+            $("#txtNomeNovidades").focus()
+            return;
+        }
 
         if (email == "" || email == null || !app.metodos.isEmail(email)) {
             alert('Informe um e-mail válido, por favor')
@@ -262,7 +269,8 @@ common.metodos = {
         }
 
         var dados = {
-            emailusuario: email
+            emailusuario: email,
+            nome: nome
         }
 
         app.metodos.post('/email/adicionar', JSON.stringify(dados),
@@ -273,6 +281,7 @@ common.metodos = {
 
                 alert(retorno.mensagem)
 
+                $("#txtNomeNovidades").val('')
                 $("#txtEmailNovidades").val('')
 
             },

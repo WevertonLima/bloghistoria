@@ -2,6 +2,7 @@
 
 SELECT                  
     idemail
+    , nome
     , emailusuario
 FROM 
     email
