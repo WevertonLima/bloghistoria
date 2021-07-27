@@ -4,12 +4,18 @@ $(document).ready(function () {
 
 var home = {};
 
-var PAGINA = 1;
-var TOTAL_P_PAGINA = 5;
+var LISTA_POSTS = [];
+var PAGINA = 0;
+var TOTAL_P_PAGINA = 6;
+var AUX_PAGE = 6;
 
 home.eventos = {
 
     init: () => {
+
+        $("#btnCarregarMais").on('click', () => {
+            home.metodos.carregarPosts(LISTA_POSTS);
+        })
 
         app.eventos.init();
         home.metodos.obterPosts();
@@ -29,6 +35,7 @@ home.metodos = {
 
                 var posts = response;
                 console.log('posts', posts)
+                LISTA_POSTS = posts;
 
                 home.metodos.carregarPosts(posts)
 
@@ -47,32 +54,47 @@ home.metodos = {
 
     carregarPosts: (list) => {
 
-        $.each(list, (i, e) => {
+        // remove o botão de carregar mais posts
+        let total_posts = LISTA_POSTS.length;
 
-            var temp = home.templates.post;
+        if (total_posts <= TOTAL_P_PAGINA) {
+            $("#container-ver-mais").remove();
+        }
 
-            let _capa = '';
+        // carrega os posts paginados
 
-            if (e.capa != null) {
-                _capa = `
-                    <a href="/detalhes.html?n=${e.idnoticia}" class="link-capa">
-                        <img class="capa" src="${e.capa}" />
-                    </a>
-                `
+        for (var i = PAGINA; i < TOTAL_P_PAGINA; i++) {
+
+            if (list[i] != undefined) {
+
+                let temp = home.templates.post;
+
+                let _capa = '';
+    
+                if (list[i].capa != null) {
+                    _capa = `
+                        <a href="/detalhes.html?n=${list[i].idnoticia}" class="link-capa">
+                            <img class="capa" src="${list[i].capa}" />
+                        </a>
+                    `
+                }
+    
+                $("#listPosts").append(
+                    temp.replace(/\${idnoticia}/g, list[i].idnoticia)
+                        .replace(/\${content_capa}/g, _capa)
+                        .replace(/\${titulo}/g, list[i].titulo)
+                        .replace(/\${descricao}/g, list[i].descricao)
+                        .replace(/\${data}/g, list[i].datapub)
+                        .replace(/\${acessos}/g, list[i].acessos)
+                        .replace(/\${comentarios}/g, list[i].comentarios)
+                        .replace(/\${curtidas}/g, list[i].curtidas)
+                );
             }
 
-            $("#listPosts").append(
-                temp.replace(/\${idnoticia}/g, e.idnoticia)
-                    .replace(/\${content_capa}/g, _capa)
-                    .replace(/\${titulo}/g, e.titulo)
-                    .replace(/\${descricao}/g, e.descricao)
-                    .replace(/\${data}/g, e.datapub)
-                    .replace(/\${acessos}/g, e.acessos)
-                    .replace(/\${comentarios}/g, e.comentarios)
-                    .replace(/\${curtidas}/g, e.curtidas)
-            );
+        }
 
-        })
+        PAGINA += AUX_PAGE;
+        TOTAL_P_PAGINA += AUX_PAGE;
 
     }
 
