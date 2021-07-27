@@ -19,10 +19,25 @@ section.header {
     padding-top: 25px;
 }
 
+.header.scrolled .top-menus {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 99999;
+    background: black;
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+
 .brand {
     text-align: center;
     padding: 80px 0;
     position: relative;
+}
+
+.header.scrolled .brand {
+    padding-top: 141px;
 }
 
 .menu {
@@ -208,7 +223,7 @@ a.top-menu-item.link-social:last-child {
 }
 
 .btn-ver-mais {
-    background: #86861e;
+    background: #DAA520;
     color: #FFF!important;
     padding: 10px 30px;
     font-weight: 500;
@@ -245,7 +260,7 @@ a.top-menu-item.link-social:last-child {
     margin-bottom: 10px;
     font-size: 15px;
     display: block;
-    color: #82a200;;
+    color: #ecb426;
     font-weight: 600;
 }
 
@@ -360,7 +375,7 @@ a.btn.btn-footer {
 .copy {
     padding: 20px;
     text-align: center;
-    background: #86861e;
+    background: #DAA520;
     color: #FFF;
     font-size: 14px;
 }
@@ -549,7 +564,7 @@ button.slick-prev.slick-arrow, button.slick-next.slick-arrow {
 }
 
 a.link.link-green {
-    color: #86861e!important;
+    color: #DAA520!important;
     font-weight: 600;
 }
 
@@ -561,7 +576,7 @@ a.link.link-green {
 .new-comentario .btn-comentar {
     float: right;
     margin-top: 15px;
-    background: #86861e;
+    background: #DAA520;
     color: #FFF;
     padding-left: 15px;
     padding-right: 15px;
@@ -575,7 +590,7 @@ a.link.link-green {
     top: 0;
     bottom: 0;
     background: white;
-    z-index: 9;
+    z-index: 999999;
     background-color: #222;
     padding: 40px 20px;
     width: 295px;
@@ -654,7 +669,7 @@ a.menu-item-left:hover {
     top: 0;
     bottom: 0;
     background-color: #fff;
-    z-index: 99;
+    z-index: 999999;
 }
 
 .pesquisa-close {
@@ -703,7 +718,7 @@ a.btn-search {
 
 a.link-password {
     float: right;
-    color: #86861e;
+    color: #DAA520;
     font-weight: 500;
     font-size: 14px;
     margin-top: 5px;

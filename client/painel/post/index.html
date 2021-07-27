@@ -1,0 +1,75 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../assets/css/feathericon.css" />
+    <link rel="stylesheet" href="../../assets/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="../../assets/css/animate.css" />
+    <link rel="stylesheet" href="../css/modal.css" />
+    <link rel="stylesheet" href="../../assets/css/main.css" />
+
+    <style>
+        table#tblPosts {
+            width: 100% !important;
+        }
+
+        .table-nowrap tr td:nth-child(2) {
+            padding-bottom: 14px !important;
+            width: 80px!important;
+        }
+
+        .table-nowrap tr th:first-child, .table-nowrap tr td:first-child {
+            width: 5px!important;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div id="master"></div>
+
+    <div class="main-content pb-6 hidden">
+        <div class="container-fluid">
+
+            <div class="header mt-md-2">
+                <div class="header-body">
+
+                    <a class="btn btn-primary btn-sm float-right mt-3" href="#" data-toggle="modal"
+                        data-target="#modalForm" onclick="post.metodos.abrirModal()">
+                        <i class="fe fe-plus"></i>&nbsp; Adicionar Post
+                    </a>
+
+                    <h6 class="header-pretitle">
+                        listagem
+                    </h6>
+                    <h1 class="header-title display-4">
+                        <i class="fe fe-post"></i>&nbsp; Publicações
+                    </h1>
+                </div>
+            </div>
+
+            <div class="card" id="containerTabela">
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../../assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/app.js"></script>
+    <script type="text/javascript" src="./js/index.js"></script>
+
+</body>
+
+</html>

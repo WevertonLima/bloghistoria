@@ -18,6 +18,17 @@ common.eventos = {
         // adiciona a modal de login e cadastro
         $('#containerLogin').load('/login.html');
 
+        // inicia o check para aparecer o menu 
+        $(window).scroll(function () {
+            var scrollTop = $(window).scrollTop();
+            if(scrollTop >= 150) {
+                $(".header").addClass('scrolled')
+            }
+            else {
+                $(".header").removeClass('scrolled')
+            }
+        });
+
     }
 
 }

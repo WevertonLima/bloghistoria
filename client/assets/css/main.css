@@ -292,3 +292,11 @@ a.nav-link.active:before {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.capa-post {
+    height: 50px;
+    width: 80px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
