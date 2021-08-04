@@ -5,6 +5,7 @@ $(document).ready(function () {
 var post = {};
 
 var EDICAO = false;
+var B64CAPA = null;
 
 post.eventos = {
 
@@ -15,6 +16,26 @@ post.eventos = {
 
         // inicia a listagem dos posts
         post.metodos.carregarPosts();
+
+        $("#btnSalvar").on('click', () => {
+            post.metodos.validaFormulario();
+        });
+
+        $('#txtConteudo').summernote({
+            placeholder: 'Insira a descrição aqui',
+            tabsize: 2,
+            height: 150,
+            lang: 'pt-BR',
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link']],
+                ['view', ['fullscreen']]
+            ]
+        });
 
         setTimeout(() => {
             $(".main-content").removeClass('hidden');
@@ -71,8 +92,6 @@ post.metodos = {
                     elem.Acoes = elem.Acoes.replace('{Opcao}', opcao);
 
                     // capa
-                    
-
                     if (elem.capa == null) {
                         elem.spCapa = "-"
                     }
@@ -134,10 +153,265 @@ post.metodos = {
 
     },
 
+    adicionar: (dados) => {
 
+        // chama o método de adicionar
+        app.metodos.post('/post/adicionar', JSON.stringify(dados),
+            (response) => {
 
+                console.log(response);
 
+                if (response.resultado == "erro") {
+                    app.metodos.mensagem(response.msg);
+                    console.log("Erro interno: ", response.ex);
+                    return;
+                }
 
+                if (response.resultado == "sucesso") {
+                    app.metodos.mensagem(response.msg, 'green');
+                    $("#modalForm").modal('toggle');
+                    post.metodos.carregarPosts();
+                }
+
+            },
+            (xhr, ajaxOptions, error) => {
+                console.log('xhr', xhr);
+                console.log('ajaxOptions', ajaxOptions);
+                console.log('error', error);
+                app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
+                return;
+            }
+        );
+
+    },
+
+    editar: (dados) => {
+
+        // chama o método de editar
+        app.metodos.put('/post/atualizar', JSON.stringify(dados),
+            (response) => {
+
+                if (response.resultado == "erro") {
+                    app.metodos.mensagem(response.msg);
+                    console.log("Erro interno: ", response.ex);
+                    return;
+                }
+
+                if (response.resultado == "sucesso") {
+                    app.metodos.mensagem(response.msg, 'green');
+                    $("#modalForm").modal('toggle');
+
+                    // recarrega a tabela
+                    post.metodos.carregarPosts();
+                }
+            },
+            (xhr, ajaxOptions, error) => {
+                console.log('xhr', xhr);
+                console.log('ajaxOptions', ajaxOptions);
+                console.log('error', error);
+                app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
+                return;
+            }
+        );
+
+    },
+
+    carregarEdicao: (id) => {
+
+        post.metodos.limparCampos();
+        EDICAO = true;
+
+        // abre a modal
+        $("#modalForm").modal('show');
+
+        // chama o método de obter por id
+        app.metodos.get('/post/editar/' + id,
+            (response) => {
+
+                var post = response[0];
+
+                // passa as informações para os campos
+                $("#hdfPostId").val(post.idnoticia);
+                $("#txtDescricao").val(post.descricao);
+
+            },
+            (xhr, ajaxOptions, error) => {
+                console.log('xhr', xhr);
+                console.log('ajaxOptions', ajaxOptions);
+                console.log('error', error);
+                app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
+                return;
+            }
+        );
+
+    },
+
+    ativar: (ativar) => {
+
+        var idnoticia = $("#hdfPostId").val();
+
+        if (idnoticia != undefined && idnoticia != '') {
+
+            var dados = {
+                idnoticia: idnoticia,
+                ativo: ativar
+            }
+
+            // chama o método de ativar / desativar
+            app.metodos.post('/post/ativar', JSON.stringify(dados),
+                (response) => {
+
+                    if (response.resultado == "erro") {
+                        app.metodos.mensagem(response.msg);
+                        console.log("Erro interno: ", response.ex);
+                        return;
+                    }
+
+                    if (response.resultado == "sucesso") {
+                        app.metodos.mensagem(response.msg, 'green');
+                        $("#modalAtivar").modal('toggle');
+
+                        // recarrega a tabela
+                        post.metodos.carregarPosts();
+                    }
+                },
+                (xhr, ajaxOptions, error) => {
+                    console.log('xhr', xhr);
+                    console.log('ajaxOptions', ajaxOptions);
+                    console.log('error', error);
+                    app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
+                    return;
+                }
+            );
+
+        }
+
+    },
+
+    validaFormulario: () => {
+
+        // valida os campos 
+        var titulo = $("#txtTitulo").val().trim();
+        var descricao = $("#txtDescricao").val().trim().replace(/\'/g, '');
+        var conteudo = $('#txtConteudo').summernote('code').replace(/\'/g, '');
+        var capa = B64CAPA;
+        var idnoticia = $("#hdfPostId").val();
+
+        if (titulo == '' || titulo == undefined) {
+            app.metodos.mensagem("Informe o título, por favor.");
+            $("#txtTitulo").focus();
+            return;
+        }
+
+        if (descricao == '' || descricao == undefined) {
+            app.metodos.mensagem("Informe a descrição, por favor.");
+            $("#txtDescricao").focus();
+            return;
+        }
+
+        if (conteudo == '' || conteudo == undefined) {
+            app.metodos.mensagem("Informe o conteúdo, por favor.");
+            $("#txtConteudo").focus();
+            return;
+        }
+
+        var dados = {
+            idnoticia: idnoticia,
+            strtitulo: titulo,
+            strdescricao: descricao,
+            strcapa: capa,
+            conteudo: conteudo
+        }
+
+        console.log(dados)
+
+        if (EDICAO) {
+            post.metodos.editar(dados);
+        }
+        else {
+            post.metodos.adicionar(dados);
+        }
+
+    },
+
+    abrirModal: () => {
+        post.metodos.limparCampos();
+        EDICAO = false;
+    },
+
+    abrirModalAtivar: (id, ativar) => {
+
+        $("#hdfPostId").val(id);
+
+        if (ativar == 1) {
+            $("#lblTituloModalAtivar").text('Ativar Publicação');
+            $("#lblTextoConfirm").text('Deseja realmente ativar a publicação?');
+
+            $("#btnAtivar").removeClass('hidden');
+            $("#btnDesativar").addClass('hidden');
+        }
+        else {
+            $("#lblTituloModalAtivar").text('Desativar Publicação');
+            $("#lblTextoConfirm").text('Deseja realmente desativar a publicação?');
+
+            $("#btnAtivar").addClass('hidden');
+            $("#btnDesativar").removeClass('hidden');
+        }
+
+        $("#modalAtivar").modal('toggle');
+
+    },
+
+    limparCampos: () => {
+        $("#txtTitulo").val('');
+        $("#txtDescricao").val('');
+        $("#hdfPostId").val('');
+        $('#txtConteudo').summernote('code', '');
+        post.metodos.removerCapa();
+    },
+
+    carregarCapa: () => {
+
+        let file = document.getElementById('fileCapa').files[0];
+
+        console.log('file', file);
+
+        if (file == undefined) {
+            $("#imageView").css('background-image', 'none');
+            $("#btnRemoverCapa").addClass('hidden');
+            B64CAPA = null;
+            return;
+        }
+        else {
+            $("#btnRemoverCapa").removeClass('hidden');
+        }
+
+        function readFile(file) {
+            return new Promise((resolve, reject) => {
+                let myReader = new FileReader();
+                myReader.onloadend = function (e) {
+                    resolve(myReader.result);
+                };
+                myReader.readAsDataURL(file);
+            })
+        };
+
+        readFile(file).then(function (base64string) {
+
+            $("#imageView").css('background-image', `url('${base64string}')`);
+            $("#imageView").css('background-size', 'cover');
+            B64CAPA = base64string;
+
+        })
+
+    },
+
+    removerCapa: () => {
+        document.getElementById('fileCapa').value = "";
+        $("#imageView").css('background-image', 'none');
+        $("#btnRemoverCapa").addClass('hidden');
+        B64CAPA = null;
+    },
 
     // usar para galeria
     OLDuploadImage: () => {

@@ -35,9 +35,9 @@ module.exports = class AcessoDados {
                                 else // int
                                     SqlQueryUp = SqlQueryUp.replace('@' + campo, valor);
                             }
-                             // valida se é data (yyyy-MM-dd)
+                            // valida se é data (yyyy-MM-dd)
                             else if (valor != '' && valor.split('-').length == 3 && valor.length == 10) //date
-                                    SqlQueryUp = SqlQueryUp.replace('@' + campo, `'${valor}'`);
+                                SqlQueryUp = SqlQueryUp.replace('@' + campo, `'${valor}'`);
 
                             else {
                                 SqlQueryUp = SqlQueryUp.replace('@' + campo, `'${valor}'`);
@@ -45,28 +45,29 @@ module.exports = class AcessoDados {
 
                         }
                         else {
-                            SqlQueryUp = SqlQueryUp.replace('@' + campo, `'${valor}'`);
+                            SqlQueryUp = SqlQueryUp.replace('@' + campo.replace('str', ''), `'${valor}'`);
                         }
 
                     }
                 }
             }
 
-            //console.log('SqlQueryUp', SqlQueryUp)
+            //return SqlQueryUp;
 
             connection.connect();
 
             await new Promise((resolve, reject) => {
 
                 connection.query(SqlQueryUp, function (error, results, fields) {
-                    if (error) { reject(); throw error }    
+                    if (error) { reject(); throw error }
                     retorno = results
                     resolve()
                 });
 
             })
-            
+
             connection.end();
+            //console.log('retorno', retorno)
             return retorno;
 
         } catch (error) {

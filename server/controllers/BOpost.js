@@ -20,12 +20,92 @@ const controllers = () => {
 
     }
 
+    const obterPorId = async (req) => {
 
+        var ComandoSQL = await readCommandSql.retornaStringSql('obterPorId', 'BOpost');
+        var result = await db.Query(ComandoSQL, req.params);
+
+        return result
+
+    }
+
+    const inserir = async (req) => {
+
+        try {
+
+            console.log('INSERIR')
+            //console.log(req.body);
+
+            let _usuarioId = Acesso.retornaCodigoTokenAcesso('IdUsuario', req.headers['authorization']);
+            req.body.idusuario = _usuarioId 
+
+            var ComandoSQL = await readCommandSql.retornaStringSql('inserir', 'BOpost');
+            var result = await db.Query(ComandoSQL, req.body);
+
+            return {
+                resultado: "sucesso",
+                msg: "Publicação cadastrada com sucesso!"
+            }
+
+        } catch (error) {
+            return {
+                resultado: "erro",
+                msg: "Falha ao realizar operação. Tente novamente.",
+                ex: error
+            }
+        }
+
+    }
+
+    const atualizar = async (req) => {
+
+        try {
+
+            var ComandoSQL = await readCommandSql.retornaStringSql('atualizar', 'BOpost');
+            var result = await db.Query(ComandoSQL, req.body);
+
+            return {
+                resultado: "sucesso",
+                msg: "Publicação atualizada com sucesso!"
+            }
+
+        } catch (error) {
+            return {
+                resultado: "erro",
+                msg: "Falha ao realizar operação. Tente novamente.",
+                ex: error
+            }
+        }
+
+    }
+
+    const atualizarStatus = async (req) => {
+
+        try {
+
+            var ComandoSQL = await readCommandSql.retornaStringSql('atualizarStatus', 'BOpost');
+            var result = await db.Query(ComandoSQL, req.body);
+
+            return {
+                resultado: "sucesso",
+                msg: "Status atualizado com sucesso!"
+            }
+
+        } catch (error) {
+            return {
+                resultado: "erro",
+                msg: "Falha ao realizar operação. Tente novamente.",
+                ex: error
+            }
+        }
+
+    }
+    
 
     // usar para Galeria
-    const adicionarImagem = async (req) => {
+    const adicionarImagem = async (base64Image) => {
 
-        var baseImage = req.body.base64Image;
+        var baseImage = base64Image;
 
         //console.log('baseImage', baseImage);
 
@@ -72,7 +152,7 @@ const controllers = () => {
             fs.writeFileSync(localPath + filename, base64Data, 'base64');
 
             console.log('localPath + filename', localPath + filename)
-            console.log('base64Data', base64Data)
+            //console.log('base64Data', base64Data)
 
             return { filename, localPath };
 
@@ -82,17 +162,12 @@ const controllers = () => {
 
     }
 
-    const adicionar = async (req) => {
-
-        var ComandoSQL = await readCommandSql.retornaStringSql('adicionar', 'BOpost');
-        var result = await db.Query(ComandoSQL);
-
-        return result
-
-    }
-
     return Object.create({
         consultar
+        , obterPorId
+        , inserir
+        , atualizar
+        , atualizarStatus
     })
 
 }

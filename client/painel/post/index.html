@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../../assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../../assets/css/feathericon.css" />
     <link rel="stylesheet" href="../../assets/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="../../assets/css/summernote-lite.min.css" />
     <link rel="stylesheet" href="../../assets/css/animate.css" />
     <link rel="stylesheet" href="../css/modal.css" />
     <link rel="stylesheet" href="../../assets/css/main.css" />
@@ -19,11 +20,42 @@
 
         .table-nowrap tr td:nth-child(2) {
             padding-bottom: 14px !important;
-            width: 80px!important;
+            width: 80px !important;
         }
 
-        .table-nowrap tr th:first-child, .table-nowrap tr td:first-child {
-            width: 5px!important;
+        .table-nowrap tr th:first-child,
+        .table-nowrap tr td:first-child {
+            width: 5px !important;
+        }
+
+        #modalForm .modal-dialog.modal-dialog-centered {
+            width: 90%;
+            max-width: 700px;
+        }
+
+        .imageView {
+            width: 170px;
+            height: 100px;
+            background-position: center;
+            background-repeat: no-repeat;
+            float: right;
+            margin-top: -40px;
+        }
+
+        a#btnRemoverCapa {
+            position: absolute;
+            right: 48px;
+            top: 90px;
+        }
+
+        .note-editor.note-airframe.fullscreen,
+        .note-editor.note-frame.fullscreen {
+            top: 70px;
+            bottom: 0px;
+            left: 0;
+            right: 0;
+            z-index: 999999;
+            background: white;
         }
 
     </style>
@@ -62,11 +94,116 @@
         </div>
     </div>
 
+    <!-- Modal de Ativar / Desativar -->
+    <div class="modal fade" id="modalAtivar" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-card card mb-0">
+
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h4 class="card-header-title" id="lblTituloModalAtivar">
+                                    <i class="fe fe-document"></i>&nbsp; Publicação
+                                </h4>
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+
+                        <p class="mb-0" id="lblTextoConfirm">Deseja realmente ativar a publicação?</p>
+
+                        <div class="float-right mt-5">
+                            <a href="#" id="btnDesativar" class="btn btn-danger"
+                                onclick="post.metodos.ativar(0)">Desativar</a>
+                            <a href="#" class="btn" data-dismiss="modal">Cancelar</a>
+                            <a href="#" id="btnAtivar" class="btn btn-success"
+                                onclick="post.metodos.ativar(1)">Ativar</a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Cadastro / Edição -->
+    <div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-card card mb-0">
+
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h4 class="card-header-title">
+                                    <i class="fe fe-document"></i>&nbsp; Cadastrar / Editar Publicação
+                                </h4>
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body p-5">
+
+                        <input type="hidden" id="hdfPostId" />
+
+                        <div class="form-group">
+                            <label><b>Selecione a Capa:</b></label><br>
+                            <input type="file" accept="image/*" id="fileCapa"
+                                onchange="post.metodos.carregarCapa()" /><br>
+                            <a id="btnRemoverCapa" class="btn btn-danger btn-sm mt-2 hidden" href="#!"
+                                onclick="post.metodos.removerCapa()">
+                                <i class="fe fe-trash"></i>&nbsp; Remover
+                            </a>
+                            <div id="imageView" class="imageView"></div>
+                        </div>
+
+                        <div class="form-group mt-5">
+                            <label><b>Título:</b></label>
+                            <input type="text" id="txtTitulo" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label><b>Descrição:</b></label>
+                            <textarea id="txtDescricao" class="form-control" rows="3"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label><b>Conteúdo da publicação:</b></label>
+                            <textarea id="txtConteudo" class="form-control" rows="5"></textarea>
+                        </div>
+
+                        <div class="mt-4">
+                            <a id="btnSalvar" href="#" class="btn btn-block btn-primary mb-2">Salvar</a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <script type="text/javascript" src="../../assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="../../assets/js/popper.min.js"></script>
     <script type="text/javascript" src="../../assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../assets/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="../../assets/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/summernote-lite.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/summernote-pt-BR.min.js"></script>
     <script type="text/javascript" src="../../assets/js/app.js"></script>
     <script type="text/javascript" src="./js/index.js"></script>
 
