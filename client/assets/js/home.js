@@ -71,7 +71,7 @@ home.metodos = {
 
                 let _capa = '';
     
-                if (list[i].capa != null) {
+                if (list[i].capa != null && list[i].capa != '') {
                     _capa = `
                         <a href="/detalhes.html?n=${list[i].idnoticia}" class="link-capa">
                             <img class="capa" src="${list[i].capa}" />

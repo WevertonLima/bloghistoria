@@ -74,6 +74,10 @@ a.top-menu-item.link-social {
     right: 15px;
 }
 
+a.top-menu-item.link-social:nth-child(1) {
+    right: 105px;
+}
+
 a.top-menu-item.link-social:last-child {
     right: 60px;
 }

@@ -96,7 +96,7 @@ detalhes.metodos = {
                     $("#lblConteudo").html(post[0].conteudo)
                     $("#lblTotalLikes").text(post[0].curtidas)
 
-                    if (post[0].capa != null) {
+                    if (post[0].capa != null && post[0].capa != '') {
                         $("#containerCapa").html(`<img class="capa" src="${post[0].capa}" />`)
                     }
 

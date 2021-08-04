@@ -230,9 +230,20 @@ post.metodos = {
 
                 var post = response[0];
 
+                console.log(post)
+
                 // passa as informações para os campos
                 $("#hdfPostId").val(post.idnoticia);
+                $("#txtTitulo").val(post.titulo);
                 $("#txtDescricao").val(post.descricao);
+                $('#txtConteudo').summernote('code', post.conteudo);
+
+                if (post.capa != "") {
+                    $("#imageView").css('background-image', `url('${post.capa}')`);
+                    $("#imageView").css('background-size', 'cover');
+                    B64CAPA = post.capa;
+                    $("#btnRemoverCapa").removeClass('hidden');
+                }
 
             },
             (xhr, ajaxOptions, error) => {
@@ -379,7 +390,7 @@ post.metodos = {
         if (file == undefined) {
             $("#imageView").css('background-image', 'none');
             $("#btnRemoverCapa").addClass('hidden');
-            B64CAPA = null;
+            B64CAPA = '';
             return;
         }
         else {
@@ -410,7 +421,7 @@ post.metodos = {
         document.getElementById('fileCapa').value = "";
         $("#imageView").css('background-image', 'none');
         $("#btnRemoverCapa").addClass('hidden');
-        B64CAPA = null;
+        B64CAPA = '';
     },
 
     // usar para galeria

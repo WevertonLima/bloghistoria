@@ -24,7 +24,7 @@ var config = {
         // googleSecretKey: "QSAUjcDpxbGP2IIB8KlWlJww"
     },
     prod: {
-        url: 'http://www.ajeitameulayout.com.br/',
+        url: 'http://bebedourohistoriaememoria.com.br/',
         port: 21107,
         ambiente: 'PROD',
         session: {
