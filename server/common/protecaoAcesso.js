@@ -10,11 +10,35 @@ var UsuarioTokenAcesso = new SchemaObject({ tokenAcesso: String },
             },
 
             verificaTokenAcesso(req, res, next) {
+                console.log('verificaTokenAcesso')
                 var headerTokenAcesso = req.headers['authorization'];
                 if (typeof headerTokenAcesso != 'undefined') {
                     try {
                         var decoded = jwt.verify(headerTokenAcesso, 'Token');
                         next();
+                    } catch (err) {
+                        res.send(401);
+                    }
+                } else {
+                    res.send(401);
+                }
+            },
+
+            checkUsuarioAdm(req, res, next) {
+                console.log('checaUsuarioAdm')
+                var headerTokenAcesso = req.headers['authorization'];
+                if (typeof headerTokenAcesso != 'undefined') {
+                    try {
+
+                        var _decoded = jwt.decode(headerTokenAcesso, { complete: true });
+                        console.log(_decoded.payload);
+                        isAdm = _decoded.payload.IdTipoUsuario;
+
+                        console.log('VALIDA ADM: ', isAdm)
+
+                        if (isAdm != 1) { res.send(405); }
+                        else { next(); }
+
                     } catch (err) {
                         res.send(401);
                     }

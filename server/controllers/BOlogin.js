@@ -34,6 +34,14 @@ const controllers = () => {
 
             console.log('usuario banco', usuarioBanco[0])
 
+            // valida se o usuário é ADM
+            if (usuarioBanco[0].idtipousuario != 1) {
+                return {
+                    status: 'error',
+                    mensagem: "Usuário não possui acesso."
+                };
+            }
+
             // se estiver tudo ok, gera o token e retorna o json
             var tokenAcesso = Acesso.gerarTokenAcesso(usuarioBanco[0]);
 

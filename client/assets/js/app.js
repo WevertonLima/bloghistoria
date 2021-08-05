@@ -82,6 +82,8 @@ app.metodos = {
                         // se o retorno for não autorizado, redireciona o usuário para o login
                         if (xhr.status == 401) app.metodos.logout();
 
+                        if (xhr.status == 405) app.metodos.naoAutorizado();
+
                         callbackError(xhr, ajaxOptions, error)
                     }
                 });
@@ -113,6 +115,8 @@ app.metodos = {
                         // se o retorno for não autorizado, redireciona o usuário para o login
                         if (xhr.status == 401) app.metodos.logout();
 
+                        if (xhr.status == 405) app.metodos.naoAutorizado();
+
                         callbackError(xhr, ajaxOptions, error)
                     }
                 });
@@ -143,6 +147,8 @@ app.metodos = {
 
                         // se o retorno for não autorizado, redireciona o usuário para o login
                         if (xhr.status == 401) app.metodos.logout();
+
+                        if (xhr.status == 405) app.metodos.naoAutorizado();
 
                         callbackError(xhr, ajaxOptions, error)
                     }
@@ -187,6 +193,12 @@ app.metodos = {
 
         localStorage.clear();
         window.location.href = '/painel/login.html';
+
+    },
+
+    naoAutorizado: () => {
+
+        window.location.href = '/painel/login.html?s=1';
 
     },
 
