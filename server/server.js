@@ -5,7 +5,7 @@ const recursiveReaddir = require('recursive-readdir');
 const path = require('path');
 
 const server = restify.createServer({
-    name: 'BlogHistoria',
+    name: 'BlogHistoria', 
     version: '1.0.0'
 });
 
