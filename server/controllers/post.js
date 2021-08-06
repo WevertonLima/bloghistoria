@@ -16,6 +16,33 @@ const controllers = () => {
 
     }
 
+    const obterpostsportexto = async (req) => {
+
+        var ComandoSQL = await readCommandSql.retornaStringSql('obterpostsportexto', 'post');
+        var result = await db.Query(ComandoSQL, req.body);
+
+        return result
+
+    }
+
+    const obterpostsporcategoria = async (req) => {
+
+        var ComandoSQL = await readCommandSql.retornaStringSql('obterpostsporcategoria', 'post');
+        var result = await db.Query(ComandoSQL, req.body);
+
+        return result
+
+    }
+
+    const obterpostsportag = async (req) => {
+
+        var ComandoSQL = await readCommandSql.retornaStringSql('obterpostsportag', 'post');
+        var result = await db.Query(ComandoSQL, req.body);
+
+        return result
+
+    }
+
     const obterpostspopulares = async (req) => {
 
         var ComandoSQL = await readCommandSql.retornaStringSql('obterpostspopulares', 'post');
@@ -146,6 +173,9 @@ const controllers = () => {
 
     return Object.create({
         obterposts
+        , obterpostsportexto
+        , obterpostsporcategoria
+        , obterpostsportag
         , obterpostspopulares
         , obterpostporid
         , obtercomentarios

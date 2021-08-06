@@ -18,6 +18,71 @@ ORDER BY
 
 --END#obterposts#
 
+--#obterpostsportexto#
+
+SELECT
+	n.idnoticia
+    , n.titulo
+    , n.capa
+    , n.descricao
+    , DATE_FORMAT(n.datapub, "%d/%m/%Y") as datapub
+    , n.acessos
+    , (SELECT COUNT(*) FROM comentario WHERE idnoticia = n.idnoticia AND excluido = 0) as comentarios
+    , (SELECT COUNT(*) FROM curtida WHERE idnoticia = n.idnoticia) as curtidas
+FROM 
+	noticia as n
+WHERE
+    n.ativo = 1
+    AND n.titulo like CONCAT('%', @texto, '%')
+ORDER BY
+	n.datapub DESC
+
+--END#obterpostsportexto#
+
+--#obterpostsporcategoria#
+
+SELECT
+	n.idnoticia
+    , n.titulo
+    , n.capa
+    , n.descricao
+    , DATE_FORMAT(n.datapub, "%d/%m/%Y") as datapub
+    , n.acessos
+    , (SELECT COUNT(*) FROM comentario WHERE idnoticia = n.idnoticia AND excluido = 0) as comentarios
+    , (SELECT COUNT(*) FROM curtida WHERE idnoticia = n.idnoticia) as curtidas
+FROM 
+	noticia as n
+    JOIN categoria as c ON c.idcategoria = n.idcategoria
+WHERE
+    n.ativo = 1
+    AND c.descricao like CONCAT('%', @texto, '%')
+ORDER BY
+	n.datapub DESC
+
+--END#obterpostsporcategoria#
+
+--#obterpostsportag#
+
+SELECT DISTINCT
+	n.idnoticia
+    , n.titulo
+    , n.capa
+    , n.descricao
+    , DATE_FORMAT(n.datapub, "%d/%m/%Y") as datapub
+    , n.acessos
+    , (SELECT COUNT(*) FROM comentario WHERE idnoticia = n.idnoticia AND excluido = 0) as comentarios
+    , (SELECT COUNT(*) FROM curtida WHERE idnoticia = n.idnoticia) as curtidas
+FROM 
+	noticia as n
+    JOIN noticiatag as nt ON nt.idnoticia = n.idnoticia
+    JOIN tag as t ON t.idtag = nt.idtag
+WHERE
+    n.ativo = 1
+    AND t.descricao like CONCAT('%', @texto, '%')
+ORDER BY
+	n.datapub DESC
+
+--END#obterpostsportag#
 
 --#obterpostspopulares#
 

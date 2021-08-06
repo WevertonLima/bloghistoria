@@ -92,12 +92,20 @@ post.metodos = {
                     elem.Acoes = elem.Acoes.replace('{Opcao}', opcao);
 
                     // capa
-                    if (elem.capa == null) {
+                    if (elem.capa == null || elem.capa == '') {
                         elem.spCapa = "-"
                     }
                     else {
                         let _capa = `<div class="capa-post" style="background-image: url('${elem.capa}'); background-size: cover;"></div>`
                         elem.spCapa = _capa;
+                    }
+
+                    // categoria
+                    if(elem.idcategoria == null) {
+                        elem.spCategoria = "-";
+                    }
+                    else {
+                        elem.spCategoria = elem.categoria;
                     }
 
                 });
@@ -120,8 +128,10 @@ post.metodos = {
                         { data: "idnoticia" },
                         { data: "spCapa" },
                         { data: "titulo" },
+                        { data: "spCategoria" },
                         //{ data: "descricao" },
                         { data: "datapub" },
+                        { data: "acessos" },
                         { data: "spAtivo" },
                         { data: "Acoes" }
                     ],
@@ -379,6 +389,7 @@ post.metodos = {
         $("#hdfPostId").val('');
         $('#txtConteudo').summernote('code', '');
         post.metodos.removerCapa();
+        $("#nav-principal-tab").click();
     },
 
     carregarCapa: () => {
@@ -476,7 +487,9 @@ post.templates = {
                         <th class="text-muted">ID</th>
                         <th class="text-muted">Capa</th>
                         <th class="text-muted">Título</th>
+                        <th class="text-muted">Categoria</th>
                         <th class="text-muted">Data Pub.</th>
+                        <th class="text-muted">Acessos</th>
                         <th class="text-muted">Ativa</th>
                         <th colspan="2" class="text-muted text-center">Ações</th>
                     </tr>

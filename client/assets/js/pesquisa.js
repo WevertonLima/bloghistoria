@@ -1,43 +1,89 @@
 $(document).ready(function () {
-    home.eventos.init();
+    pesquisa.eventos.init();
 })
 
-var home = {};
+var pesquisa = {};
 
 var LISTA_POSTS = [];
 var PAGINA = 0;
 var TOTAL_P_PAGINA = 6;
 var AUX_PAGE = 6;
 
-home.eventos = {
+var TIPO_PESQUISA = 0;
+var TEXTO_PESQUISA = '';
+
+pesquisa.eventos = {
 
     init: () => {
 
         $("#btnCarregarMais").on('click', () => {
-            home.metodos.carregarPosts(LISTA_POSTS);
+            pesquisa.metodos.carregarPosts(LISTA_POSTS);
         })
 
         app.eventos.init();
-        home.metodos.obterPosts();
+        //pesquisa.metodos.obterPosts();
+
+        pesquisa.metodos.validarURL();
 
     }
 
 }
 
-home.metodos = {
+pesquisa.metodos = {
 
-    obterPosts: () => {
+    validarURL: () => {
+
+        const queryString = window.location.search;
+        let urlParams = new URLSearchParams(queryString);
+        TIPO_PESQUISA = parseInt(urlParams.get('t'))
+        TEXTO_PESQUISA = urlParams.get('d')
+
+        console.log('TIPO_PESQUISA', TIPO_PESQUISA);
+        console.log('TEXTO_PESQUISA', TEXTO_PESQUISA);
+
+        if (TIPO_PESQUISA == 1 && TEXTO_PESQUISA.length > 0) {
+            // texto normal
+            pesquisa.metodos.obterPostsPorTexto();
+        }
+        else if (TIPO_PESQUISA == 2 && TEXTO_PESQUISA.length > 0) {
+            // categorias
+            pesquisa.metodos.obterPostsPorCategoria();
+        }
+        else if (TIPO_PESQUISA == 3 && TEXTO_PESQUISA.length > 0) {
+            // tags
+            pesquisa.metodos.obterPostsPorTag();
+        }
+        else {
+            window.location.href = '/';
+        }
+
+        var badge = `<span class="badge badge-light">${TEXTO_PESQUISA}&nbsp; <a href="#" onclick="pesquisa.metodos.exitSearch()"><i class="fe fe-close"></i></a></span>`
+        $("#lblPesquisa").append(badge)
+
+
+    },
+
+    obterPostsPorTexto: () => {
 
         $("#listPosts").html('')
 
-        app.metodos.get('/obterposts',
+        var dados = {
+            texto: TEXTO_PESQUISA
+        }
+
+        app.metodos.post('/obterposts/texto', JSON.stringify(dados),
             (response) => {
 
                 var posts = response;
                 console.log('posts', posts)
                 LISTA_POSTS = posts;
 
-                home.metodos.carregarPosts(posts)
+                if (posts.length == 0) {
+                    pesquisa.metodos.nenhumaPublicacao();
+                    return;
+                }
+
+                pesquisa.metodos.carregarPosts(posts)
 
             },
             (xhr, ajaxOptions, error) => {
@@ -50,6 +96,81 @@ home.metodos = {
             true
         );
 
+    },
+
+    obterPostsPorCategoria: () => {
+
+        $("#listPosts").html('')
+
+        var dados = {
+            texto: TEXTO_PESQUISA
+        }
+
+        app.metodos.post('/obterposts/categoria', JSON.stringify(dados),
+            (response) => {
+
+                var posts = response;
+                console.log('posts', posts)
+                LISTA_POSTS = posts;
+
+                if (posts.length == 0) {
+                    pesquisa.metodos.nenhumaPublicacao();
+                    return;
+                }
+
+                pesquisa.metodos.carregarPosts(posts)
+
+            },
+            (xhr, ajaxOptions, error) => {
+                console.log('xhr', xhr);
+                console.log('ajaxOptions', ajaxOptions);
+                console.log('error', error);
+                app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
+                return;
+            },
+            true
+        );
+
+    },
+
+    obterPostsPorTag: () => {
+
+        $("#listPosts").html('')
+
+        var dados = {
+            texto: TEXTO_PESQUISA
+        }
+
+        app.metodos.post('/obterposts/tag', JSON.stringify(dados),
+            (response) => {
+
+                var posts = response;
+                console.log('posts', posts)
+                LISTA_POSTS = posts;
+
+                if (posts.length == 0) {
+                    pesquisa.metodos.nenhumaPublicacao();
+                    return;
+                }
+
+                pesquisa.metodos.carregarPosts(posts)
+
+            },
+            (xhr, ajaxOptions, error) => {
+                console.log('xhr', xhr);
+                console.log('ajaxOptions', ajaxOptions);
+                console.log('error', error);
+                app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
+                return;
+            },
+            true
+        );
+
+    },
+
+    nenhumaPublicacao: () => {
+        $("#listPosts").append(`<p><b>Nenhuma publicação encontrada.</b></p>`);
+        $("#container-ver-mais").remove();
     },
 
     carregarPosts: (list) => {
@@ -67,10 +188,10 @@ home.metodos = {
 
             if (list[i] != undefined) {
 
-                let temp = home.templates.post;
+                let temp = pesquisa.templates.post;
 
                 let _capa = '';
-    
+
                 if (list[i].capa != null && list[i].capa != '') {
                     _capa = `
                         <a href="/detalhes.html?n=${list[i].idnoticia}" class="link-capa">
@@ -78,7 +199,7 @@ home.metodos = {
                         </a>
                     `
                 }
-    
+
                 $("#listPosts").append(
                     temp.replace(/\${idnoticia}/g, list[i].idnoticia)
                         .replace(/\${content_capa}/g, _capa)
@@ -96,11 +217,16 @@ home.metodos = {
         PAGINA += AUX_PAGE;
         TOTAL_P_PAGINA += AUX_PAGE;
 
+    },
+
+
+    exitSearch: () => {
+        window.location.href = '/';
     }
 
 }
 
-home.templates = {
+pesquisa.templates = {
 
     post: `
         <article class="post card">

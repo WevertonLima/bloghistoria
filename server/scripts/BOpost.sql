@@ -2,13 +2,19 @@
 
 SELECT
 	n.idnoticia
+    , n.idcategoria
+    , c.descricao as categoria
     , n.titulo
     , n.capa
     , n.descricao
     , DATE_FORMAT(n.datapub, "%d/%m/%Y") as datapub
     , n.ativo
+    , n.acessos
+    , (SELECT COUNT(*) FROM comentario WHERE idnoticia = n.idnoticia AND excluido = 0) as comentarios
+    , (SELECT COUNT(*) FROM curtida WHERE idnoticia = n.idnoticia) as curtidas
 FROM 
 	noticia as n
+    LEFT JOIN categoria as c ON c.idcategoria = n.idcategoria
 ORDER BY
 	n.datapub DESC
 

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bebedouro História e Memória</title>
+    <title>Pesquisa - Bebedouro História e Memória</title>
     <meta name="description" content="Bebedouro História e Memória">
     <meta property="og:title" content="Bebedouro História e Memória - Publicações">
     <meta property="og:description" content="Bebedouro História e Memória">
@@ -13,11 +13,28 @@
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/font-awesome.css" />
+    <link rel="stylesheet" href="assets/css/feathericon.css" />
     <link rel="stylesheet" href="assets/css/animate.css" />
 
     <link rel="stylesheet" href="assets/css/slick.css" />
 
     <link rel="stylesheet" href="assets/css/blog.css" />
+
+    <style>
+        span.badge.badge-light {
+            float: right;
+            background: black;
+            color: #FFF;
+            padding: 10px 15px;
+            border-radius: 50px;
+            font-size: 16px;
+        }
+
+        span.badge.badge-light a {
+            color: #e74c3c;
+        }
+
+    </style>
 
 </head>
 
@@ -63,7 +80,8 @@
             <div class="pesquisa-form">
                 <div class="row">
                     <div class="col-10">
-                        <input type="text" id="txtPesquisarTexto" class="form-control form-control-lg" placeholder="Faça a sua busca" />
+                        <input type="text" id="txtPesquisarTexto" class="form-control form-control-lg"
+                            placeholder="Faça a sua busca" />
                     </div>
                     <div class="col-2">
                         <a href="#!" id="btnPesquisarTexto" class="btn-search"><i class="fa fa-search"></i></a>
@@ -119,7 +137,8 @@
             <div class="col-8 pr-0">
 
                 <div class="col-12 mb-1">
-                    <h2 class="title-content"><i class="fa fa-newspaper-o"></i>&nbsp; Últimas Publicações</h2>
+                    <h2 class="title-content" id="lblPesquisa"><i class="fa fa-newspaper-o"></i>&nbsp; Pesquisar
+                        Publicação: </h2>
                 </div>
 
                 <div class="card-columns" id="listPosts">
@@ -222,7 +241,7 @@
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/app.js"></script>
     <script src="assets/js/common.js"></script>
-    <script src="assets/js/home.js"></script>
+    <script src="assets/js/pesquisa.js"></script>
 
     <script type="text/javascript" src="assets/js/slick.min.js"></script>
 

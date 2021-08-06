@@ -56,3 +56,18 @@
 .card-header{
     display: table;
 }
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link {
+    border: none;
+    border-bottom: 1px solid transparent;
+    color: #000;
+}
+
+.nav-tabs a.nav-link.active:before {
+    content: none;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    border-bottom: 3px solid #007bff;
+    color: #007bff;
+}

@@ -21,13 +21,17 @@ common.eventos = {
         // inicia o check para aparecer o menu 
         $(window).scroll(function () {
             var scrollTop = $(window).scrollTop();
-            if(scrollTop >= 150) {
+            if (scrollTop >= 150) {
                 $(".header").addClass('scrolled')
             }
             else {
                 $(".header").removeClass('scrolled')
             }
         });
+
+        $("#btnPesquisarTexto").on('click', function () {
+            common.metodos.pesquisarTexto()
+        })
 
     }
 
@@ -163,6 +167,7 @@ common.metodos = {
 
             var temp = common.templates.itemTag;
             let _desc = e.descricao;
+            let link = e.descricao.replace(/\#/g, '')
 
             if (_desc.indexOf('#') < 0) {
                 _desc = '#' + _desc
@@ -170,6 +175,7 @@ common.metodos = {
 
             $(".list-tags").append(
                 temp.replace(/\${descricao}/g, _desc)
+                    .replace(/\${link}/g, link)
             );
 
         })
@@ -306,6 +312,20 @@ common.metodos = {
             true
         );
 
+    },
+
+    pesquisarTexto: () => {
+
+        let texto = $("#txtPesquisarTexto").val().trim();
+
+        if (texto == "") {
+            alert("Informe o texto para ser pesquisado, por favor.")
+            $("#txtPesquisarTexto").focus();
+            return;
+        }
+
+        window.location.href = `/pesquisa.html?t=1&d=${texto}`
+
     }
 
 
@@ -315,22 +335,22 @@ common.templates = {
 
     itemCategoria: `
         <li>
-            <a href="/pesquisa?t=2&d=\${descricao}" class="item-categoria">
+            <a href="/pesquisa.html?t=2&d=\${descricao}" class="item-categoria">
                 <span class="before"><i class="fa fa-folder-o"></i></span>\${descricao}
             </a>
         </li>
     `,
 
     itemTag: `
-        <a href="/pesquisa?t=3&d=\${descricao}" class="badge">\${descricao}</a>
+        <a href="/pesquisa.html?t=3&d=\${link}" class="badge">\${descricao}</a>
     `,
 
     itemMenuDestaque: `
-        <a href="/pesquisa?t=2&d=\${descricao}" class="menu-item">\${descricao}</a>
+        <a href="/pesquisa.html?t=2&d=\${descricao}" class="menu-item">\${descricao}</a>
     `,
 
     itemMenuDestaqueLeft: `
-        <a href="/pesquisa?t=2&d=\${descricao}" class="menu-item-left">\${descricao}</a>
+        <a href="/pesquisa.html?t=2&d=\${descricao}" class="menu-item-left">\${descricao}</a>
     `,
 
     postPopular: `

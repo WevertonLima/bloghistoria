@@ -10,6 +10,24 @@ module.exports = (server) => {
         return next();
     });
 
+    server.post('/obterposts/texto', async (req, res, next) => {
+        const result = await ctPost.controllers().obterpostsportexto(req)
+        res.send(result);
+        return next();
+    });
+
+    server.post('/obterposts/categoria', async (req, res, next) => {
+        const result = await ctPost.controllers().obterpostsporcategoria(req)
+        res.send(result);
+        return next();
+    });
+
+    server.post('/obterposts/tag', async (req, res, next) => {
+        const result = await ctPost.controllers().obterpostsportag(req)
+        res.send(result);
+        return next();
+    });
+
     server.get('/obterpostspopulares', async (req, res, next) => {
         const result = await ctPost.controllers().obterpostspopulares(req)
         res.send(result);

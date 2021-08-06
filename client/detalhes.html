@@ -5,7 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog de História - </title>
+    <title>Publicação - Bebedouro História e Memória</title>
+    <meta name="description" content="Bebedouro História e Memória">
+    <meta property="og:title" content="Bebedouro História e Memória - Publicações">
+    <meta property="og:description" content="Bebedouro História e Memória">
+    <meta property="og:site_name" content="Bebedouro História e Memória">
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/font-awesome.css" />
@@ -59,10 +63,10 @@
            <div class="pesquisa-form">
                <div class="row">
                    <div class="col-10">
-                       <input type="text" class="form-control form-control-lg" placeholder="Faça a sua busca" />
+                       <input type="text" id="txtPesquisarTexto" class="form-control form-control-lg" placeholder="Faça a sua busca" />
                    </div>
                    <div class="col-2">
-                       <a href="#!" class="btn-search"><i class="fa fa-search"></i></a>
+                       <a href="#!" id="btnPesquisarTexto" class="btn-search"><i class="fa fa-search"></i></a>
                    </div>
                </div>
            </div>
@@ -123,22 +127,17 @@
                             </span>
                             <div class="share details">
                                 <div class="dropdown">
-                                    <a class="btn-share dropdown-toggle" type="button" id="ddlShare"
+                                    <a class="btn-share dropdown-toggle" id="ddlShare"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <span class="fa fa-share-alt"></span>
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="ddlShare">
-                                        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmariustheme.tumblr.com%2Fpost%2F141262044798%2Fdriving-in-the-city-driving-in-the-city-is-a-very"
+                                        <a href="#" id="lnkShareFace"
                                             onclick="window.open(this.href, 'facebook-share','width=580,height=550');return false;"
                                             class="dropdown-item">
                                             <span class="fa fa-facebook icon-share"></span>&nbsp; Facebook
                                         </a>
-                                        <a href="https://twitter.com/share?url=https%3A%2F%2Fmariustheme.tumblr.com%2Fpost%2F141262044798%2Fdriving-in-the-city-driving-in-the-city-is-a-very"
-                                            onclick="window.open(this.href, 'twitter-share', 'width=550,height=550');return false;"
-                                            class="dropdown-item">
-                                            <span class="fa fa-twitter icon-share"></span>&nbsp; Twitter
-                                        </a>
-                                        <a href="https://api.whatsapp.com/send?text=https%3A%2F%2Fmariustheme.tumblr.com%2Fpost%2F141262044798%2Fdriving-in-the-city-driving-in-the-city-is-a-very"
+                                        <a href="#" id="lnkShareWhats"
                                             data-action="share/whatsapp/share"
                                             onclick="window.open(this.href, 'whatsapp-share', 'width=550,height=550');return false;"
                                             class="dropdown-item">
