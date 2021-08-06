@@ -7,6 +7,9 @@ var post = {};
 var EDICAO = false;
 var B64CAPA = null;
 
+var LIST_CATEGORIAS = [];
+var LIST_TAGS = [];
+
 post.eventos = {
 
     init: () => {
@@ -16,6 +19,9 @@ post.eventos = {
 
         // inicia a listagem dos posts
         post.metodos.carregarPosts();
+
+        post.metodos.obterCategorias();
+        post.metodos.obterTags();
 
         $("#btnSalvar").on('click', () => {
             post.metodos.validaFormulario();
@@ -35,6 +41,10 @@ post.eventos = {
                 ['insert', ['link']],
                 ['view', ['fullscreen']]
             ]
+        });
+
+        $('.select2').select2({
+            placeholder: 'Selecione uma opção'
         });
 
         setTimeout(() => {
@@ -101,7 +111,7 @@ post.metodos = {
                     }
 
                     // categoria
-                    if(elem.idcategoria == null) {
+                    if (elem.idcategoria == null) {
                         elem.spCategoria = "-";
                     }
                     else {
@@ -159,6 +169,72 @@ post.metodos = {
                 app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
                 return;
             }
+        );
+
+    },
+
+    obterCategorias: () => {
+
+        app.metodos.get('/obtercategorias',
+            (response) => {
+                var categorias = response;
+                console.log('categorias', categorias)
+                LIST_CATEGORIAS = categorias;
+
+                // carrega as categorias
+                $.each(categorias, (i, e) => {
+                    var data = { id: e.idcategoria, text: e.descricao };
+                    var newOption = new Option(data.text, data.id, false, false);
+                    $('#ddlCategoriaPub').append(newOption).trigger('change');
+                })
+
+            },
+            (xhr, ajaxOptions, error) => {
+                console.log('xhr', xhr);
+                console.log('ajaxOptions', ajaxOptions);
+                console.log('error', error);
+                app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
+                return;
+            },
+            true
+        );
+
+    },
+
+    changeCategoria: () => {
+
+        let _selected = $('#ddlCategoriaPub').select2('data');
+
+        if (_selected.length > 0) {
+            $('#btnRemoverCategoria').removeClass('hidden');
+        }
+        else {
+            $('#btnRemoverCategoria').addClass('hidden');
+        }
+
+    },
+
+    removerCategoria: () => {
+        $("#ddlCategoriaPub").val(null).trigger('change');
+        $('#btnRemoverCategoria').addClass('hidden');
+    },
+
+    obterTags: () => {
+
+        app.metodos.get('/obtertags',
+            (response) => {
+                var tags = response;
+                console.log('tags', tags)
+                LIST_TAGS = tags;
+            },
+            (xhr, ajaxOptions, error) => {
+                console.log('xhr', xhr);
+                console.log('ajaxOptions', ajaxOptions);
+                console.log('error', error);
+                app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
+                return;
+            },
+            true
         );
 
     },
@@ -231,6 +307,10 @@ post.metodos = {
         post.metodos.limparCampos();
         EDICAO = true;
 
+        // habilita as tabs
+        $("#nav-categoria-tab").removeClass('disabled');
+        $("#nav-tags-tab").removeClass('disabled');
+
         // abre a modal
         $("#modalForm").modal('show');
 
@@ -239,7 +319,6 @@ post.metodos = {
             (response) => {
 
                 var post = response[0];
-
                 console.log(post)
 
                 // passa as informações para os campos
@@ -248,11 +327,17 @@ post.metodos = {
                 $("#txtDescricao").val(post.descricao);
                 $('#txtConteudo').summernote('code', post.conteudo);
 
-                if (post.capa != "") {
+                if (post.capa != "" && post.capa != null) {
                     $("#imageView").css('background-image', `url('${post.capa}')`);
                     $("#imageView").css('background-size', 'cover');
                     B64CAPA = post.capa;
                     $("#btnRemoverCapa").removeClass('hidden');
+                }
+
+                // carrega a categoria
+                if (post.idcategoria != null) {
+                    $('#ddlCategoriaPub').val(post.idcategoria);
+                    $('#ddlCategoriaPub').trigger('change');
                 }
 
             },
@@ -317,27 +402,38 @@ post.metodos = {
         var conteudo = $('#txtConteudo').summernote('code').replace(/\'/g, '');
         var capa = B64CAPA;
         var idnoticia = $("#hdfPostId").val();
+        var listCategoria = $('#ddlCategoriaPub').select2('data');
+        var idcategoria = null;
 
         if (titulo == '' || titulo == undefined) {
+            $("#nav-principal-tab").click();
             app.metodos.mensagem("Informe o título, por favor.");
             $("#txtTitulo").focus();
             return;
         }
 
         if (descricao == '' || descricao == undefined) {
+            $("#nav-principal-tab").click();
             app.metodos.mensagem("Informe a descrição, por favor.");
             $("#txtDescricao").focus();
             return;
         }
 
         if (conteudo == '' || conteudo == undefined) {
+            $("#nav-principal-tab").click();
             app.metodos.mensagem("Informe o conteúdo, por favor.");
             $("#txtConteudo").focus();
             return;
         }
 
+        // valida a categoria
+        if (listCategoria.length > 0) {
+            idcategoria = parseInt(listCategoria[0].id);
+        }
+
         var dados = {
             idnoticia: idnoticia,
+            idcategoria: idcategoria,
             strtitulo: titulo,
             strdescricao: descricao,
             strcapa: capa,
@@ -358,6 +454,11 @@ post.metodos = {
     abrirModal: () => {
         post.metodos.limparCampos();
         EDICAO = false;
+
+        // desabilita as tabs
+        $("#nav-categoria-tab").addClass('disabled');
+        $("#nav-tags-tab").addClass('disabled');
+
     },
 
     abrirModalAtivar: (id, ativar) => {
@@ -390,6 +491,7 @@ post.metodos = {
         $('#txtConteudo').summernote('code', '');
         post.metodos.removerCapa();
         $("#nav-principal-tab").click();
+        $('.select2').val(null).trigger('change');
     },
 
     carregarCapa: () => {
@@ -401,7 +503,7 @@ post.metodos = {
         if (file == undefined) {
             $("#imageView").css('background-image', 'none');
             $("#btnRemoverCapa").addClass('hidden');
-            B64CAPA = '';
+            B64CAPA = null;
             return;
         }
         else {
@@ -432,8 +534,11 @@ post.metodos = {
         document.getElementById('fileCapa').value = "";
         $("#imageView").css('background-image', 'none');
         $("#btnRemoverCapa").addClass('hidden');
-        B64CAPA = '';
+        B64CAPA = null;
     },
+
+
+
 
     // usar para galeria
     OLDuploadImage: () => {

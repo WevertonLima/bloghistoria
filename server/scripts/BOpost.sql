@@ -24,6 +24,7 @@ ORDER BY
 
 SELECT                 
     idnoticia
+    , idcategoria
     , titulo
     , descricao
     , capa
@@ -54,6 +55,7 @@ SET
     , descricao = @descricao
     , capa = @capa
     , conteudo = @conteudo
+    , idcategoria = @idcategoria
 WHERE
     idnoticia = @idnoticia
 

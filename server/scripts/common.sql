@@ -14,8 +14,9 @@ ORDER BY
 
 --#obtercategorias#
 
-SELECT                  
-    descricao
+SELECT
+    idcategoria
+    , descricao
 FROM 
     categoria
 WHERE
@@ -28,8 +29,9 @@ ORDER BY
 
 --#obtertags#
 
-SELECT                  
-    descricao
+SELECT
+    idtag                  
+    , descricao
 FROM 
     tag
 WHERE

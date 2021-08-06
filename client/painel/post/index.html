@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../assets/css/feathericon.css" />
     <link rel="stylesheet" href="../../assets/css/dataTables.bootstrap4.min.css" />
     <link rel="stylesheet" href="../../assets/css/summernote-lite.min.css" />
+    <link rel="stylesheet" href="../../assets/css/select2.min.css" />
     <link rel="stylesheet" href="../../assets/css/animate.css" />
     <link rel="stylesheet" href="../css/modal.css" />
     <link rel="stylesheet" href="../../assets/css/main.css" />
@@ -56,6 +57,38 @@
             right: 0;
             z-index: 999999;
             background: white;
+        }
+
+        .tab-pane {
+            min-height: 250px;
+        }
+
+        .select2-container {
+            width: 100% !important;
+            display: block !important;
+        }
+
+        .select2-container .select2-selection--single {
+            height: 38px;
+            padding-top: 4px;
+        }
+
+        .select2-container .select2-selection--single .select2-selection__rendered {
+            padding-right: 30px;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 38px;
+            width: 30px;
+        }
+
+        a#btnRemoverCategoria {
+            float: right;
+            margin-top: -10px;
+        }
+
+        .nav-tabs .nav-link.disabled {
+            color: #c7cdd2!important;
         }
     </style>
 
@@ -176,6 +209,8 @@
                             </div>
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
+
+                            <!-- Dados Principais -->
                             <div class="tab-pane pt-4 mt-2 fade show active" id="nav-principal" role="tabpanel"
                                 aria-labelledby="nav-principal-tab">
 
@@ -206,13 +241,31 @@
                                 </div>
 
                             </div>
+
+                            <!-- Categoria -->
                             <div class="tab-pane pt-4 mt-2 fade" id="nav-categoria" role="tabpanel"
                                 aria-labelledby="nav-categoria-tab">
 
-                            </div>
-                            <div class="tab-pane pt-4 mt-2 fade" id="nav-tags" role="tabpanel" aria-labelledby="nav-tags-tab">
+                                <div class="form-group">
+                                    <a href="#!" id="btnRemoverCategoria" class="btn btn-sm btn-danger hidden"
+                                        onclick="post.metodos.removerCategoria()">
+                                        <i class="fe fe-close"></i>&nbsp; Remover</a>
+                                    <label><b>Selecione a categoria da publicação:</b></label>
+                                    <select class="form-control select2" id="ddlCategoriaPub" name="state"
+                                        onchange="post.metodos.changeCategoria()">
+                                    </select>
+                                </div>
+
+                                <p style="font-size: 14px; color: #989898;">Após selecionar a opção desejada, clique no botão "Salvar"</p>
 
                             </div>
+
+                            <!-- Tags -->
+                            <div class="tab-pane pt-4 mt-2 fade" id="nav-tags" role="tabpanel"
+                                aria-labelledby="nav-tags-tab">
+
+                            </div>
+
                         </div>
 
                         <div class="mt-4">
@@ -234,6 +287,7 @@
     <script type="text/javascript" src="../../assets/js/dataTables.bootstrap4.min.js"></script>
     <script type="text/javascript" src="../../assets/js/summernote-lite.min.js"></script>
     <script type="text/javascript" src="../../assets/js/summernote-pt-BR.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/select2.min.js"></script>
     <script type="text/javascript" src="../../assets/js/app.js"></script>
     <script type="text/javascript" src="./js/index.js"></script>
 

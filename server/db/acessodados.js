@@ -27,8 +27,12 @@ module.exports = class AcessoDados {
                         // valida se é para forçar o tipo para String (str)
                         if (campo.indexOf('str') != 0) {
 
+                            // valida se o valor é null
+                            if (valor == 'null' || valor == null) {
+                                SqlQueryUp = SqlQueryUp.replace('@' + campo, valor);
+                            }
                             // valida se é número
-                            if (valor != '' && !isNaN(valor)) {
+                            else if (valor != '' && !isNaN(valor)) {
                                 // valida se é float ou int
                                 if (!Number.isInteger(parseFloat(valor))) // float
                                     SqlQueryUp = SqlQueryUp.replace('@' + campo, valor);
@@ -45,7 +49,14 @@ module.exports = class AcessoDados {
 
                         }
                         else {
-                            SqlQueryUp = SqlQueryUp.replace('@' + campo.replace('str', ''), `'${valor}'`);
+
+                            // valida se o valor é null
+                            if (valor == 'null' || valor == null) {
+                                SqlQueryUp = SqlQueryUp.replace('@' + campo.replace('str', ''), valor);
+                            }
+                            else {
+                                SqlQueryUp = SqlQueryUp.replace('@' + campo.replace('str', ''), `'${valor}'`);
+                            }
                         }
 
                     }
