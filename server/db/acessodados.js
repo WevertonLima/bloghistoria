@@ -64,6 +64,7 @@ module.exports = class AcessoDados {
             }
 
             //return SqlQueryUp;
+            //console.log(SqlQueryUp);
 
             connection.connect();
 

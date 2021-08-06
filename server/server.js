@@ -1,4 +1,4 @@
-global.env = require('./env').get('dev');
+global.env = require('./env').get('prod');
 
 const restify = require('restify');
 const recursiveReaddir = require('recursive-readdir');

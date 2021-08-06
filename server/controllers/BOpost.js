@@ -7,6 +7,7 @@ const readCommandSql = new ReadCommandSql();
 
 const fs = require('fs');
 var path = require('path');
+const { resolve } = require('path');
 
 
 const controllers = () => {
@@ -33,11 +34,11 @@ const controllers = () => {
 
         try {
 
-            console.log('INSERIR')
+            //console.log('INSERIR')
             //console.log(req.body);
 
             let _usuarioId = Acesso.retornaCodigoTokenAcesso('IdUsuario', req.headers['authorization']);
-            req.body.idusuario = _usuarioId 
+            req.body.idusuario = _usuarioId
 
             var ComandoSQL = await readCommandSql.retornaStringSql('inserir', 'BOpost');
             var result = await db.Query(ComandoSQL, req.body);
@@ -61,8 +62,46 @@ const controllers = () => {
 
         try {
 
+            // Salva as informações principais e a categoria
+
             var ComandoSQL = await readCommandSql.retornaStringSql('atualizar', 'BOpost');
-            var result = await db.Query(ComandoSQL, req.body);
+            await db.Query(ComandoSQL, req.body);
+
+            //console.log('--- Salvou informações principais')
+
+            // limpa as Tags da publicação
+
+            var ComandoSQLTags = await readCommandSql.retornaStringSql('removerTags', 'BOtag');
+            await db.Query(ComandoSQLTags, { idnoticia: req.body.idnoticia });
+            //console.log('ComandoSQLTags', ComandoSQLTags)
+
+            //console.log('--- Removeu Tags')
+
+            // cadastra as novas Tags
+
+            if (req.body.listaTags.length > 0) {
+
+                var promessas = [];
+
+                req.body.listaTags.forEach(function (tag) {
+                    promessas.push(
+                        new Promise(async (resolve, reject) => {
+
+                            //console.log('req.body.idnoticia', req.body.idnoticia);
+                            //console.log('idtag', tag);
+
+                            var ComandoSQLAdd = await readCommandSql.retornaStringSql('adicionarTagNoticia', 'BOtag');
+                            await db.Query(ComandoSQLAdd, { idnoticia: req.body.idnoticia, idtag: tag });
+                            resolve();
+                        })
+                    );
+                });
+
+                await Promise.all(promessas);
+
+                //console.log('--- Fim Adicionar Tags')
+
+            }
 
             return {
                 resultado: "sucesso",
@@ -100,7 +139,7 @@ const controllers = () => {
         }
 
     }
-    
+
 
     // usar para Galeria
     const adicionarImagem = async (base64Image) => {
@@ -114,7 +153,7 @@ const controllers = () => {
             var appDir = path.dirname(require.main.filename);
 
             /*path of the folder where your project is saved. (In my case i got it from config file, root path of project).*/
-            const uploadPath = appDir + "/server/";          
+            const uploadPath = appDir + "/server/";
 
             //path of folder where you want to save the image.
             const localPath = `${uploadPath}/public/capas/`;

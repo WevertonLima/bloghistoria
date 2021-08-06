@@ -82,13 +82,42 @@
             width: 30px;
         }
 
-        a#btnRemoverCategoria {
+        a#btnRemoverCategoria, #btnRemoverTags {
             float: right;
             margin-top: -10px;
         }
 
         .nav-tabs .nav-link.disabled {
-            color: #c7cdd2!important;
+            color: #c7cdd2 !important;
+        }
+
+        .select2-container--default .select2-selection--multiple {
+            border: none !important;
+        }
+
+        .select2-container--default.select2-container--focus .select2-selection--multiple {
+            border: none !important;
+        }
+
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            background: white;
+            border: 1px solid #cfcfcf;
+            padding: 5px 5px 5px 25px;
+            border-radius: 2px;
+            color: #212529;
+            font-size: 75%;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+            height: 22px;
+            color: #000;
+            border-right: 1px solid #cfcfcf;
+        }
+
+        .select2-container--default .select2-search--inline .select2-search__field {
+            height: 24px;
         }
     </style>
 
@@ -251,18 +280,34 @@
                                         onclick="post.metodos.removerCategoria()">
                                         <i class="fe fe-close"></i>&nbsp; Remover</a>
                                     <label><b>Selecione a categoria da publicação:</b></label>
-                                    <select class="form-control select2" id="ddlCategoriaPub" name="state"
+                                    <select class="form-control select2" id="ddlCategoriaPub"
                                         onchange="post.metodos.changeCategoria()">
                                     </select>
                                 </div>
 
-                                <p style="font-size: 14px; color: #989898;">Após selecionar a opção desejada, clique no botão "Salvar"</p>
+                                <p style="font-size: 14px; color: #989898;">Após selecionar a opção, clique no botão
+                                    "Salvar"</p>
 
                             </div>
 
                             <!-- Tags -->
                             <div class="tab-pane pt-4 mt-2 fade" id="nav-tags" role="tabpanel"
                                 aria-labelledby="nav-tags-tab">
+
+                                <div class="form-group">
+                                    <a href="#!" id="btnRemoverTags" class="btn btn-sm btn-danger hidden"
+                                        onclick="post.metodos.removerTags()">
+                                        <i class="fe fe-close"></i>&nbsp; Remover Todas</a>
+                                    <label style="display: block; margin-bottom: 20px;">
+                                        <b>Selecione as tags da publicação:</b>
+                                    </label>
+                                    <select class="form-control select2 mt-3" id="ddlTagsPub" multiple="multiple"
+                                        onchange="post.metodos.changeTags()">
+                                    </select>
+                                </div>
+
+                                <p style="font-size: 14px; color: #989898;">Após selecionar as opções, clique no
+                                    botão "Salvar"</p>
 
                             </div>
 

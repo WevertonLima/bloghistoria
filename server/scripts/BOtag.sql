@@ -55,3 +55,21 @@ WHERE
 
 --END#atualizarStatus#
 
+
+--#removerTags#
+
+DELETE FROM 
+    noticiatag 
+WHERE
+    idnoticia = @idnoticia
+
+--END#removerTags#
+
+--#adicionarTagNoticia#
+
+INSERT INTO noticiatag
+    (idnoticia, idtag)
+VALUES
+    (@idnoticia, @idtag)
+
+--END#adicionarTagNoticia#

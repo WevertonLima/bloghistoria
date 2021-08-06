@@ -165,7 +165,8 @@ WHERE
 --#obtertagspost#
 
 SELECT
-	t.descricao
+    t.idtag
+	, t.descricao
 FROM 
 	noticiatag nt
     INNER JOIN tag as t ON t.idtag = nt.idtag

@@ -226,6 +226,14 @@ post.metodos = {
                 var tags = response;
                 console.log('tags', tags)
                 LIST_TAGS = tags;
+
+                // carrega as tags
+                $.each(tags, (i, e) => {
+                    var data = { id: e.idtag, text: e.descricao };
+                    var newOption = new Option(data.text, data.id, false, false);
+                    $('#ddlTagsPub').append(newOption).trigger('change');
+                })
+
             },
             (xhr, ajaxOptions, error) => {
                 console.log('xhr', xhr);
@@ -238,6 +246,26 @@ post.metodos = {
         );
 
     },
+
+    changeTags: () => {
+
+        let _selected = $('#ddlTagsPub').select2('data');
+
+        if (_selected.length > 0) {
+            $('#btnRemoverTags').removeClass('hidden');
+        }
+        else {
+            $('#btnRemoverTags').addClass('hidden');
+        }
+
+    },
+
+    removerTags: () => {
+        $("#ddlTagsPub").val(null).trigger('change');
+        $('#btnRemoverTags').addClass('hidden');
+    },
+
+
 
     adicionar: (dados) => {
 
@@ -272,6 +300,16 @@ post.metodos = {
     },
 
     editar: (dados) => {
+
+        let _listaTags = $('#ddlTagsPub').select2('data');
+        dados.listaTags = [];
+
+        // adiciona a lista de Tags
+        if (_listaTags.length > 0) {
+            dados.listaTags = _listaTags.map(a => parseInt(a.id));
+        }
+
+        console.log(dados)
 
         // chama o método de editar
         app.metodos.put('/post/atualizar', JSON.stringify(dados),
@@ -314,6 +352,9 @@ post.metodos = {
         // abre a modal
         $("#modalForm").modal('show');
 
+        // obtem as tags relacionadas 
+        post.metodos.carregarTags(id);
+
         // chama o método de obter por id
         app.metodos.get('/post/editar/' + id,
             (response) => {
@@ -348,6 +389,33 @@ post.metodos = {
                 app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
                 return;
             }
+        );
+
+    },
+
+    carregarTags: (id) => {
+
+        app.metodos.get('/obtertagspost/' + id,
+            (response) => {
+
+                var tagsPost = response;
+                console.log('tagsPost', tagsPost)
+
+                // carrega as tags
+                if (tagsPost.length > 0) {
+                    let ids = tagsPost.map(a => a.idtag);
+                    $('#ddlTagsPub').val(ids);
+                    $('#ddlTagsPub').trigger('change');
+                }
+            },
+            (xhr, ajaxOptions, error) => {
+                console.log('xhr', xhr);
+                console.log('ajaxOptions', ajaxOptions);
+                console.log('error', error);
+                app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
+                return;
+            },
+            true
         );
 
     },
