@@ -757,5 +757,74 @@ a.btn.btn-block.btn-light {
 }
 
 div#modalLogin, div#modalCadastro {
-    z-index: 99999;
+    z-index: 999999;
+}
+
+
+.container-posts, .populars {
+    padding-right: 0px;
+}
+
+
+@media (max-width: 767px) {
+
+    .brand img {
+        width: 250px;
+    }
+
+    .pesquisa-form {
+        width: 80%!important;
+    }
+
+    #menuDestaques {
+        display: none;
+    }
+
+    .container-posts {
+        padding-right: 15px;
+    }
+
+    #listPosts {
+        -webkit-column-count: 1;
+        -moz-column-count: 1;
+        column-count: 1;
+    }
+
+    .dados {
+        margin-top: 100px;
+    }
+
+    .post.card {
+        padding: 0px!important;
+    }
+
+    .container-news {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .post.card-sobre {
+        width: 100%!important;
+        float: none;
+    }
+
+    .post.card-categoria {
+        width: 100%!important;
+        float: none;
+    }
+
+    .post.card-tags {
+        width: 100%!important;
+        float: none;
+    }
+
+    .populars {
+        padding-right: 15px;
+    }
+
+    .brand-footer img {
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
 }

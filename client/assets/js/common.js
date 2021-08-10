@@ -251,14 +251,31 @@ common.metodos = {
             // ultimo item, carrega o slider
             if ((i + 1) == list.length) {
 
-                $('.slider').slick({
-                    dots: false,
-                    infinite: false,
-                    speed: 300,
-                    slidesToShow: 3,
-                    centerMode: false,
-                    variableWidth: true
-                });
+                // valida o tamanho da tela
+                let tamanho = $(window).width();
+
+                if (tamanho > 767) {
+                    $('.slider').slick({
+                        dots: false,
+                        infinite: false,
+                        speed: 300,
+                        slidesToShow: 3,
+                        centerMode: false,
+                        variableWidth: true
+                    });
+                }
+                else {
+                    $('.slider').slick({
+                        dots: false,
+                        infinite: false,
+                        speed: 300,
+                        slidesToShow: 1,
+                        centerMode: false,
+                        variableWidth: true
+                    });
+                }
+
+
 
             }
 
