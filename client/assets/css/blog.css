@@ -647,8 +647,8 @@ body.slide .menu-left {
 
 .menu-left .title {
     font-size: 20px;
-    margin-bottom: 40px;
-    margin-top: 4px;
+    margin-bottom: 30px;
+    margin-top: -6px;
     font-weight: 700;
     color: #AAA;
 }
@@ -825,6 +825,11 @@ div#modalLogin, div#modalCadastro {
     .brand-footer img {
         margin-top: 50px;
         margin-bottom: 50px;
+    }
+
+    span.badge.badge-light {
+        float: none!important;
+        margin-top: 20px;
     }
 
 }
