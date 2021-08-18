@@ -587,6 +587,10 @@ a.link.link-green {
     border-radius: 0;
 }
 
+.container-texto-comentario {
+    padding-left: 0px;
+}
+
 
 .menu-left {
     position: fixed;
@@ -830,6 +834,19 @@ div#modalLogin, div#modalCadastro {
     span.badge.badge-light {
         float: none!important;
         margin-top: 20px;
+    }
+
+    .card-comentario .user-image {
+        width: 30px;
+        height: 30px;
+    }
+
+    .comentario-content {
+        margin-left: 10px;
+    }
+
+    .container-texto-comentario {
+        padding-left: 10px;
     }
 
 }

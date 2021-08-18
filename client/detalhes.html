@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Publicação - Bebedouro História e Memória</title>
-    <meta name="description" content="Bebedouro História e Memória">
-    <meta property="og:title" content="Bebedouro História e Memória - Publicações">
-    <meta property="og:description" content="Bebedouro História e Memória">
+    <title>Bebedouro História e Memória</title>
+    <meta property="og:title" content="Bebedouro História e Memória">
+    <meta property="og:description" content="Tudo sobre nossa cidade coração - Bebedouro/SP">
     <meta property="og:site_name" content="Bebedouro História e Memória">
+    <meta property="og:image" content="http://bebedourohistoriaememoria.com.br/assets/img/thumb.png">
+    <meta property="og:url" content="http://bebedourohistoriaememoria.com.br/home.htm">    
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/font-awesome.css" />
@@ -42,10 +43,10 @@
         </div>
         <div class="containerUsuario hidden">
             <div class="row">
-                <div class="col-3">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-3">
                     <div id="imgAvatar" class="avatar-img rounded-circle"></div>
                 </div>
-                <div class="col-8 pl-0">
+                <div class="col-lg-8 col-md-8 col-sm-8 col-8 pl-0">
                     <p id="lblUsuarioLogado"></p>
                 </div>
             </div>
@@ -64,10 +65,10 @@
        <div class="pesquisa-content">
            <div class="pesquisa-form">
                <div class="row">
-                   <div class="col-10">
+                   <div class="col-lg-10 col-md-10 col-sm-10 col-10">
                        <input type="text" id="txtPesquisarTexto" class="form-control form-control-lg" placeholder="Faça a sua busca" />
                    </div>
-                   <div class="col-2">
+                   <div class="col-lg-2 col-md-2 col-sm-2 col-2">
                        <a href="#!" id="btnPesquisarTexto" class="btn-search"><i class="fa fa-search"></i></a>
                    </div>
                </div>
@@ -81,7 +82,7 @@
         <div class="top-menus">
             <div class="container">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                         <a id="btnMenuLeft" href="#!" class="top-menu-item">
                             <i class="fa fa-bars"></i>
                         </a>
@@ -89,7 +90,7 @@
                             <i class="fa fa-search"></i>
                         </a>
                     </div>
-                    <div class="col-6 text-right">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-6 text-right">
                         <a href="#!" class="top-menu-item link-social">
                             <i class="fa fa-facebook"></i>
                         </a>
@@ -115,9 +116,9 @@
     </section>
 
     <section class="container main-content">
-        <div class="row">
+        <div class="row mr-0 ml-0">
 
-            <div class="col-8 pr-0">
+            <div class="col-lg-8 col-md-8 col-sm-12 col-12 container-posts">
 
                 <article class="post card">
                     <p id="containerCapa" class="link-capa mb-0"></p>
@@ -133,7 +134,7 @@
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <span class="fa fa-share-alt"></span>
                                     </a>
-                                    <div class="dropdown-menu" aria-labelledby="ddlShare">
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="ddlShare">
                                         <a href="#" id="lnkShareFace"
                                             onclick="window.open(this.href, 'facebook-share','width=580,height=550');return false;"
                                             class="dropdown-item">
@@ -184,7 +185,7 @@
                                     <div class="col-2">
                                         <div class="user-image" id="imgUserComment"></div>
                                     </div>
-                                    <div class="col-10 pl-0">
+                                    <div class="col-10 container-texto-comentario">
                                         <label><b>Escreva um comentário:</b></label>
                                         <textarea class="text-new-comment form-control" rows="4" id="txtComentario"></textarea>
                                         <a href="#!" class="btn btn-comentar" id="btnComentar"><i class="fa fa-send-o"></i>&nbsp; Enviar Comentário</a>
@@ -206,7 +207,7 @@
 
             </div>
 
-            <div class="col-4">
+            <div class="col-lg-4 col-md-4 col-sm-12 col-12 dados">
 
                 <div class="post card-sobre">
                     <div class="img-sobre"></div>
@@ -244,12 +245,12 @@
         </div>
     </section>
 
-    <section class="container populars mt-3 mb-5 pr-0">
+    <section class="container populars mt-3 mb-5">
         <div class="row">
-            <div class="col-12 mb-3">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12 mb-3">
                 <h2 class="title-content"><i class="fa fa-newspaper-o"></i>&nbsp; Mais Acessados</h2>
             </div>
-            <div class="col-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12">
 
                 <div class="slider" id="listPostsPopular">
                     
@@ -262,14 +263,14 @@
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-4">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                     <h1 class="title-footer">SOBRE O BLOG</h1>
                     <p class="text-footer" id="lblSobreBlog"></p>
                 </div>
-                <div class="col-4 text-center">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12 text-center brand-footer">
                     <img src="./assets/img/logo.png" alt="Bebedouro História e Memória" width="250" />
                 </div>
-                <div class="col-4">
+                <div class="col-lg-4 col-md-4 col-sm-12 col-12">
                     <h1 class="title-footer">RECEBA AS NOVIDADES</h1>
                     <p class="text-footer">Informe seu nome e seu e-mail para receber novidades:</p>
                     <div class="form-group">

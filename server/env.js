@@ -20,8 +20,8 @@ var config = {
         //     user: 'teste@gmail.com',
         //     pass: 'teste' 
         // },
-        // googleID: "629679185123-d8q71lomop2gukdgtqp2klb3atujmlnd.apps.googleusercontent.com",
-        // googleSecretKey: "QSAUjcDpxbGP2IIB8KlWlJww"
+        googleID: "467541054020-pvaandkfp21fto9fr1bg9pcoucsto99r.apps.googleusercontent.com",
+        googleSecretKey: "LOlbFNPzTjGagC6apUUHOfmF"
     },
     prod: {
         url: 'http://bebedourohistoriaememoria.com.br/',
@@ -44,8 +44,8 @@ var config = {
         //     user: 'teste@gmail.com',
         //     pass: 'teste' 
         // },
-        // googleID: "629679185123-d8q71lomop2gukdgtqp2klb3atujmlnd.apps.googleusercontent.com",
-        // googleSecretKey: "QSAUjcDpxbGP2IIB8KlWlJww"
+        googleID: "467541054020-pvaandkfp21fto9fr1bg9pcoucsto99r.apps.googleusercontent.com",
+        googleSecretKey: "LOlbFNPzTjGagC6apUUHOfmF"
     }
 
 }

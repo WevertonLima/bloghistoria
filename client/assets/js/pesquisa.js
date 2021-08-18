@@ -242,7 +242,7 @@ pesquisa.templates = {
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="fa fa-share-alt"></span>
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="ddlShare">
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="ddlShare">
                                 <a href="https://www.facebook.com/sharer/sharer.php?u=http://bebedourohistoriaememoria.com.br/detalhes.html?n=\${idnoticia}"
                                     onclick="window.open(this.href, 'facebook-share','width=580, height=550');return false;"
                                     class="dropdown-item">
