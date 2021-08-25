@@ -63,23 +63,35 @@ a.top-menu-item {
 a.top-menu-item.link-social {
     background: #191a1b;
     color: #ccc;
-    height: 40px;
-    width: 40px;
+    height: 38px;
+    width: 38px;
     position: absolute;
     padding: 0;
     text-align: center;
     border-radius: 50%;
-    font-size: 20px;
+    font-size: 19px;
     padding-top: 4px;
     right: 15px;
 }
 
 a.top-menu-item.link-social:nth-child(1) {
-    right: 105px;
+    right: 193px;
+}
+
+a.top-menu-item.link-social:nth-child(2) {
+    right: 148px;
+}
+
+a.top-menu-item.link-social:nth-child(3) {
+    right: 103px;
+}
+
+a.top-menu-item.link-social:nth-child(4) {
+    right: 58px;
 }
 
 a.top-menu-item.link-social:last-child {
-    right: 60px;
+    right: 13px;
 }
 
 .main-content {

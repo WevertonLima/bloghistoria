@@ -65,7 +65,7 @@ login.metodos = {
                     app.metodos.gravarValorSessao(response.Nome, "NomeUsuario")
                     app.metodos.gravarValorSessao(response.Email, "Email")
 
-                    window.location.href = '/painel/categoria/index.html';
+                    window.location.href = '/painel/home/index.html';
 
                 }
                 
