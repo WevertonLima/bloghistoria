@@ -82,7 +82,8 @@
             width: 30px;
         }
 
-        a#btnRemoverCategoria, #btnRemoverTags {
+        a#btnRemoverCategoria,
+        #btnRemoverTags {
             float: right;
             margin-top: -10px;
         }
@@ -335,6 +336,24 @@
     <script type="text/javascript" src="../../assets/js/select2.min.js"></script>
     <script type="text/javascript" src="../../assets/js/app.js"></script>
     <script type="text/javascript" src="./js/index.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+                "extract-date-pre": function (value) {
+                    var date = value;
+                    date = date.split('/');
+                    return Date.parse(date[1] + '/' + date[0] + '/' + date[2])
+                },
+                "extract-date-asc": function (a, b) {
+                    return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+                },
+                "extract-date-desc": function (a, b) {
+                    return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+                }
+            });
+        })
+    </script>
 
 </body>
 

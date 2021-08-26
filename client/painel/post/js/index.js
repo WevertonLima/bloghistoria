@@ -131,7 +131,10 @@ post.metodos = {
                     aaSorting: [[0]],
                     dom: 'Bfrtipl',
                     lengthMenu: [[10, 25, 50, -1], ['10 linhas', '25 linhas', '50 linhas', 'Todas']],
-                    columnDefs: [{ targets: [5], className: 'text-center' }],
+                    columnDefs: [
+                        { targets: [5], className: 'text-center' }, 
+                        { targets: [4], type: 'extract-date', }
+                    ],
                     buttons: ['pageLength'],
                     "data": posts,
                     "columns": [
