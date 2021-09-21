@@ -65,17 +65,20 @@ const controllers = () => {
             // Salva as informações principais e a categoria
 
             var ComandoSQL = await readCommandSql.retornaStringSql('atualizar', 'BOpost');
-            await db.Query(ComandoSQL, req.body);
-
-            //console.log('--- Salvou informações principais')
+            var result = await db.Query(ComandoSQL, {
+                titulo: req.body.strtitulo,
+                descricao: req.body.strdescricao,
+                capa: req.body.strcapa,
+                conteudo: req.body.conteudo,
+                idcategoria: req.body.idcategoria,
+                idnoticia: req.body.idnoticia
+            });
 
             // limpa as Tags da publicação
 
             var ComandoSQLTags = await readCommandSql.retornaStringSql('removerTags', 'BOtag');
             await db.Query(ComandoSQLTags, { idnoticia: req.body.idnoticia });
             //console.log('ComandoSQLTags', ComandoSQLTags)
-
-            //console.log('--- Removeu Tags')
 
             // cadastra as novas Tags
 
@@ -92,14 +95,13 @@ const controllers = () => {
 
                             var ComandoSQLAdd = await readCommandSql.retornaStringSql('adicionarTagNoticia', 'BOtag');
                             await db.Query(ComandoSQLAdd, { idnoticia: req.body.idnoticia, idtag: tag });
+
                             resolve();
                         })
                     );
                 });
 
                 await Promise.all(promessas);
-
-                //console.log('--- Fim Adicionar Tags')
 
             }
 
