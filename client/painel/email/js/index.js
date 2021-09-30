@@ -37,7 +37,7 @@ email.metodos = {
 
                 var emails = response;
 
-                console.log('emails', emails) 
+                console.log('emails', emails)
 
                 // adciona a coluna de ação nos registros
 
@@ -88,7 +88,17 @@ email.metodos = {
             }
         );
 
-    }  
+    },
+
+    exportar: (type, fn, dl) => {
+
+        var elt = document.getElementById('tblEmails');
+        var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
+        return dl ?
+            XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }) :
+            XLSX.writeFile(wb, fn || ('Emails.' + (type || 'xlsx')));
+
+    }
 
 }
 

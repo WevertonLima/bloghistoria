@@ -30,10 +30,10 @@
             <div class="header mt-md-2">
                 <div class="header-body">
 
-                    <!-- <a class="btn btn-primary btn-sm float-right mt-3" href="#" data-toggle="modal"
-                        data-target="#modalForm" onclick="tag.metodos.abrirModal()">
-                        <i class="fe fe-plus"></i>&nbsp; Adicionar Tag
-                    </a> -->
+                    <a class="btn btn-success btn-sm float-right mt-3" href="#" data-toggle="modal"
+                        data-target="#modalForm" onclick="email.metodos.exportar('xlsx')">
+                        Exportar para Excel
+                    </a>
 
                     <h6 class="header-pretitle">
                         listagem
@@ -51,12 +51,16 @@
         </div>
     </div>
 
+
+    <iframe id="txtArea" style="display:none"></iframe>
+
     <script type="text/javascript" src="../../assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="../../assets/js/popper.min.js"></script>
     <script type="text/javascript" src="../../assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../assets/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="../../assets/js/dataTables.bootstrap4.min.js"></script>
     <script type="text/javascript" src="../../assets/js/app.js"></script>
+    <script type="text/javascript" src="./js/xlsx.full.min.js"></script>
     <script type="text/javascript" src="./js/index.js"></script>
 
 </body>
