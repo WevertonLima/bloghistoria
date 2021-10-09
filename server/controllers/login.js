@@ -153,7 +153,7 @@ const controllers = () => {
         if (usuarioBanco != undefined && usuarioBanco.length > 0) {
 
             // cria uma nova senha
-            var nova = Math.random() * (99999 - 10000) + 99999;
+            var nova = Math.random().toString(36).slice(-8);
             var hashSenha = crypto.createHmac('sha256', nova).digest('hex');
 
             // salva a nova senha do usuário
