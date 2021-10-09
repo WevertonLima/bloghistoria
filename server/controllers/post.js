@@ -18,6 +18,8 @@ const controllers = () => {
 
     const obterpostsportexto = async (req) => {
 
+        req.body.textoDesc = req.body.texto;
+
         var ComandoSQL = await readCommandSql.retornaStringSql('obterpostsportexto', 'post');
         var result = await db.Query(ComandoSQL, req.body);
 

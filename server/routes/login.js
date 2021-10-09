@@ -16,6 +16,18 @@ module.exports = (server) => {
         return next();
     });
 
+    server.post('/usuario/alterarSenha', Acesso.verificaTokenAcesso, async (req, res, next) => {
+        const result = await ctLogin.controllers().alterarSenha(req)
+        res.send(result);
+        return next();
+    });
+
+    server.post('/usuario/recuperarSenha', async (req, res, next) => {
+        const result = await ctLogin.controllers().emailRecuperarSenha(req)
+        res.send(result);
+        return next();
+    });
+
     server.get('/check', Acesso.verificaTokenAcesso, async (req, res, next) => {
         res.send(true);
         return next();

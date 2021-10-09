@@ -27,6 +27,16 @@ login.eventos = {
             login.metodos.cadastro();
         })
 
+        $("#btnAlterarSenha").on('click', () => {
+            $("#btnAlterarSenha").addClass('disabled');
+            login.metodos.alterarSenha();
+        })
+
+        $("#btnRecuperar").on('click', () => {
+            $("#btnRecuperar").addClass('disabled');
+            login.metodos.recuperarSenha();
+        })
+
     }
 
 }
@@ -147,6 +157,118 @@ login.metodos = {
         )
 
     },
+
+    alterarSenha: () => {
+
+        let senha = $("#txtSenhaAtual").val().trim();
+        let novaSenha = $("#txtNovaSenha").val().trim();
+        let confirmaSenha = $("#txtConfirmaSenha").val().trim();
+
+        if (senha.length == 0) {
+            alert("Informe a senha atual, por favor");
+            $("#txtSenhaAtual").focus();
+            $("#btnAlterarSenha").removeClass('disabled')
+            return;
+        }
+
+        if (novaSenha.length == 0) {
+            alert("Informe a nova senha, por favor");
+            $("#txtNovaSenha").focus();
+            $("#btnAlterarSenha").removeClass('disabled')
+            return;
+        }
+
+        if (confirmaSenha.length == 0) {
+            alert("Repita a nova senha, por favor");
+            $("#txtConfirmaSenha").focus();
+            $("#btnAlterarSenha").removeClass('disabled')
+            return;
+        }
+
+        if (novaSenha != confirmaSenha) {
+            alert("As senhas não conferem");
+            $("#txtConfirmaSenha").focus();
+            $("#btnAlterarSenha").removeClass('disabled')
+            return;
+        }
+
+        let dados = {
+            senha: senha,
+            novaSenha: novaSenha
+        }
+
+        app.metodos.post('/usuario/alterarSenha', JSON.stringify(dados),
+            (response) => {
+                console.log('response', response)
+
+                if (response.status == "error") {
+                    alert(response.mensagem);
+                }
+                else if (response.status == "success") {
+                    alert(response.mensagem);
+                    $("#modalAlterarSenha").modal('hide')
+                }
+
+                $("#btnAlterarSenha").removeClass('disabled')
+
+            },
+            (xhr, ajaxOptions, error) => {
+                console.log('xhr', xhr)
+                console.log('ajaxOptions', ajaxOptions)
+                console.log('error', error)
+            }, true
+        )
+
+    },
+
+    openModalalterarSenha: () => {
+
+        $("#txtSenhaAtual").val('');
+        $("#txtNovaSenha").val();
+        $("#txtConfirmaSenha").val();
+
+        $("#modalAlterarSenha").modal('show')
+
+    },
+
+    recuperarSenha: () => {
+
+        let email = $("#txtEmailRecuperar").val().trim();
+
+        if (email.length == 0 || !app.metodos.isEmail(email)) {
+            alert("Informe um e-mail válido, por favor");
+            $("#txtEmailRecuperar").focus();
+            $("#btnRecuperar").removeClass('disabled')
+            return;
+        }
+
+        let dados = {
+            email: email,
+        }
+
+        app.metodos.post('/usuario/recuperarSenha', JSON.stringify(dados),
+            (response) => {
+                console.log('response', response)
+
+                if (response.status == "error") {
+                    alert(response.mensagem);
+                }
+                else if (response.status == "success") {
+                    alert(response.mensagem);
+                    $("#modalRecuperarSenha").modal('hide')
+                }
+
+                $("#btnRecuperar").removeClass('disabled')
+
+            },
+            (xhr, ajaxOptions, error) => {
+                console.log('xhr', xhr)
+                console.log('ajaxOptions', ajaxOptions)
+                console.log('error', error)
+            }, true
+        )
+
+    }
 
     // loginGoogle: (access) => {
 

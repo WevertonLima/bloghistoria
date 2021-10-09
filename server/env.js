@@ -41,10 +41,10 @@ var config = {
             password: 'bl0gh1st0r1a',
             database: 'ajeitameulayou'
         },
-        // email: {
-        //     user: 'teste@gmail.com',
-        //     pass: 'teste' 
-        // },
+        email: {
+            user: 'bebedourohistoriaememoria@gmail.com',
+            pass: '03maio1884' 
+        },
         googleID: "467541054020-pvaandkfp21fto9fr1bg9pcoucsto99r.apps.googleusercontent.com",
         googleSecretKey: "LOlbFNPzTjGagC6apUUHOfmF",
         googleAPIKey: "AIzaSyAOhbuoACObvGqkDTMxsz7QCc8AwS_tafA"

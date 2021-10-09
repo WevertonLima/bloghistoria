@@ -764,6 +764,13 @@ a.btn.btn-block.btn-light {
     font-weight: 600;
 }
 
+.containerUsuario .btn-alterar {
+    background: none;
+    display: block;
+    color: #ecb426;
+    font-weight: 600;
+}
+
 .containerUsuario .avatar-img.rounded-circle {
     height: 40px;
     width: 40px;
@@ -772,10 +779,13 @@ a.btn.btn-block.btn-light {
     background-position: center center;
 }
 
-div#modalLogin, div#modalCadastro {
+div#modalLogin, div#modalCadastro, #modalAlterarSenha, #modalRecuperarSenha {
     z-index: 999999;
 }
 
+#modalRecuperarSenha {
+    background: rgb(0 0 0 / 80%);
+}
 
 .container-posts, .populars {
     padding-right: 0px;

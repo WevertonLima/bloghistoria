@@ -33,7 +33,7 @@ FROM
 	noticia as n
 WHERE
     n.ativo = 1
-    AND n.titulo like CONCAT('%', @texto, '%')
+    AND (n.titulo like CONCAT('%', @texto, '%') OR n.descricao like CONCAT('%', @textoDesc, '%'))
 ORDER BY
 	n.datapub DESC
 

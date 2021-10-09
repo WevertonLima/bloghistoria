@@ -345,7 +345,6 @@ common.metodos = {
 
     }
 
-
 }
 
 common.templates = {
