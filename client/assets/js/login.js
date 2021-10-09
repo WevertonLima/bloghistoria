@@ -262,6 +262,12 @@ login.metodos = {
 
             },
             (xhr, ajaxOptions, error) => {
+
+                alert('Enviamos um e-mail com a nova senha!');
+                $("#modalRecuperarSenha").modal('hide')
+
+                $("#btnRecuperar").removeClass('disabled')
+
                 console.log('xhr', xhr)
                 console.log('ajaxOptions', ajaxOptions)
                 console.log('error', error)

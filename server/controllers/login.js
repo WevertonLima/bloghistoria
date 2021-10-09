@@ -158,7 +158,10 @@ const controllers = () => {
 
             // salva a nova senha do usuário
             var ComandoSQLNovaSenha = await readCommandSql.retornaStringSql('alterarSenha', 'login');
-            var usuarioBanco = await db.Query(ComandoSQLNovaSenha, { novaSenha: hashSenha, idusuario: usuarioBanco[0].idusuario });
+            var novaSenhaOK = await db.Query(ComandoSQLNovaSenha, { novaSenha: hashSenha, idusuario: usuarioBanco[0].idusuario });
+
+            console.log(usuarioBanco)
+            console.log('global.email', global.email)
 
             // envia o email
             var transporter = nodemailer.createTransport({
@@ -216,8 +219,10 @@ const controllers = () => {
             transporter.sendMail(mailOptions, function (error, info) {
                 if (error) {
                     console.log('Falha ao enviar e-mail.')
+                    console.log(error)
                     return {
                         status: 'error',
+                        error: error,
                         mensagem: "Falha ao recuperar senha. Tente novamente mais tarde."
                     };
                 } else {
