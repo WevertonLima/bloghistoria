@@ -258,7 +258,7 @@ a.top-menu-item.link-social:last-child {
     background-image: url(../img/jp.jpeg);
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position: top center;
     width: 200px;
     height: 200px;
     border: 5px solid #ececec;
