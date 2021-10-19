@@ -169,8 +169,17 @@ post.metodos = {
                 console.log('xhr', xhr);
                 console.log('ajaxOptions', ajaxOptions);
                 console.log('error', error);
-                app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
-                return;
+
+                if (xhr.status == 503) {
+                    setTimeout(() => {
+                        post.metodos.carregarPosts();
+                    }, 1000)
+                }
+                else {
+                    app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
+                    return;
+                }
+
             }
         );
 
