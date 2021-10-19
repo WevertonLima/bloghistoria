@@ -117,7 +117,7 @@ home.templates = {
                                 <span class="fa fa-share-alt"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="ddlShare">
-                                <a href="https://www.facebook.com/sharer/sharer.php?u=http://bebedourohistoriaememoria.com.br/detalhes.html?n=\${idnoticia}"
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=http://bebedourohistoriaememoria.com.br/shared/post\${idnoticia}.html"
                                     onclick="window.open(this.href, 'facebook-share','width=580, height=550');return false;"
                                     class="dropdown-item">
                                     <span class="fa fa-facebook icon-share"></span>&nbsp; Facebook
