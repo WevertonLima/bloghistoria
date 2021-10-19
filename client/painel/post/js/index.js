@@ -132,7 +132,7 @@ post.metodos = {
                     dom: 'Bfrtipl',
                     lengthMenu: [[10, 25, 50, -1], ['10 linhas', '25 linhas', '50 linhas', 'Todas']],
                     columnDefs: [
-                        { targets: [5], className: 'text-center' }, 
+                        { targets: [5], className: 'text-center' },
                         { targets: [4], type: 'extract-date', }
                     ],
                     buttons: ['pageLength'],
@@ -295,8 +295,17 @@ post.metodos = {
                 console.log('xhr', xhr);
                 console.log('ajaxOptions', ajaxOptions);
                 console.log('error', error);
-                app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
-                return;
+
+                // reiniciou o servidor, prossegue normalmente
+                if (xhr.status == 503) {
+                    app.metodos.mensagem(response.msg, 'green');
+                    $("#modalForm").modal('toggle');
+                    post.metodos.carregarPosts();
+                }
+                else {
+                    app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
+                    return;
+                }
             }
         );
 
@@ -336,8 +345,17 @@ post.metodos = {
                 console.log('xhr', xhr);
                 console.log('ajaxOptions', ajaxOptions);
                 console.log('error', error);
-                app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
-                return;
+
+                // reiniciou o servidor, prossegue normalmente
+                if (xhr.status == 503) {
+                    app.metodos.mensagem(response.msg, 'green');
+                    $("#modalForm").modal('toggle');
+                    post.metodos.carregarPosts();
+                }
+                else {
+                    app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
+                    return;
+                }
             }
         );
 

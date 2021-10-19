@@ -116,10 +116,13 @@ const controllers = () => {
             }
 
             // cria a thumb 
-            criarThumb(req.body.strcapa, req.body.idnoticia, req.body)
-            //console.log(_thumb.filename)
-            
-            console.log('retorno')
+            var _thumb = await criarThumb(req.body.strcapa, req.body.idnoticia)
+            console.log(_thumb.filename)
+
+            // cria o HTML
+            var _html = await criarHTML(req.body, req.body.idnoticia, _thumb.filename);
+            console.log('_html', _html)
+
             return {
                 resultado: "sucesso",
                 msg: "Publicação atualizada com sucesso!"
@@ -157,7 +160,7 @@ const controllers = () => {
 
     }
 
-    const criarThumb = async (base64Image, postID, post) => {
+    const criarThumb = async (base64Image, postID) => {
 
         var baseImage = base64Image;
 
@@ -199,8 +202,7 @@ const controllers = () => {
             console.log('localPath + filename', localPath + filename)
             //console.log('base64Data', base64Data)
 
-            var _html = await criarHTML(post, post.idnoticia, filename);
-            console.log('_html', _html)
+            return { filename, localPath };
 
         } catch (error) {
             return { error: error };
