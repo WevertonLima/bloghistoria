@@ -297,7 +297,7 @@ post.metodos = {
                 console.log('error', error);
 
                 // reiniciou o servidor, prossegue normalmente
-                if (xhr.status == 503) {
+                if (xhr.status == 503 || xhr.status == 502) {
                     app.metodos.mensagem('Publicação cadastrada com sucesso!', 'green');
                     $("#modalForm").modal('toggle');
                     post.metodos.carregarPosts();
@@ -347,7 +347,7 @@ post.metodos = {
                 console.log('error', error);
 
                 // reiniciou o servidor, prossegue normalmente
-                if (xhr.status == 503) {
+                if (xhr.status == 503 || xhr.status == 502) {
                     app.metodos.mensagem('Publicação atualizada com sucesso!', 'green');
                     $("#modalForm").modal('toggle');
                     post.metodos.carregarPosts();
