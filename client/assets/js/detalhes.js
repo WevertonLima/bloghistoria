@@ -106,6 +106,16 @@ detalhes.metodos = {
 
                     detalhes.metodos.adicionarAcesso(post[0].acessos)
 
+                    // adiciona as meta tags
+                    // <meta property="og:title" content="Bebedouro História e Memória">
+                    // <meta property="og:description" content="Tudo sobre nossa cidade coração - Bebedouro/SP">
+                    // <meta property="og:site_name" content="Bebedouro História e Memória">
+                    // <meta property="og:image" content="http://bebedourohistoriaememoria.com.br/assets/img/thumb.png">
+                    // <meta property="og:url" content="http://bebedourohistoriaememoria.com.br/home.htm"></meta>
+
+                    $("head").append(`<meta property="og:title" content="${post[0].titulo}">`);
+                    $("head").append(`<meta property="og:description" content="${post[0].descricao}">`);
+
                 }
 
             },

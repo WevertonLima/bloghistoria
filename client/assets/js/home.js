@@ -96,27 +96,7 @@ home.metodos = {
         PAGINA += AUX_PAGE;
         TOTAL_P_PAGINA += AUX_PAGE;
 
-    },
-
-    compartilhar: (idnoticia) => {
-
-        FB.ui(
-            {
-             method: 'feed', //Método para postar no Mural
-             name: 'Título do conteúdo',
-             caption: 'Linha abaixo do conteúdo. Não obrigatório.',
-             description: 'Descrição. Recomendado no máximo 255 caracteres.',
-             link: `https://www.facebook.com/sharer/sharer.php?u=http://bebedourohistoriaememoria.com.br/detalhes.html?n=${idnoticia}`, //Link a ser compartilhado
-             picture: 'http://google.com/logo.png' //Imagem do Share
-            },
-            function(response) {
-               console.log(response); //Callback da função.
-            }
-          );
-
-          //window.open(this.href, 'facebook-share','width=580, height=550');return false;
-
-    },
+    }
 
 }
 
@@ -137,8 +117,8 @@ home.templates = {
                                 <span class="fa fa-share-alt"></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="ddlShare">
-                                <a href="#!"
-                                    onclick="home.metodos.compartilhar(\${idnoticia})"
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=http://bebedourohistoriaememoria.com.br/detalhes.html?n=\${idnoticia}"
+                                    onclick="window.open(this.href, 'facebook-share','width=580, height=550');return false;"
                                     class="dropdown-item">
                                     <span class="fa fa-facebook icon-share"></span>&nbsp; Facebook
                                 </a>
