@@ -9,7 +9,6 @@ const fs = require('fs');
 var path = require('path');
 const { resolve } = require('path');
 
-
 const controllers = () => {
 
     const consultar = async (req) => {
@@ -41,7 +40,19 @@ const controllers = () => {
             req.body.idusuario = _usuarioId
 
             var ComandoSQL = await readCommandSql.retornaStringSql('inserir', 'BOpost');
-            var result = await db.Query(ComandoSQL, req.body);
+            await db.Query(ComandoSQL, req.body);
+
+
+            var ComandoSQLLastID = await readCommandSql.retornaStringSql('lastID', 'BOpost');
+            var _lastID = await db.Query(ComandoSQLLastID);
+
+            // cria a thumb 
+            var _thumb = await criarThumb(req.body.strcapa, _lastID[0].ID)
+            console.log(_thumb.filename)
+
+            // cria o HTML
+            var _html = await criarHTML(req.body, _lastID[0].ID, _thumb.filename);
+            console.log('_html', _html)
 
             return {
                 resultado: "sucesso",
@@ -142,6 +153,111 @@ const controllers = () => {
 
     }
 
+    const criarThumb = async (base64Image, postID) => {
+
+        var baseImage = base64Image;
+
+        try {
+
+            var appDir = path.dirname(require.main.filename);
+
+            /*path of the folder where your project is saved. (In my case i got it from config file, root path of project).*/
+            const uploadPath = appDir + "/client/";
+
+            //path of folder where you want to save the image.
+            const localPath = `${uploadPath}/shared/img/`;
+
+            //Find extension of file
+            const ext = baseImage.substring(baseImage.indexOf("/") + 1, baseImage.indexOf(";base64"));
+            const fileType = baseImage.substring("data:".length, baseImage.indexOf("/"));
+
+            //Forming regex to extract base64 data of file.
+            const regex = new RegExp(`^data:${fileType}\/${ext};base64,`, 'gi');
+
+            //Extract base64 data.
+            const base64Data = baseImage.replace(regex, "");
+            const rand = Math.ceil(Math.random() * 1000);
+
+            const filename = `post${postID}.${ext}`;
+
+            //Check that if directory is present or not.
+            if (!fs.existsSync(`${uploadPath}/shared/`)) {
+                fs.mkdirSync(`${uploadPath}/shared/`);
+            }
+            if (!fs.existsSync(localPath)) {
+                fs.mkdirSync(localPath);
+            }
+
+            console.log('filename', filename);
+
+            fs.writeFileSync(localPath + filename, base64Data, 'base64');
+
+            console.log('localPath + filename', localPath + filename)
+            //console.log('base64Data', base64Data)
+
+            return { filename, localPath };
+
+        } catch (error) {
+            return { error: error };
+        }
+
+    }
+
+    const criarHTML = async (post, postID, imagem) => {
+
+        try {
+
+            var appDir = path.dirname(require.main.filename);
+
+            /*path of the folder where your project is saved. (In my case i got it from config file, root path of project).*/
+            const uploadPath = appDir + "/client/";
+
+            //path of folder where you want to save the image.
+            const localPath = `${uploadPath}/shared/`;
+
+            const filename = `post${postID}.html`;
+
+            const data = `
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>${post.strtitulo}</title>
+                    <meta property="og:title" content="${post.strtitulo}">
+                    <meta property="og:site_name" content="${post.strtitulo}">
+                    <meta property="og:description" content="${post.strdescricao}">
+                    <meta property="og:image" content="http://bebedourohistoriaememoria.com.br/shared/img/${imagem}">
+                    <meta property="og:url" content="http://bebedourohistoriaememoria.com.br/shared/post${postID}.html">
+                </head>
+                <body>
+                    <script>
+                        window.location.href = 'http://bebedourohistoriaememoria.com.br/detalhes.html?n=${postID}'
+                    </script>
+                </body>
+                </html>
+            `
+
+            //Check that if directory is present or not.
+            if (!fs.existsSync(`${uploadPath}/shared/`)) {
+                fs.mkdirSync(`${uploadPath}/shared/`);
+            }
+            if (!fs.existsSync(localPath)) {
+                fs.mkdirSync(localPath);
+            }
+
+            console.log('filename', filename);
+
+            fs.writeFileSync(localPath + filename, data);
+
+            return { filename, localPath };
+
+        } catch (error) {
+            return { error: error };
+        }
+
+    }
 
     // usar para Galeria
     const adicionarImagem = async (base64Image) => {

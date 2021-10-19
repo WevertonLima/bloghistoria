@@ -46,6 +46,12 @@ VALUES (
 
 --END#inserir#
 
+--#lastID#
+
+SELECT MAX(idnoticia) as ID FROM noticia;
+
+--END#lastID#
+
 --#atualizar#
 
 UPDATE 
