@@ -673,7 +673,7 @@ post.metodos = {
                 // reiniciou o servidor, prossegue normalmente
                 if (xhr.status == 503 || xhr.status == 502) {
                     console.log('Salvou');
-
+                    post.metodos.criarHTML(_post, _imagem, obterUltimoId);
                 }
                 else {
                     app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
