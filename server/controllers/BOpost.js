@@ -42,7 +42,6 @@ const controllers = () => {
             var ComandoSQL = await readCommandSql.retornaStringSql('inserir', 'BOpost');
             await db.Query(ComandoSQL, req.body);
 
-
             var ComandoSQLLastID = await readCommandSql.retornaStringSql('lastID', 'BOpost');
             var _lastID = await db.Query(ComandoSQLLastID);
 
@@ -115,6 +114,14 @@ const controllers = () => {
                 await Promise.all(promessas);
 
             }
+
+            // cria a thumb 
+            var _thumb = await criarThumb(req.body.strcapa, req.body.idnoticia)
+            console.log(_thumb.filename)
+
+            // cria o HTML
+            var _html = await criarHTML(req.body, req.body.idnoticia, _thumb.filename);
+            console.log('_html', _html)
 
             return {
                 resultado: "sucesso",
