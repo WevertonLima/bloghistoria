@@ -39,6 +39,9 @@ home.metodos = {
 
                 home.metodos.carregarPosts(posts)
 
+                $("#container-loader").addClass('hidden')
+                $("#container-ver-mais").removeClass('hidden')
+
             },
             (xhr, ajaxOptions, error) => {
                 console.log('xhr', xhr);

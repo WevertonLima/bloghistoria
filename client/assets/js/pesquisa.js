@@ -78,12 +78,16 @@ pesquisa.metodos = {
                 console.log('posts', posts)
                 LISTA_POSTS = posts;
 
+                $("#container-loader").addClass('hidden')
+                $("#container-ver-mais").removeClass('hidden')
+
                 if (posts.length == 0) {
                     pesquisa.metodos.nenhumaPublicacao();
                     return;
                 }
 
                 pesquisa.metodos.carregarPosts(posts)
+
 
             },
             (xhr, ajaxOptions, error) => {
@@ -112,6 +116,9 @@ pesquisa.metodos = {
                 var posts = response;
                 console.log('posts', posts)
                 LISTA_POSTS = posts;
+
+                $("#container-loader").addClass('hidden')
+                $("#container-ver-mais").removeClass('hidden')
 
                 if (posts.length == 0) {
                     pesquisa.metodos.nenhumaPublicacao();
@@ -147,6 +154,9 @@ pesquisa.metodos = {
                 var posts = response;
                 console.log('posts', posts)
                 LISTA_POSTS = posts;
+
+                $("#container-loader").addClass('hidden')
+                $("#container-ver-mais").removeClass('hidden')
 
                 if (posts.length == 0) {
                     pesquisa.metodos.nenhumaPublicacao();

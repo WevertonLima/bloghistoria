@@ -104,6 +104,9 @@ detalhes.metodos = {
                         $("#containerCapa").html(`<img class="capa" src="${post[0].capa}" />`)
                     }
 
+                    $(".container-loader").addClass('hidden')
+                    $(".container-posts").removeClass('hidden')
+
                     detalhes.metodos.adicionarAcesso(post[0].acessos)
 
                 }
