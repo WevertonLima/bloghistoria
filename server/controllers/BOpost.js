@@ -121,7 +121,7 @@ const controllers = () => {
 
             // cria o HTML
             var _html = await criarHTML(req.body, req.body.idnoticia, _thumb.filename);
-            console.log('_html', _html)
+            //console.log('_html', _html)
 
             return {
                 resultado: "sucesso",
