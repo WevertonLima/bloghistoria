@@ -132,7 +132,7 @@ post.metodos = {
                     dom: 'Bfrtipl',
                     lengthMenu: [[10, 25, 50, -1], ['10 linhas', '25 linhas', '50 linhas', 'Todas']],
                     columnDefs: [
-                        { targets: [5], className: 'text-center' },
+                        { targets: [5], className: 'text-center' }, 
                         { targets: [4], type: 'extract-date', }
                     ],
                     buttons: ['pageLength'],
@@ -169,17 +169,8 @@ post.metodos = {
                 console.log('xhr', xhr);
                 console.log('ajaxOptions', ajaxOptions);
                 console.log('error', error);
-
-                if (xhr.status == 503) {
-                    setTimeout(() => {
-                        post.metodos.carregarPosts();
-                    }, 1000)
-                }
-                else {
-                    app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
-                    return;
-                }
-
+                app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
+                return;
             }
         );
 
@@ -297,10 +288,6 @@ post.metodos = {
                     app.metodos.mensagem(response.msg, 'green');
                     $("#modalForm").modal('toggle');
                     post.metodos.carregarPosts();
-
-                    // chama o metodo para criar a thumb e o arquivo html de share
-                    post.metodos.criarThumb(dados, 1);
-
                 }
 
             },
@@ -308,17 +295,8 @@ post.metodos = {
                 console.log('xhr', xhr);
                 console.log('ajaxOptions', ajaxOptions);
                 console.log('error', error);
-
-                // // reiniciou o servidor, prossegue normalmente
-                // if (xhr.status == 503 || xhr.status == 502) {
-                //     app.metodos.mensagem('Publicação cadastrada com sucesso!', 'green');
-                //     $("#modalForm").modal('toggle');
-                //     post.metodos.carregarPosts();
-                // }
-                // else {
                 app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
                 return;
-                //}
             }
         );
 
@@ -352,26 +330,14 @@ post.metodos = {
 
                     // recarrega a tabela
                     post.metodos.carregarPosts();
-
-                    // chama o metodo para criar a thumb e o arquivo html de share
-                    post.metodos.criarThumb(dados);
                 }
             },
             (xhr, ajaxOptions, error) => {
                 console.log('xhr', xhr);
                 console.log('ajaxOptions', ajaxOptions);
                 console.log('error', error);
-
-                // // reiniciou o servidor, prossegue normalmente
-                // if (xhr.status == 503 || xhr.status == 502) {
-                //     app.metodos.mensagem('Publicação atualizada com sucesso!', 'green');
-                //     $("#modalForm").modal('toggle');
-                //     post.metodos.carregarPosts();
-                // }
-                // else {
-                    app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
-                    return;
-                //}
+                app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
+                return;
             }
         );
 
@@ -643,83 +609,7 @@ post.metodos = {
     },
 
 
-    criarThumb: (_post, obterUltimoId = 0) => {
 
-        console.log('criarThumb')
-
-        var dados = {
-            obterUltimoId: obterUltimoId,
-            base64Image: _post.strcapa,
-            postid: _post.idnoticia
-        };
-
-        // chama o método de adicionar
-        app.metodos.post('/post/criarThumb', JSON.stringify(dados),
-            (response) => {
-
-                console.log('response', response);
-                let _imagem = response.filename;
-
-                console.log(_post)
-
-                post.metodos.criarHTML(_post, _imagem, obterUltimoId);
-
-            },
-            (xhr, ajaxOptions, error) => {
-                console.log('xhr', xhr);
-                console.log('ajaxOptions', ajaxOptions);
-                console.log('error', error);
-
-                // reiniciou o servidor, prossegue normalmente
-                if (xhr.status == 503 || xhr.status == 502) {
-                    console.log('Salvou');
-                    post.metodos.criarHTML(_post, _imagem, obterUltimoId);
-                }
-                else {
-                    app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
-                    return;
-                }
-            }
-        );
-
-    },
-
-    criarHTML: (_post, imagem, obterUltimoId) => {
-
-        console.log('criarHTML')
-
-        var dados = {
-            strtitulo: _post.strtitulo,
-            strdescricao: _post.strdescricao,
-            postid: _post.idnoticia,
-            nomeimagem: imagem,
-            obterUltimoId: obterUltimoId
-        };
-
-        // chama o método de adicionar
-        app.metodos.post('/post/criarHTML', JSON.stringify(dados),
-            (response) => {
-
-                console.log('response', response);
-
-            },
-            (xhr, ajaxOptions, error) => {
-                console.log('xhr', xhr);
-                console.log('ajaxOptions', ajaxOptions);
-                console.log('error', error);
-
-                // reiniciou o servidor, prossegue normalmente
-                if (xhr.status == 503 || xhr.status == 502) {
-                    console.log('Salvou');
-                }
-                else {
-                    app.metodos.mensagem("Falha ao realizar operação. Tente novamente.");
-                    return;
-                }
-            }
-        );
-
-    },
 
     // usar para galeria
     OLDuploadImage: () => {

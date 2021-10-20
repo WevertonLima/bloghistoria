@@ -46,12 +46,12 @@ const controllers = () => {
             var _lastID = await db.Query(ComandoSQLLastID);
 
             // cria a thumb 
-            //var _thumb = await criarThumb(req.body.strcapa, _lastID[0].ID)
-            //console.log(_thumb.filename)
+            var _thumb = await criarThumb(req.body.strcapa, _lastID[0].ID)
+            console.log(_thumb.filename)
 
             // cria o HTML
-            //var _html = await criarHTML(req.body, _lastID[0].ID, _thumb.filename);
-            //console.log('_html', _html)
+            var _html = await criarHTML(req.body, _lastID[0].ID, _thumb.filename);
+            console.log('_html', _html)
 
             return {
                 resultado: "sucesso",
@@ -116,12 +116,12 @@ const controllers = () => {
             }
 
             // cria a thumb 
-            //var _thumb = await criarThumb(req.body.strcapa, req.body.idnoticia)
-            //console.log(_thumb.filename)
+            var _thumb = await criarThumb(req.body.strcapa, req.body.idnoticia)
+            console.log(_thumb.filename)
 
             // cria o HTML
-            //var _html = await criarHTML(req.body, req.body.idnoticia, _thumb.filename);
-            //console.log('_html', _html)
+            var _html = await criarHTML(req.body, req.body.idnoticia, _thumb.filename);
+            console.log('_html', _html)
 
             return {
                 resultado: "sucesso",
@@ -160,16 +160,9 @@ const controllers = () => {
 
     }
 
-    const criarThumb = async (req) => {
+    const criarThumb = async (base64Image, postID) => {
 
-        var baseImage = req.body.base64Image;
-        var postID = req.body.postid;
-
-        if (req.body.obterUltimoId == 1) {
-            var ComandoSQLLastID = await readCommandSql.retornaStringSql('lastID', 'BOpost');
-            var _lastID = await db.Query(ComandoSQLLastID);
-            postID = _lastID[0].ID;
-        }
+        var baseImage = base64Image;
 
         try {
 
@@ -209,26 +202,15 @@ const controllers = () => {
             console.log('localPath + filename', localPath + filename)
             //console.log('base64Data', base64Data)
 
-            return { status: 'success', filename, localPath };
+            return { filename, localPath };
 
         } catch (error) {
-            return { status: 'error', error: error };
+            return { error: error };
         }
 
     }
 
-    const criarHTML = async (req) => {
-
-        var _titulo = req.body.strtitulo;
-        var _descricao = req.body.strdescricao;
-        var _postId = req.body.postid;
-        var _imagem = req.body.nomeimagem;
-
-        if (req.body.obterUltimoId == 1) {
-            var ComandoSQLLastID = await readCommandSql.retornaStringSql('lastID', 'BOpost');
-            var _lastID = await db.Query(ComandoSQLLastID);
-            _postId = _lastID[0].ID;
-        }
+    const criarHTML = async (post, postID, imagem) => {
 
         try {
 
@@ -240,7 +222,7 @@ const controllers = () => {
             //path of folder where you want to save the image.
             const localPath = `${uploadPath}/shared/`;
 
-            const filename = `post${_postId}.html`;
+            const filename = `post${postID}.html`;
 
             const data = `
                 <!DOCTYPE html>
@@ -249,16 +231,16 @@ const controllers = () => {
                     <meta charset="UTF-8">
                     <meta http-equiv="X-UA-Compatible" content="IE=edge">
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>${_titulo}</title>
-                    <meta property="og:title" content="${_titulo}">
-                    <meta property="og:site_name" content="${_titulo}">
-                    <meta property="og:description" content="${_descricao}">
-                    <meta property="og:image" content="http://bebedourohistoriaememoria.com.br/shared/img/${_imagem}">
-                    <meta property="og:url" content="http://bebedourohistoriaememoria.com.br/shared/post${_postId}.html">
+                    <title>${post.strtitulo}</title>
+                    <meta property="og:title" content="${post.strtitulo}">
+                    <meta property="og:site_name" content="${post.strtitulo}">
+                    <meta property="og:description" content="${post.strdescricao}">
+                    <meta property="og:image" content="http://bebedourohistoriaememoria.com.br/shared/img/${imagem}">
+                    <meta property="og:url" content="http://bebedourohistoriaememoria.com.br/shared/post${postID}.html">
                 </head>
                 <body>
                     <script>
-                        window.location.href = 'http://bebedourohistoriaememoria.com.br/detalhes.html?n=${_postId}'
+                        window.location.href = 'http://bebedourohistoriaememoria.com.br/detalhes.html?n=${postID}'
                     </script>
                 </body>
                 </html>
@@ -276,10 +258,10 @@ const controllers = () => {
 
             fs.writeFileSync(localPath + filename, data);
 
-            return { status: 'success', filename, localPath };
+            return { filename, localPath };
 
         } catch (error) {
-            return { status: 'error', error: error };
+            return { error: error };
         }
 
     }
@@ -350,8 +332,6 @@ const controllers = () => {
         , inserir
         , atualizar
         , atualizarStatus
-        , criarThumb
-        , criarHTML
     })
 
 }
