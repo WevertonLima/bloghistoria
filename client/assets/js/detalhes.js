@@ -353,7 +353,7 @@ detalhes.metodos = {
             (response) => {
 
                 var tagsPost = response;
-                console.log('tagsPost', tagsPost)
+                //console.log('tagsPost', tagsPost)
 
                 detalhes.metodos.carregarTags(tagsPost)
 
