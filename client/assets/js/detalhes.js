@@ -57,7 +57,7 @@ detalhes.metodos = {
 
         // muda as URL's dos botões de compartilhar
         $("#lnkShareFace").attr('href', `https://www.facebook.com/sharer/sharer.php?u=http://bebedourohistoriaememoria.com.br/shared/post${POST_ID}.html`)
-        $("#lnkShareWhats").attr('href', `https://api.whatsapp.com/send?text=http://bebedourohistoriaememoria.com.br/detalhes.html?n=${POST_ID}`)
+        $("#lnkShareWhats").attr('href', `https://api.whatsapp.com/send?text=http://bebedourohistoriaememoria.com.br/shared/post${POST_ID}.html`)
 
     },
 

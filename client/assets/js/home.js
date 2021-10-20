@@ -125,7 +125,7 @@ home.templates = {
                                     class="dropdown-item">
                                     <span class="fa fa-facebook icon-share"></span>&nbsp; Facebook
                                 </a>
-                                <a href="https://api.whatsapp.com/send?text=http://bebedourohistoriaememoria.com.br/detalhes.html?n=\${idnoticia}"
+                                <a href="https://api.whatsapp.com/send?text=http://bebedourohistoriaememoria.com.br/shared/post\${idnoticia}.html"
                                     data-action="share/whatsapp/share"
                                     onclick="window.open(this.href, 'whatsapp-share', 'width=550, height=550');return false;"
                                     class="dropdown-item">
