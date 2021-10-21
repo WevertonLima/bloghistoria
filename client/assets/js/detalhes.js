@@ -59,6 +59,9 @@ detalhes.metodos = {
         $("#lnkShareFace").attr('href', `https://www.facebook.com/sharer/sharer.php?u=http://bebedourohistoriaememoria.com.br/shared/post${POST_ID}.html`)
         $("#lnkShareWhats").attr('href', `https://api.whatsapp.com/send?text=http://bebedourohistoriaememoria.com.br/shared/post${POST_ID}.html`)
 
+        // altera a URL para ser copiada corretamente
+        window.history.replaceState("", "", `/shared/post${POST_ID}.html`);
+
     },
 
     redirectHome: () => {
