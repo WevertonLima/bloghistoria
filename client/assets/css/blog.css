@@ -688,7 +688,8 @@ a.menu-item-left:hover {
     right: 0;
     top: 0;
     bottom: 0;
-    background-color: #fff;
+    /* background-color: #fff; */
+    background-color: rgb(0 0 0 / 20%);
     z-index: 999999;
 }
 
@@ -704,7 +705,8 @@ a.menu-item-left:hover {
     left: 0;
     top: 0;
     right: 0;
-    bottom: 0;
+    /* bottom: 0; */
+    height: 313px;
     background: white;
     z-index: 9;
     display: flex;
