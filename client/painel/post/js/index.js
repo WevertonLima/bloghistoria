@@ -106,9 +106,12 @@ post.metodos = {
                         elem.spCapa = "-"
                     }
                     else {
-                        let _capa = `<div class="capa-post" style="background-image: url('${elem.capa}'); background-size: cover;"></div>`
+                        let _formato = elem.capa.split(';base64,')[0].split('/')[1]
+                        let _capa = `<div class="capa-post" style="background-image: url('${window.location.origin}/shared/img/post${elem.idnoticia}.${_formato}'); background-size: cover;"></div>`
                         elem.spCapa = _capa;
                     }
+
+                   
 
                     // categoria
                     if (elem.idcategoria == null) {
