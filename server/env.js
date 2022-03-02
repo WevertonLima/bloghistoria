@@ -26,7 +26,7 @@ var config = {
     },
     prod: {
         url: 'http://bebedourohistoriaememoria.com.br/',
-        port: 21107,
+        port: 80,
         ambiente: 'PROD',
         session: {
             secret: 'teste',
@@ -35,11 +35,11 @@ var config = {
             cookie: { secure: false }
         },
         database: {
-            host: 'mysql26-farm36.kinghost.net',
+            host: '185.211.7.154',
             port: 3306,
-            user: 'ajeitameulayou',
-            password: 'bl0gh1st0r1a',
-            database: 'ajeitameulayou'
+            user: 'u975003274_bloghistoria',
+            password: 'Bl0gh1st0r1@',
+            database: 'u975003274_bloghistoria'
         },
         email: {
             user: 'bebedourohistoriaememoria@gmail.com',
