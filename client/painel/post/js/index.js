@@ -102,16 +102,14 @@ post.metodos = {
                     elem.Acoes = elem.Acoes.replace('{Opcao}', opcao);
 
                     // capa
-                    if (elem.capa == null || elem.capa == '') {
+                    if (elem.formato == null || elem.formato == '') {
                         elem.spCapa = "-"
                     }
                     else {
-                        let _formato = elem.capa.split(';base64,')[0].split('/')[1]
+                        let _formato = elem.formato.split(';base64,')[0].split('/')[1]
                         let _capa = `<div class="capa-post" style="background-image: url('${window.location.origin}/shared/img/post${elem.idnoticia}.${_formato}'); background-size: cover;"></div>`
                         elem.spCapa = _capa;
                     }
-
-                   
 
                     // categoria
                     if (elem.idcategoria == null) {

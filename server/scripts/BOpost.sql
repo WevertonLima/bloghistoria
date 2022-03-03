@@ -5,7 +5,7 @@ SELECT
     , n.idcategoria
     , c.descricao as categoria
     , n.titulo
-    , n.capa
+    , SUBSTRING(n.capa, 1, 25) as formato
     , n.descricao
     , DATE_FORMAT(n.datapub, "%d/%m/%Y") as datapub
     , n.ativo

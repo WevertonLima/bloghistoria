@@ -26,6 +26,7 @@ var config = {
     },
     prod: {
         url: 'http://bebedourohistoriaememoria.com.br/',
+        //url: 'http://localhost',
         port: 80,
         ambiente: 'PROD',
         session: {
