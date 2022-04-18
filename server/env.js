@@ -36,11 +36,11 @@ var config = {
             cookie: { secure: false }
         },
         database: {
-            host: '185.211.7.154',
+            host: '195.110.59.94',
             port: 3306,
-            user: 'u975003274_bloghistoria',
-            password: 'Bl0gh1st0r1@',
-            database: 'u975003274_bloghistoria'
+            user: 'bloghistoria',
+            password: 'bl0gh1st0r1@',
+            database: 'bloghistoria'
         },
         email: {
             user: 'bebedourohistoriaememoria@gmail.com',
