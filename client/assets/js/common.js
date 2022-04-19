@@ -240,9 +240,12 @@ common.metodos = {
 
             var temp = common.templates.postPopular;
 
+            let _formato = e.formato.split(';base64,')[0].split('/')[1]
+            let _capa = `${window.location.origin}/shared/img/post${e.idnoticia}.${_formato}`
+
             $("#listPostsPopular").append(
                 temp.replace(/\${idnoticia}/g, e.idnoticia)
-                    .replace(/\${capa}/g, e.capa)
+                    .replace(/\${capa}/g, _capa)
                     .replace(/\${titulo}/g, e.titulo)
                     .replace(/\${descricao}/g, e.descricao)
                     .replace(/\${data}/g, e.datapub)

@@ -23,12 +23,12 @@ ORDER BY
 SELECT
 	n.idnoticia
     , n.titulo
-    , n.capa
     , n.descricao
     , DATE_FORMAT(n.datapub, "%d/%m/%Y") as datapub
     , n.acessos
     , (SELECT COUNT(*) FROM comentario WHERE idnoticia = n.idnoticia AND excluido = 0) as comentarios
     , (SELECT COUNT(*) FROM curtida WHERE idnoticia = n.idnoticia) as curtidas
+    , SUBSTRING(n.capa, 1, 25) as formato
 FROM 
 	noticia as n
 WHERE
@@ -44,12 +44,12 @@ ORDER BY
 SELECT
 	n.idnoticia
     , n.titulo
-    , n.capa
     , n.descricao
     , DATE_FORMAT(n.datapub, "%d/%m/%Y") as datapub
     , n.acessos
     , (SELECT COUNT(*) FROM comentario WHERE idnoticia = n.idnoticia AND excluido = 0) as comentarios
     , (SELECT COUNT(*) FROM curtida WHERE idnoticia = n.idnoticia) as curtidas
+    , SUBSTRING(n.capa, 1, 25) as formato
 FROM 
 	noticia as n
     JOIN categoria as c ON c.idcategoria = n.idcategoria
@@ -66,12 +66,12 @@ ORDER BY
 SELECT DISTINCT
 	n.idnoticia
     , n.titulo
-    , n.capa
     , n.descricao
     , DATE_FORMAT(n.datapub, "%d/%m/%Y") as datapub
     , n.acessos
     , (SELECT COUNT(*) FROM comentario WHERE idnoticia = n.idnoticia AND excluido = 0) as comentarios
     , (SELECT COUNT(*) FROM curtida WHERE idnoticia = n.idnoticia) as curtidas
+    , SUBSTRING(n.capa, 1, 25) as formato
 FROM 
 	noticia as n
     JOIN noticiatag as nt ON nt.idnoticia = n.idnoticia
@@ -90,8 +90,8 @@ SELECT
 	idnoticia
     , titulo
     , descricao
-    , capa
     , DATE_FORMAT(datapub, "%d/%m/%Y") as datapub
+    , SUBSTRING(capa, 1, 25) as formato
 FROM 
 	noticia
 WHERE
