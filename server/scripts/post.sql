@@ -3,12 +3,12 @@
 SELECT
 	n.idnoticia
     , n.titulo
-    , n.capa
     , n.descricao
     , DATE_FORMAT(n.datapub, "%d/%m/%Y") as datapub
     , n.acessos
     , (SELECT COUNT(*) FROM comentario WHERE idnoticia = n.idnoticia AND excluido = 0) as comentarios
     , (SELECT COUNT(*) FROM curtida WHERE idnoticia = n.idnoticia) as curtidas
+    , SUBSTRING(n.capa, 1, 25) as formato
 FROM 
 	noticia as n
 WHERE

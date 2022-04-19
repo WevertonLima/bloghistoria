@@ -9,11 +9,18 @@ var config = {
             saveUninitialized: false,
             cookie: { secure: false }
         },
+        // database: {
+        //     host: 'localhost',
+        //     port: 3306,
+        //     user: 'root',
+        //     password: 'root',
+        //     database: 'bloghistoria'
+        // },
         database: {
-            host: 'localhost',
+            host: '195.110.59.94',
             port: 3306,
-            user: 'root',
-            password: 'root',
+            user: 'bloghistoria',
+            password: 'bl0gh1st0r1@',
             database: 'bloghistoria'
         },
         // email: {

@@ -74,10 +74,16 @@ home.metodos = {
 
                 let _capa = '';
     
-                if (list[i].capa != null && list[i].capa != '') {
+                if (list[i].formato != null && list[i].formato != '') {
+                    // _capa = `
+                    //     <a href="/detalhes.html?n=${list[i].idnoticia}" class="link-capa">
+                    //         <img class="capa" src="${list[i].capa}" />
+                    //     </a>
+                    // `
+                    let _formato = list[i].formato.split(';base64,')[0].split('/')[1]
                     _capa = `
                         <a href="/detalhes.html?n=${list[i].idnoticia}" class="link-capa">
-                            <img class="capa" src="${list[i].capa}" />
+                            <img class="capa" src="${window.location.origin}/shared/img/post${list[i].idnoticia}.${_formato}" />
                         </a>
                     `
                 }
